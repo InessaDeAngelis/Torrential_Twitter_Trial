@@ -10,6 +10,7 @@
 library(tidyverse)
 library(janitor)
 library(arrow)
+library(labelled)
 
 #### Read in the raw data sets ####
 
@@ -43,7 +44,7 @@ cleaned_mckenna_data =
     friends,
     tweet_url
   ) |>
-  filter(grepl('environment | climate', text)) |>
+  filter(grepl('climate | environment', text)) |>
   rename(
     Text = text,
     Name = user_name,
@@ -107,7 +108,7 @@ cleaned_collins_data =
     friends,
     tweet_url
   ) |>
-  filter(grepl('environment | climate | pipeline', text)) |>
+  filter(grepl('climate', text)) |>
   rename(
     Text = text,
     Name = user_name,
