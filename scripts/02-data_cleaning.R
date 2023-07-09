@@ -10,7 +10,6 @@
 library(tidyverse)
 library(janitor)
 library(arrow)
-library(labelled)
 
 #### Read in the raw data sets ####
 
@@ -30,7 +29,7 @@ raw_mckenna_data <-
     show_col_types = FALSE
   )
 
-# Select columns of interest & filter by key words #
+# Select columns of interest, filter by key words, and select 1,000 Tweets for analysis #
 # Code referenced from: https://www.statology.org/filter-rows-that-contain-string-dplyr/#:~:text=Often%20you%20may%20want%20to,()%20function%20in%20Base%20R.
 cleaned_mckenna_data = 
   raw_mckenna_data |>
@@ -44,7 +43,7 @@ cleaned_mckenna_data =
     friends,
     tweet_url
   ) |>
-  filter(grepl('climate | environment', text)) |>
+  filter(grepl('climate', text)) |>
   rename(
     Text = text,
     Name = user_name,
@@ -54,7 +53,9 @@ cleaned_mckenna_data =
     Followers = followers,
     Following = friends,
     URL = tweet_url 
-  )
+  ) |>
+  slice_sample(n = 1000) 
+
 
 #### Clean Elizabeth May data set ####
 raw_may_data <-
@@ -63,7 +64,7 @@ raw_may_data <-
     show_col_types = FALSE
   )
 
-# Select columns of interest & filter by key words #
+# Select columns of interest, filter by key words, and select 1,000 Tweets for analysis #
 cleaned_may_data = 
   raw_may_data |>
   select(
@@ -76,7 +77,7 @@ cleaned_may_data =
     friends,
     tweet_url
   ) |>
-  filter(grepl('environment | climate', text)) |>
+  filter(grepl('climate', text)) |>
   rename(
     Text = text,
     Name = user_name,
@@ -86,7 +87,8 @@ cleaned_may_data =
     Followers = followers,
     Following = friends,
     URL = tweet_url 
-  )
+  ) |>
+  slice_sample(n = 1000) 
 
 #### Clean Laurel Collins data set ####
 raw_collins_data <-
