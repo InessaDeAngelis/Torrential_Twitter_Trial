@@ -1,0 +1,44 @@
+---
+title: "Torrential Twitter: Climate Change, Female Politicians, and Harassment - Code Book"
+author: "Inessa De Angelis"
+thanks: "Code and other information available at: https://github.com/InessaDeAngelis/Torrential_Twitter_Trial "
+date: "today"
+date-format: "long"
+format: pdf
+toc: true
+number-sections: true
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+#### Workspace set-up ####
+
+## Load packages ##
+
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+## Read in the cleaned data sets ##
+cleaned_mckenna_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/cleaned_mckenna_data.csv"))
+show_col_types = FALSE
+
+cleaned_may_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/cleaned_may_data.csv"))
+show_col_types = FALSE
+
+cleaned_collins_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/cleaned_collins_data.csv"))
+show_col_types = FALSE
+
+```
+
+# Overview #
+
+
+# Coding Schedule #
+
+## Severity of Harassment ## 
+
+# Explanation of Coding Schedule #
