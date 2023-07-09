@@ -30,7 +30,9 @@ raw_mckenna_data <-
   )
 
 # Select columns of interest, filter by key words, and select 1,000 Tweets for analysis #
-# Code referenced from: https://www.statology.org/filter-rows-that-contain-string-dplyr/#:~:text=Often%20you%20may%20want%20to,()%20function%20in%20Base%20R.
+# Code to filter referenced from: https://www.statology.org/filter-rows-that-contain-string-dplyr/#:~:text=Often%20you%20may%20want%20to,()%20function%20in%20Base%20R.
+# Code for sampling Tweets referenced from: https://tellingstorieswithdata.com/11-eda.html
+
 cleaned_mckenna_data = 
   raw_mckenna_data |>
   select(
