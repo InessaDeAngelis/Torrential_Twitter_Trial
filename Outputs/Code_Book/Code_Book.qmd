@@ -1,5 +1,5 @@
 ---
-title: "Torrential Twitter: Climate Change, Female Politicians, and Harassment - Code Book"
+title: "Torrential Twitter: Climate Change, Female Politicians, and Harassment - Codebook"
 author: "Inessa De Angelis"
 thanks: "Code and other information available at: https://github.com/InessaDeAngelis/Torrential_Twitter_Trial "
 date: "today"
@@ -7,6 +7,7 @@ date-format: "long"
 format: pdf
 toc: true
 number-sections: true
+bibliography: Code_book_ref.bib
 ---
 
 ```{r}
@@ -39,6 +40,63 @@ show_col_types = FALSE
 
 # Coding Schedule #
 
+The coding of sentiment in Tweets will be conducted to determine the severity of harassment on the seven-point scale. The sentiment categories will be mutually exclusive, therefore only one of the five types of harassment can be selected per reply [@krippendorff].
+
 ## Severity of Harassment ## 
+Severity of harassment will be measured on a seven-point scale ranging from name-calling to hate speech [@mantilla2013], [@silencingwomen]. The seven-point scale contains the following categories, and they are: 
+
+(@) **Positive**
+a. XXX
+
+(@) **Neutral**
+a. XXX
+
+(@)	**Name-calling** 
+
+a. “Comments the receiver perceives as unpleasant” [@silencingwomen, p. 248].
+
+(@) **Gender-based insults**
+
+a. Derogatory comments and terms used against women, including “whore” and “slut” which are “…designed to insult and humiliate women, especially in regard to their weight and physical appearance” [@mantilla2013, p. 564].
+
+(@)	**Vicious language** 
+a.	Vile and violent descriptions of behaviour that gendertrolls claim that they would like to subject the female user to [@mantilla2013] [@Citron]
+
+(@)	**Credible Threats** 
+a.	Doxxing, stalking, and threats of rape and death [@mediatingmisogyny]
+b.	Tangible “threats of sexual violence “literally, albeit not physically, penetrate” women’s bodies”” [@Citron, p. 17].
+
+(@) **Hate speech** 
+a.	Hateful comments which oppose freedom of speech, violate human rights, and may even be unlawful [@silencingwomen] [@chettyalathur] 
+b.	Any form of expression that “… seeks to promote, or has the capacity to increase hatred against a person or group of people because of a characteristic they share, or a group to which they belong” [@saleem, p. 1]
+c.	Online or offline vilification of an individual communicated in a specific context based on “… race, national or ethnic origin, colour, religion, age, sex, sexual orientation, gender identity or expression, marital status, family status, genetic characteristics, [or] disability” (Government of Canada, 2021).
+
+
+## Type of Account ##
+Only one type of account can be selected and will also be coded mutually exclusively. If one user replies to a single Tweet by a female politician using multiple separate Tweets, then each Tweet will be coded separately. There will be no limit on the coding of the number of replies sent by an individual account. 
+
+Types of accounts include and are defined as:
+
+(@) **Personal**
+a.	People who represent their own views and interests and use their account for fun, to read the news, and socially interact [@uddin, p. 2]
+
+(@) **Professionals**
+a.	Share information about their area of expertise and may include businesses who use the platform to market their products and reach new audiences [@uddin, p. 2]
+
+(@)	**Bots**
+a.	Automated “… online agents that are used to intervene in political discourse online” and are intentionally created to circulate disinformation, malicious content, and flood the notifications of users [@Duboisbots, p. 28], [@marlow].
+
+(@) **Spammers**
+a.	Intentionally “spread malicious content” [@singh, p. 2].
+b.	May show up as one individual who has created multiple accounts to bolster their ability to send harassing content (Mantilla, 2015).
+
+(@)	**Anonymous** 
+a.	An individually intentionally hiding information about their identity and location for the purposes of using the platform maliciously. May include not adding a profile picture or using an obscured, random picture and not revealing their actual name, age, gender, and other identifying characteristics [@trifiro].
+b.	Hide behind fake usernames and “… express sexist, racist, or homophobic views with little fear of being held accountable for their comments” [@wagner, p. 8]. 
+
 
 # Explanation of Coding Schedule #
+
+# Other Guidelines
+
+# References 
