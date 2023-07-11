@@ -48,7 +48,7 @@ type_of_account |>
 set.seed(416)
 
 simulated_data <- tibble(
-  unit = 1:2000,
+  Tweet = 1:2000,
   severity_of_harassment =
     sample(x = c("Credible Threats", "Hate Speech"), 
            size = 2000, 
@@ -66,7 +66,7 @@ simulated_data
 set.seed(416)
 
 simulated_data <- tibble(
-  unit = 1:2000,
+  Tweet = 1:2000,
   severity_of_harassment =
     sample(x = c("Name-calling", "Gender-based insults", "Vicious language"), 
            size = 2000, 
