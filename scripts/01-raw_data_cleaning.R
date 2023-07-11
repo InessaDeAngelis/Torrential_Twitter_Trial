@@ -56,7 +56,7 @@ cleaned_mckenna_data =
     Following = friends,
     URL = tweet_url 
   ) |>
-  slice_sample(n = 1000) 
+  slice_sample(n = 500) 
 
 
 #### Clean Elizabeth May data set ####
@@ -90,7 +90,7 @@ cleaned_may_data =
     Following = friends,
     URL = tweet_url 
   ) |>
-  slice_sample(n = 1000) 
+  slice_sample(n = 500) 
 
 #### Clean Laurel Collins data set ####
 raw_collins_data <-
