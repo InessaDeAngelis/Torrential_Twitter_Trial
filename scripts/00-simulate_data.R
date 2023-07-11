@@ -36,7 +36,7 @@ set.seed(416)
 num_people <- 2000
 type_of_account <- tibble(
   person = 1:num_people,
-  account_type = sample(c("Personal", "Professional", "Bot", "Spammer", "Anonymous"), size = num_people, replace = TRUE),
+  account_type = sample(c("Personal", "Professional", "Bot", "Spammer", "Anonymous", "Suspended/Deleted"), size = num_people, replace = TRUE),
 )
 type_of_account 
 
@@ -61,7 +61,6 @@ simulated_data <- tibble(
            prob = c(0.7, 0.3))
 )
 simulated_data 
-
 
 # Harassing Tweets are more likely to be categorized as "name-calling", "gender-based insults", and/or "vicious language"
 set.seed(416)
@@ -107,8 +106,9 @@ sum(!(type_of_account$account_type) %in%
         "Bot",
         "Spammer",
         "Anonymous",
+        "Suspended/Deleted",
         NA)) == 0
 
 type_of_account$account_type |>
   unique() |>
-  length() == 5
+  length() == 6
