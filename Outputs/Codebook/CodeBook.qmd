@@ -25,9 +25,9 @@ Severity of Harassment includes:
 
 - Vicious language
 
-- Credible Threats
+- Credible threats
 
-- Hate Speech
+- Hate speech
 
 
 Type of account includes:
@@ -48,91 +48,99 @@ Type of account includes:
 ## Severity of Harassment ##
 The coding of sentiment in Tweets will be conducted to determine the severity of harassment, measuring Tweets on a seven-point scale ranging from positive to hate speech [@mantilla2013], [@silencingwomen]. The sentiment categories will be mutually exclusive, therefore only one of the seven types of harassment can be selected per reply [@krippendorff]. The seven-point scale contains the following categories, and they are: 
 
-(@) **Positive**
-a. XXX
+1. **Positive**
+a. Tweets that employ positive wording and tone without expressing complaints [@zavattaro].
+b. Punctuation, such as exclamation marks, may be used to covey a positive message [@twitterpower]. See @tbl-positive-example for an example and note the use of the exclamation mark. 
 
 | Tweet                                                                                                             | 
 |--------------------------------------------------------------------------------------------------------------------|
 | @ ElizabethMay @ paulmanly The forefront of the climate revolution. They're pushing big on Vancouver Island and for good reason!   |  
 
-: Sample of a **positive** Tweet sent to MP Elizabeth May {#tbl-positive-example}
+: Sample of a **positive** Tweet sent to MP Elizabeth May. {#tbl-positive-example}
 
-(@) **Neutral**
-a. A neutral Tweet states a fact without expressing an opinion. Reference @tbl-neutral-example for an example.
+2. **Neutral**
+a. A neutral Tweet states a matter-of-fact without expressing an opinion or exuding judgement [@twitterpower].
+b. No specific punctuation is used and the overall tone of the Tweet is neither positive or harassing. Reference @tbl-neutral-example for an example of a user stating something that occurred during proceedings in the House of Commons.
 
 | Tweet                                               |                                                              
 |-----------------------------------------------------|
 | @ Laurel_BC The gov't declared a climate emergency. |  
 
-: Sample of a **neutral** Tweet sent to MP Laurel Collins {#tbl-neutral-example}
+: Sample of a **neutral** Tweet sent to MP Laurel Collins. {#tbl-neutral-example}
 
-(@)	**Name-calling** 
+3.	**Name-calling** 
 
-a. “Comments the receiver perceives as unpleasant” [@silencingwomen, p. 248]. For an example, see @tbl-name_calling-example. 
+a. The use of derogatory and offensive language, often grounded in stereotypes to refer to female politicians, their policies, and assumed qualifications [@silencingwomen], [@theocharis]. For an example, see @tbl-name_calling-example, where a Twitter user utilizes the term "climate barbie". 
 
 | Tweet                                                                                                    |
 |----------------------------------------------------------------------------------------------------------|
 |@ cathmckenna CO2 is NOT pollution climate barbie, no matter how many times or how loudly you proclaim it |
 
-: Sample of a Tweet containing **Name-calling** sent to former MP Catherine McKenna {#tbl-name_calling-example}
+: Sample of a Tweet containing **Name-calling** sent to former MP Catherine McKenna. {#tbl-name_calling-example}
 
-(@) **Gender-based insults**
+4. **Gender-based insults**
 
-a. Derogatory comments and terms used against women, including “whore” and “slut” which are “…designed to insult and humiliate women, especially in regard to their weight and physical appearance” [@mantilla2013, p. 564]. See @tbl-gender_insult-example for an example. 
+a. Derogatory comments and terms used against women, including “whore” and “slut” which are “… designed to insult and humiliate women, especially in regard to their weight and physical appearance” [@mantilla2013, p. 564]. See @tbl-gender_insult-example for an example where the user references MP McKenna's physical appearance. 
 
 | Tweet                                                                                                           |
 |-----------------------------------------------------------------------------------------------------------------|
-|@ cathmckenna you insult Andrew Scheer and Doug Ford on a daily basis, but some people insults you , you cry and get a security team that us tax payers have to pay for ? grow up bitch you're like 40                            |
+|@ cathmckenna Hey Blonde Bimbo Barbie why do you look like you always just scraped outta bed |  
 
-: Sample of a Tweet containing **Gender-based insults** sent to former MP Catherine McKenna {#tbl-gender_insult-example}
+: Sample of a Tweet containing **Gender-based insults** sent to former MP Catherine McKenna. {#tbl-gender_insult-example}
 
-(@)	**Vicious language** 
-a.	Vile and violent descriptions of behaviour that gendertrolls claim that they would like to subject the female user to [@mantilla2013] [@Citron]. @tbl-viciouslang-example emphasizes an example. 
+5.	**Vicious language** 
+a. Descriptions using vile language of behaviour that gendertrolls (who are men) claim that they would like to subject the female user to [@mantilla2013]. @tbl-viciouslang-example provides an example. 
 
 | Tweet                                            |                                                              
 |--------------------------------------------------|
 | @ cathmckenna @ carleton_ F$ck you climate b*tch |  
 
-: Sample of Tweet containing **Vicious Language** sent to former MP Catherine McKenna (language redacted for this document) {#tbl-viciouslang-example}
+: Sample of Tweet containing **Vicious Language** sent to former MP Catherine McKenna (language redacted for this document). {#tbl-viciouslang-example}
 
-(@)	**Credible Threats** 
-a.	Doxxing, stalking, and threats of rape and death [@mediatingmisogyny]
-b.	Tangible “threats of sexual violence “literally, albeit not physically, penetrate” women’s bodies”” [@Citron, p. 17].
+6.	**Credible Threats** 
+a. Tangible threats of violent sexual behaviour, rape, doxxing, and stalking which the gendertrolls would like to subject the female user to [@mantilla2013]. This includes seeking out the female politician with the intent to cause harm [@mediatingmisogyny]. Reference @tbl-threats-example for an example. 
 
-(@) **Hate speech** 
+| Tweet                                            |                                                              
+|--------------------------------------------------|
+| @ cathmckenna U DO KNOW THAT CANADIANS ARE TOTALLY WAKING UP TO YOUR LIES AND AFTER YOU LOSE THE ELECTION WE WILL MOST DEFINITELY HUNT YOU DOWN AND HAVE YOU ARRESTED AND TRIED FOR TREASON WITH YOUR DISGUSTING CARBON AND CLIMATE LIES U WILL BE DEALT WITH !!!!!! |
+
+: Sample of Tweet containing **Credible Threats** sent to former MP Catherine McKenna. {#tbl-threats-example}
+
+7. **Hate speech** 
 a.	Hateful comments which oppose freedom of speech, violate human rights, and may even be unlawful [@silencingwomen] [@chettyalathur] 
-b.	Any form of expression that “… seeks to promote, or has the capacity to increase hatred against a person or group of people because of a characteristic they share, or a group to which they belong” [@saleem, p. 1]
-c.	Online or offline vilification of an individual communicated in a specific context based on “… race, national or ethnic origin, colour, religion, age, sex, sexual orientation, gender identity or expression, marital status, family status, genetic characteristics, [or] disability” (Government of Canada, 2021).
+b. Online or offline vilification of an individual communicated in a specific context based on “… their immutable characteristics, such as their race, ethnicity, national origin, religion, gender, gender identity, sexual orientation, age, or disability” [@carlson, p. 4].
+c. Any form of expression that “… seeks to promote, or has the capacity to increase hatred against a person or group of people because of a characteristic they share, or a group to which they belong” [@saleem, p. 1]
+d. See @tbl-hatespeech-example for an example of the most hateful speech found in this sample and the [Other Guidelines] section for notes on the frequency of hate speech found in this trial.
 
 | Tweet                                                            |                                                  
 |------------------------------------------------------------------|
 | @ cathmckenna Better polish up that resume, climate mckenn*zi. |
 
-: Sample of Tweet containing **Hate Speech** sent to former MP Catherine McKenna (language redacted for this document) {#tbl-hatespeech-example}
+: Sample of Tweet containing **Hate Speech** sent to former MP Catherine McKenna (language redacted for this document). {#tbl-hatespeech-example}
 
 ## Type of Account ##
 Only one type of account can be selected and will also be coded mutually exclusively. If one user replies to a single Tweet by a female politician using multiple separate Tweets, then each Tweet will be coded separately. There will be no limit on the coding of the number of replies sent by an individual account. 
 
 Types of accounts include and are defined as:
 
-(@) **Personal**
+1. **Personal**
 a.	People who represent their own views and interests and use their account for fun, to read the news, and socially interact [@uddin, p. 2]
 
-(@) **Professional**
+2. **Professional**
 a.	Share information about their area of expertise and may include businesses who use the platform to market their products and reach new audiences [@uddin, p. 2]
 
-(@)	**Bots**
+3.	**Bots**
 a.	Automated “… online agents that are used to intervene in political discourse online” and are intentionally created to circulate disinformation, malicious content, and flood the notifications of users [@Duboisbots, p. 28], [@marlow].
 
-(@) **Spammers**
+4. **Spammers**
 a.	Intentionally “spread malicious content” [@singh, p. 2].
 b.	May show up as one individual who has created multiple accounts to bolster their ability to send harassing content (Mantilla, 2015).
 
-(@)	**Anonymous** 
+5.	**Anonymous** 
 a.	An individually intentionally hiding information about their identity and location for the purposes of using the platform maliciously. May include not adding a profile picture or using an obscured, random picture and not revealing their actual name, age, gender, and other identifying characteristics [@trifiro].
 b.	Hide behind fake usernames and “… express sexist, racist, or homophobic views with little fear of being held accountable for their comments” [@wagner, p. 8]. 
 
-(@)	**Suspended/Deleted** 
+6.	**Suspended/Deleted** 
 a. Accounts found to be in violation of Twitter's Terms of Services and temporarily or permanently removed from the platform. 
 
 # Other Guidelines
@@ -142,14 +150,14 @@ Retweets are not to be coded, only responses to Tweets that are initiated from t
 ## Threaded Responses ##
 Threaded responses occur when one user posts a connected series of Tweets which contribute towards building the same message or narrative. They may be numbered as 1, 2, 3, … out of the total number of responses.
 
-For the purposes of this study, each Tweet in a threaded response will be analyzed and coded as a separate Tweet authored by one of the accounts in the study. 
+For the purposes of this study, each Tweet in a threaded response will be analyzed and coded as a separate Tweet. 
 
 ## Media ##
 Twitter defines any gifs, memes, images, and videos as media [@Twittermedia]. Media embedded in Tweets should be considered as part of the written text of the Tweet and coded accordingly, given that hateful speech can also be expressed through images and symbols [@carlson]. With increasing doctoring and creation of media for the purpose of deception and political gain, any media embedded in Tweets should be analyzed for manipulation and machine-learning generated deepfakes, which are compelling fake pictures and videos [@farid], [@appel]. 
 
-For Tweets that contain a picture without additional text, the nature, context, and suggestiveness of the picture will be analysed to determine the severity of harassment [@sagemethods]. Emojis, if included in a Tweet, will be interpreted as both a picture and text, analysing the rest of the Tweet for context [@swartz]. Moreover, hashtags will be coded in the same manner as regular text in Tweets [@sagemethods]. 
+For Tweets that contain a picture without additional text, the nature, context, and suggestiveness of the picture should be analysed to determine the severity of harassment [@sagemethods]. Emojis, if included in a Tweet, should be interpreted as both a picture and text, analysing the rest of the Tweet for context [@swartz]. Moreover, hashtags will be coded in the same manner as regular text in Tweets [@sagemethods]. 
 
 ## Hate Speech ##
-It is anticipated that quantity of hate speech detected in this sample of Tweets will be quite low, given that these Tweets are from 2019 when Canadian politics was slightly less polarized on Twitter and Twitter employed their content moderation rules more frequently. However, given changes to Canadian politics and the affordances of Twitter, this is likely to change in the full-scale version of this study. 
+It is anticipated that the quantity of hate speech detected in this sample of Tweets will be quite low, given that these Tweets are from 2019 when Canadian politics was slightly less polarized on Twitter and Twitter employed their content moderation rules more frequently. However, given changes to Canadian politics and the affordances of Twitter, this is likely to change in the full-scale version of this study. 
 
 # References 
