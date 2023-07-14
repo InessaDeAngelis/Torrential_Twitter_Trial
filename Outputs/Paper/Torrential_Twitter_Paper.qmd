@@ -1,1 +1,62 @@
+---
+title: "Torrential Twitter: Climate Change, Female Politicans, and Harassment"
+author: "Inessa De Angelis"
+thanks: "Code and other information available at: https://github.com/InessaDeAngelis/Torrential_Twitter_Trial "
+date: "today"
+date-format: "long"
+abstract: "XXX"
+format: pdf
+toc: true
+number-sections: true
+bibliography: references.bib
+---
 
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+#### Workspace set-up ####
+
+## Load packages ##
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(here)
+library(ggplot2)
+
+# Read in cleaned data set #
+
+```
+
+# Introduction
+
+# Data
+
+## Data Limitations
+
+## Data Cleaning
+
+# Results
+
+# Discussion
+
+## Limitations
+
+## Future Research
+
+# Conclusion
+
+# Appendix {.unnumbered}
+
+## Motivation
+
+## Composition
+
+## Collection Process
+
+## Uses
+
+## Distribution
+
+# References
