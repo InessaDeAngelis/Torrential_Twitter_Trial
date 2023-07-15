@@ -41,6 +41,8 @@ library(ggplot2)
 
 # Discussion
 
+## Deliberative Democracy
+
 ## Limitations
 
 ## Future Research
@@ -49,14 +51,107 @@ library(ggplot2)
 
 # Appendix {.unnumbered}
 
+This datasheet provides background on who originally collected the raw Twitter data used in this trial study, how it has been previously used, and aims to minimize some of the unknowns. The questions below are amended from the ones outlined in @gebru2021datasheets. 
+
 ## Motivation
+1. *For what purpose was the dataset created? Was there a specific task in mind? Was there a specific gap that needed to be filled? Please provide a description.*
+
+    - This dataset was created for a group project under the theme “who follows and mentions who during elections” for        CMN 4160 - Digital Social Research taught by Professor Elizabeth Dubois at the University of Ottawa. 
+
+    - Inessa De Angelis was the group member who led research project design and pitched the idea of selecting former       MP Catherine McKenna, MP Elizabeth May, and MP Laurel Collins because of their engagement in climate change           policy advocacy. 
+
+    - Because of her previous work with Catherine McKenna during the 2019 Federal Election Campaign, Inessa noticed         the connection between climate change denial, misogyny, and online harassment. After reviewing relevant               literature from both Canada and other countries, Inessa noticed a large gap and wanted to help fill the gap           through this project and her continued research at the Faculty of Information at the University of Toronto. 
+
+    - The dataset specifically collected mentions of the three female politicians, not simply replies, which differs        from how Inessa will approach the full-scale version of this project. Instead of quantitative content                 analysis, the group performed social network analysis using Gephi on the datasets. 
+
+2. *Who created the dataset (for example, which team, research group) and on behalf of which entity (for example, company, institution, organization)?*
+
+    - Inessa defined the parameters on behalf of her group of what data they wanted collected and Trevor Deley, PhD         Candidate in E-Business (supervised by Professor Dubois) collected the data. Both were students at the                University of Ottawa. 
+
+3. *Who funded the creation of the dataset? If there is an associated grant, please provide the name of the grantor and the grant name and number.*
+
+    - Trevor's financial situation during the creation of this dataset is unknown.
+
+    - Inessa’s tuition was partially covered by a University of Ottawa Dean’s Honour List Merit Scholarship, but there      was no direct grant associated with this project.
 
 ## Composition
 
+1. *What do the instances that comprise the dataset represent (for example, documents, photos, people, countries)?* 
+    
+    - Each row of the dataset is an individual. 
+
+2. *Is the dataset self-contained, or does it link to or otherwise rely on external resources?*
+    
+    - It is self-contained. 
+    
+
+
+ *Are there any errors, sources of noise, or redundancies in the dataset?*
+ 
+   - Some users do not have bios or locations indicated, which may impact how coders categorized "type of account". 
+
 ## Collection Process
 
+1. *What mechanisms or procedures were used to collect the data (for example, hardware apparatuses or sensors, manual human curation, software programs, software APIs)? How were these mechanisms or procedures validated?*
+
+    -  Trevor collected these Tweets using a custom Python script to access Twitter’s API. The Tweets were also run         through Perspective API’s sentiment detection software to check for toxicity and assign a score,                      although Inessa removed these scores during the initial cleaning process for this paper. 
+    
+2. *Who was involved in the data collection process (for example, students, crowdworkers, contractors) and how were they compensated (for example, how much were crowdworkers paid)?*
+
+    - Trevor Deley (compensation unknown).
+    
+    - Professor Elizabeth Dubois (Associate Professor salary from the University of Ottawa, but not directly for this       project).
+    
+    - Inessa De Angelis (no compensation, paid tuition to the University of Ottawa to take CMN 4160).
+
+3. *Were any ethical review processes conducted (for example, by an institutional review board)?*
+
+    - No.
+
+4. *Were the individuals in question notified about the data collection?*
+
+    - No.
+    
+5. *Did the individuals in question consent to the collection and use of their data?*
+
+    - No.
+
+## Cleaning/Labelling 
+
+1. *Was any preprocessing/cleaning/labeling of the data done?*
+
+    - It is unknown whether Trevor conducted any cleaning of the raw datasets with Python, beyond obtaining toxicity        scores via Perspective API. 
+    
+    - For this trial study, Inessa used R to clean and simplify column names, remove additional variables, and filter       out Tweets which did not contain the word `climate`.
+    
+2. *Was the "raw" data saved in addition to the preprocessed/cleaned/labeled data (for example, to support unanticipated future uses)?*
+
+    - Yes. Inessa has the original raw data sets saved in her personal Google Drive and on the desktop of her personal       Mac. 
+    
+3. *Is the software that was used to preprocess/clean/label the data available? If so, please provide a link or other access point.*
+
+    - Trevor used Python and Perspective API by Jigsaw. Perspective API is currently free to use by requires                registration.
+    
+    - Inessa uses R. 
+    
+    
 ## Uses
 
+1. *Has the dataset been used for any tasks already? If so, please provide a description*
+
+    - Yes. This dataset was used for the aforementioned CMN 4160 class project. 
+    
+    - We used Gephi to conduct social network analysis to see which communities formed around the Tweets and Twitter        accounts of former MP Catherine McKenna, MP Elizabeth May, and MP Laurel Collins. We found that McKenna had 26        communities, May had 131 communities, and Collins had 18. We also found that harssment was sent by users with         personal accounts and was most likely to show up in the same community as the three female politicans. These          findings were written up in a professional-style guide, aimed at women running for office. This project report        was used by Professor Dubois as an example for future students in her class, but not publicly distributed beyond      the class’ Brightspace page. 
+
+2. *Is there a repository that links to any or all papers or systems that use the dataset?*
+  
+    - No.
+    
 ## Distribution
+
+1. *Will the dataset be distributed to third parties outside of the entity (for example, company, institution, organization) on behalf of which the dataset was created?* 
+
+    - No. Due to Twitter’s policies about sharing data, this dataset is not publicly available but can be obtained by       contacting Inessa De Angelis (inessa.deangelis@mail.utoronto.ca). Twitter’s policies outline that datasets are        not to be uploaded to GitHub or similar sites/repositories. 
+
 
 # References
