@@ -1,10 +1,10 @@
 ---
-title: "Torrential Twitter: Climate Change, Female Politicans, and Harassment"
+title: "Torrential Twitter? Investigating the Severity of Harassment when Canadian Female Politicians Tweet about Climate Change"
 author: "Inessa De Angelis"
 thanks: "Code and other information available at: https://github.com/InessaDeAngelis/Torrential_Twitter_Trial "
 date: "today"
 date-format: "long"
-abstract: "XXX"
+abstract: "This paper analyzes Tweets which specifically discuss climate change from former MP Catherine McKenna, MP Elizabeth May, and MP Laurel Collins to investigate the severity of harassment on a seven-point scale and type of accounts behind the Tweets."
 format: pdf
 toc: true
 number-sections: true
@@ -85,10 +85,10 @@ This datasheet provides background on who originally collected the raw Twitter d
     - It is self-contained. 
     
 
-
- *Are there any errors, sources of noise, or redundancies in the dataset?*
+3. *Are there any errors, sources of noise, or redundancies in the dataset?*
  
-   - Some users do not have bios or locations indicated, which may impact how coders categorized "type of account". 
+     -  It has been over four years since these Tweets were initally sent and over two years since these Tweets were          collected for the dataset, so there is potential inaccuracies in reporting which accounts are still on the            platform and which have been suspended/deleted.
+     - Some users do not have bios or locations indicated (listed as NA), which may impact how coders categorized             "type of account".
 
 ## Collection Process
 
@@ -130,7 +130,7 @@ This datasheet provides background on who originally collected the raw Twitter d
     
 3. *Is the software that was used to preprocess/clean/label the data available? If so, please provide a link or other access point.*
 
-    - Trevor used Python and Perspective API by Jigsaw. Perspective API is currently free to use by requires                registration.
+    - Trevor used Python and Perspective API by Jigsaw. Perspective API is currently free to use but requires                registration.
     
     - Inessa uses R. 
     
