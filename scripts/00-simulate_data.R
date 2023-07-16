@@ -8,11 +8,12 @@
 #### Workspace setup ####
 library(tidyverse)
 library(janitor)
+library(testthat)
 
 #### Data Expectations ####
 # Severity of harassment will vary on a 7-point scale from name-calling to hate speech and include positive and neutral
 # Type of account will vary from Personal, Professional, Bots, Spammers, and Anonymous 
-# The more severe forms of harassment will come from Personal and Anonymous accounts 
+# The more severe forms of harassment will come from Personal and Suspended/Deleted accounts 
 # Harassing Tweets are more likely to be categorized as "name-calling", "gender-based insults", and/or "vicious language"
 
 #### Simulate varying harassment on the 7-point scale ####
@@ -44,7 +45,7 @@ type_of_account
 type_of_account |>
   count(account_type)
 
-# The more severe forms of harassment will come from Personal and Anonymous accounts #
+# The more severe forms of harassment will come from Personal and Suspended/Deleted accounts #
 set.seed(416)
 
 simulated_data <- tibble(
@@ -55,7 +56,7 @@ simulated_data <- tibble(
            replace = TRUE, 
            prob = c(0.6, 0.4)), 
   account_type =
-    sample(x = c("Personal", "Anonymous"), 
+    sample(x = c("Personal", "Suspended/Deleted"), 
            size = 2000, 
            replace = TRUE, 
            prob = c(0.7, 0.3))
@@ -83,6 +84,7 @@ simulated_data
 #### Data Validation ####
 
 # Check that severity of harassment range from positive to hate speech #
+# Stopifnot code referenced from: https://tellingstorieswithdata.com/12-ijalm.html
 class(harassing_tweets$severity_of_harassment) == "character"
 sum(!(harassing_tweets$severity_of_harassment) %in%
       c("Positive",
@@ -98,6 +100,13 @@ harassing_tweets$severity_of_harassment |>
   unique() |>
   length() == 7
 
+stopifnot(
+  class(harassing_tweets$severity_of_harassment) == "character",
+  class(harassing_tweets$person) == "integer",
+  all(complete.cases(harassing_tweets)),
+  nrow(harassing_tweets) == 2000
+)
+
 # Check that type of accounts ranges from personal to anonymous #
 class(type_of_account$account_type) == "character"
 sum(!(type_of_account$account_type) %in%
@@ -112,3 +121,10 @@ sum(!(type_of_account$account_type) %in%
 type_of_account$account_type |>
   unique() |>
   length() == 6
+
+stopifnot(
+  class(type_of_account$account_type) == "character",
+  class(type_of_account$person) == "integer",
+  all(complete.cases(type_of_account)),
+  nrow(type_of_account) == 2000
+)
