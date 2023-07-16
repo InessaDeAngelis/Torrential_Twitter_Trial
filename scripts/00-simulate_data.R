@@ -15,7 +15,7 @@ library(testthat)
 # Type of account will vary from Personal, Professional, Bots, Spammers, and Anonymous 
 # The more severe forms of harassment will come from Personal and Suspended/Deleted accounts 
 # Harassing Tweets are more likely to be categorized as "name-calling", "gender-based insults", and/or "vicious language"
-# Personal accounts that send Tweets containing mid to high levels of harassment on the 7-point scale are likely to belong to people who support the Conservative Party of People's Party
+# Personal accounts that send Tweets containing mid to high levels of harassment on the 7-point scale are likely to belong to people who support the Conservative Party or People's Party
 
 #### Simulate varying harassment on the 7-point scale ####
 set.seed(416)
@@ -86,6 +86,11 @@ simulated_data
 set.seed(416)
 personal_accounts <- tibble(
   Account = 1:1000,
+  severity_of_harassment =
+    sample(x = c("Questioning Authority", "Name-calling/Gender-based insults"), 
+           size = 1000, 
+           replace = TRUE, 
+           prob = c(0.6, 0.4)), 
   party_identification =
     sample(x = c("Conservative", "People's Party"),
     size = 1000,
@@ -153,10 +158,15 @@ stopifnot(
 # Check personal accounts / party identification #
 stopifnot(
   class(personal_accounts$Account) == "integer",
+  class(personal_accounts$severity_of_harassment) == "character",
   class(personal_accounts$party_identification) == "character",
   all(complete.cases(personal_accounts)),
   nrow(personal_accounts) == 1000
 )
+
+personal_accounts$severity_of_harassment |>
+  unique() |>
+  length() == 2
 
 personal_accounts$party_identification |>
   unique() |>
