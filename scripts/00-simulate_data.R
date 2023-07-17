@@ -46,7 +46,7 @@ type_of_account
 type_of_account |>
   count(account_type)
 
-# The more severe forms of harassment will come from Personal and Suspended/Deleted accounts #
+#### The more severe forms of harassment will come from Personal and Suspended/Deleted accounts ####
 set.seed(416)
 
 simulated_data <- tibble(
@@ -64,10 +64,14 @@ simulated_data <- tibble(
 )
 simulated_data 
 
-# Harassing Tweets are more likely to be categorized as "name-calling", "gender-based insults", and/or "vicious language"
+# Count severity of harassment & types of accounts #
+simulated_data |>
+ count(severity_of_harassment, account_type) 
+
+#### Harassing Tweets are more likely to be categorized as "name-calling", "gender-based insults", and/or "vicious language" ####
 set.seed(416)
 
-simulated_data <- tibble(
+simulate_data <- tibble(
   Tweet = 1:1000,
   severity_of_harassment =
     sample(x = c("Name-calling", "Gender-based insults", "Vicious language"), 
@@ -80,9 +84,13 @@ simulated_data <- tibble(
            replace = TRUE, 
            prob = c(0.6, 0.3, 0.1))
 )
-simulated_data
+simulate_data
 
-# Personal accounts that send harassing Tweets are likely to be from CPC/PPC supporters #
+# Count severity of harassment & types of accounts #
+simulate_data |>
+  count(severity_of_harassment, account_type) 
+
+#### Personal accounts that send harassing Tweets are likely to be from CPC/PPC supporters ####
 set.seed(416)
 personal_accounts <- tibble(
   Account = 1:1000,
@@ -98,6 +106,10 @@ personal_accounts <- tibble(
   prob = c(0.6, 0.4))
 )
 personal_accounts
+
+# Count severity of harassment & party identification #
+personal_accounts |>
+  count(severity_of_harassment, party_identification) 
 
 #### Data Validation ####
 # Check that severity of harassment range from positive to hate speech #
