@@ -18,14 +18,17 @@ show_col_types = FALSE
 
 # Read in the cleaned May data #
 cleaned_may_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_may_data.csv"))
+show_col_types = FALSE
 
 # Read in the cleaned Collins data #
 cleaned_collins_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_collins_data.csv"))
+show_col_types = FALSE
 
 #### Check the coded and cleaned McKenna data set ####
 # Check variable type #
 # Code referenced from: https://tellingstorieswithdata.com/09-clean_and_prepare.html#checking-and-testing #
 rules <- validator(
+  is.integer(ID),
   is.character(tweet_text),
   is.character(username),
   is.character(name),
@@ -44,6 +47,7 @@ summary(out)
 #### Check the coded and cleaned May data set ####
 # Check variable type #
 rules <- validator(
+  is.integer(ID),
   is.character(tweet_text),
   is.character(username),
   is.character(name),
@@ -62,6 +66,7 @@ summary(out)
 #### Check the coded and cleaned Collins data set ####
 # Check variable type #
 rules <- validator(
+  is.integer(ID),
   is.character(tweet_text),
   is.character(username),
   is.character(name),
