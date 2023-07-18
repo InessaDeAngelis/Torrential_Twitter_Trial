@@ -12,15 +12,15 @@
 library(tidyverse)
 library(testthat)
 
-#### Read in the data sets ####
-# Read in the preliminary cleaned McKenna data # 
+#### Read in the preliminary cleaned data sets ####
+# Read in the cleaned McKenna data # 
 cleaned_mckenna_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/cleaned_mckenna_data.csv"))
 show_col_types = FALSE
 
-# Read in the preliminary cleaned May data #
+# Read in the cleaned May data #
 cleaned_may_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/cleaned_may_data.csv"))
 
-# Read in the preliminary cleaned Collins data #
+# Read in the cleaned Collins data #
 cleaned_collins_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/cleaned_collins_data.csv"))
 
 #### Check that the raw McKenna data set is ready to be coded ####
