@@ -32,20 +32,29 @@ coded_mckenna_data <-
   )
 
 # Name organization #
-  clean_names(coded_mckenna_data)
+finalized_mckenna_data <-
+clean_names(coded_mckenna_data)
 
 # Select columns of interest #
-  finalized_mckenna_data <-
-  finalized_mckenna_data |>
-  select(
-    tweet_text,
-    username,
-    name,
-    bio,
-    severity_of_harassment,
-    type_of_account,
+finalized_mckenna_data <-
+finalized_mckenna_data |>
+select(
+  tweet_text,
+  username,
+  name,
+  bio,
+  severity_of_harassment,
+  type_of_account,
   ) 
 head(finalized_mckenna_data)
+
+# Add ID column #
+# Code referenced from: https://www.statology.org/dplyr-add-column/ #
+finalized_mckenna_data <-
+finalized_mckenna_data |>
+  mutate(ID=c(1:500),
+         .before=tweet_text) |>
+  select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
 
 # Case match severity of harassment #
 finalized_mckenna_data <- 
@@ -59,7 +68,7 @@ finalized_mckenna_data <-
     severity_of_harassment == 6 ~ "Credible threats",
     severity_of_harassment == 7 ~ "Hate speech",
   )) |>
-  select(tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+  select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
 finalized_mckenna_data
 
 # Case match type of account #
@@ -73,15 +82,8 @@ finalized_mckenna_data <-
       type_of_account == 5 ~ "Anonymous",
       type_of_account == 6 ~ "Suspended/deleted",
            )) |>
-  select(tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
-finalized_mckenna_data
-
-# Add ID column #
-# Code referenced from: https://www.statology.org/dplyr-add-column/ #
-finalized_mckenna_data |>
-  mutate(ID=c(1:500),
-         .before=tweet_text) |>
   select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+finalized_mckenna_data
 
 #### Clean Elizabeth May data set ####
 coded_may_data <-
@@ -95,7 +97,8 @@ finalized_may_data <-
   clean_names(coded_may_data)
 
 # Select columns of interest #
-finalized_may_data |>
+finalized_may_data <-
+  finalized_may_data |>
   select(
     tweet_text,
     username,
@@ -105,6 +108,14 @@ finalized_may_data |>
     type_of_account,
   ) 
 head(finalized_may_data)
+
+# Add ID column #
+finalized_may_data <-
+finalized_may_data |>
+  mutate(ID=c(1:500),
+         .before=tweet_text) |>
+  select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+finalized_may_data
 
 # Case match severity of harassment #
 finalized_may_data <- 
@@ -118,7 +129,7 @@ finalized_may_data <-
     severity_of_harassment == 6 ~ "Credible threats",
     severity_of_harassment == 7 ~ "Hate speech",
   )) |>
-  select(tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+  select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
 finalized_may_data
 
 # Case match type of account #
@@ -132,13 +143,6 @@ finalized_may_data <-
     type_of_account == 5 ~ "Anonymous",
     type_of_account == 6 ~ "Suspended/deleted",
   )) |>
-  select(tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
-finalized_may_data
-
-# Add ID column #
-finalized_may_data |>
-  mutate(ID=c(1:500),
-         .before=tweet_text) |>
   select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
 finalized_may_data
 
@@ -154,6 +158,7 @@ finalized_collins_data <-
   clean_names(coded_collins_data)
 
 # Select columns of interest #
+finalized_collins_data <-
 finalized_collins_data |>
   select(
     tweet_text,
@@ -164,6 +169,14 @@ finalized_collins_data |>
     type_of_account,
   ) 
 head(finalized_collins_data)
+
+# Add ID column #
+finalized_collins_data <-
+finalized_collins_data |>
+  mutate(ID=c(1:13),
+         .before=tweet_text) |>
+  select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+finalized_collins_data
 
 # Case match severity of harassment #
 finalized_collins_data <- 
@@ -177,7 +190,7 @@ finalized_collins_data <-
     severity_of_harassment == 6 ~ "Credible threats",
     severity_of_harassment == 7 ~ "Hate speech",
   )) |>
-  select(tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+  select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
 finalized_collins_data
 
 # Case match type of account #
@@ -191,13 +204,6 @@ finalized_collins_data <-
     type_of_account == 5 ~ "Anonymous",
     type_of_account == 6 ~ "Suspended/deleted",
   )) |>
-  select(tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
-finalized_collins_data
-
-# Add ID column #
-finalized_collins_data |>
-  mutate(ID=c(1:13),
-         .before=tweet_text) |>
   select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
 finalized_collins_data
 
