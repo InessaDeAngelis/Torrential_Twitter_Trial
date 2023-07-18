@@ -1,12 +1,11 @@
 #### Preamble ####
-# Purpose: Tests the cleaned data sets
+# Purpose: Tests the preliminary cleaned data sets before coding them for severity of harassment & type of account
 # Author: Inessa De Angelis
 # Date: 16 July 2023
 # Contact: inessa.deangelis@mail.utoronto.ca 
 # License: MIT
 # Pre-requisites
   # 01-raw_data_cleaning.R
-  # 02-coded_data_cleaning.R
 
 #### Workspace setup ####
 library(tidyverse)
@@ -19,9 +18,11 @@ show_col_types = FALSE
 
 # Read in the cleaned May data #
 cleaned_may_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/cleaned_may_data.csv"))
+show_col_types = FALSE
 
 # Read in the cleaned Collins data #
 cleaned_collins_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/cleaned_collins_data.csv"))
+show_col_types = FALSE
 
 #### Check that the raw McKenna data set is ready to be coded ####
 # Code referenced from: https://tellingstorieswithdata.com/12-ijalm.html 
