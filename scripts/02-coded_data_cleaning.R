@@ -36,34 +36,172 @@ finalized_mckenna_data <-
   clean_names(coded_mckenna_data)
 
 # Select columns of interest #
-finalized_mckenna_data =
-coded_mckenna_data |>
+finalized_mckenna_data |>
   select(
-    `Tweet text`,
-    Username,
-    Name,
-    Bio,
-    `Severity of Harassment`,
-    `Type of Account`,
-  )
+    tweet_text,
+    username,
+    name,
+    bio,
+    severity_of_harassment,
+    type_of_account,
+  ) 
 head(finalized_mckenna_data)
 
-# Case match #
-finalized_mckenna_data <-
+# Case match severity of harassment #
+finalized_mckenna_data <- 
   finalized_mckenna_data |>
-  mutate("severity of harassment" = case_when(
-    `Severity of Harassment` == 1 ~ "Positive",
-    `Severity of Harassment` == 2 ~ "Neutral",
-    `Severity of Harassment` == 3 ~ "Questioning Authority",
-    `Severity of Harassment` == 4 ~ "Name-calling/Gender insults",
-    `Severity of Harassment` == 5 ~ "Vicious language",
-    `Severity of Harassment` == 6 ~ "Credible threats",
-    `Severity of Harassment` == 7 ~ "Hate speech"
+  mutate("severity_of_harassment" = case_when(
+    severity_of_harassment == 1 ~ "Positive",
+    severity_of_harassment == 2 ~ "Neutral",
+    severity_of_harassment == 3 ~ "Questioning Authority",
+    severity_of_harassment == 4 ~ "Name-calling/Gender insults",
+    severity_of_harassment == 5 ~ "Vicious language",
+    severity_of_harassment == 6 ~ "Credible threats",
+    severity_of_harassment == 7 ~ "Hate speech",
   )) |>
-  select(`Tweet text`, Username, Name, Bio, `Severity of Harassment`, `Type of Account`) |>
-  mutate("type of account" = case_when(
-    Type of account
-    
-  )) |>
-  select(`Tweet text`, Username, Name, Bio, `Severity of Harassment`, `Type of Account`) |>
+  select(tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
 finalized_mckenna_data
+
+# Case match type of account #
+finalized_mckenna_data <- 
+  finalized_mckenna_data |>
+    mutate("type_of_account" = case_when(
+      type_of_account == 1 ~ "Personal",
+      type_of_account == 2 ~ "Professional",
+      type_of_account == 3 ~ "Bots",
+      type_of_account == 4 ~ "Spammers",
+      type_of_account == 5 ~ "Anonymous",
+      type_of_account == 6 ~ "Suspended/deleted",
+           )) |>
+  select(tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+finalized_mckenna_data
+
+#### Clean Elizabeth May data set ####
+coded_may_data <-
+  read_csv(
+    file = "~/Desktop/Final Paper/Outputs/Data/Coded_May_data.csv",
+    show_col_types = FALSE
+  )
+
+# Name organization #
+finalized_may_data <-
+  clean_names(coded_may_data)
+
+# Select columns of interest #
+finalized_may_data |>
+  select(
+    tweet_text,
+    username,
+    name,
+    bio,
+    severity_of_harassment,
+    type_of_account,
+  ) 
+head(finalized_may_data)
+
+# Case match severity of harassment #
+finalized_may_data <- 
+  finalized_may_data |>
+  mutate("severity_of_harassment" = case_when(
+    severity_of_harassment == 1 ~ "Positive",
+    severity_of_harassment == 2 ~ "Neutral",
+    severity_of_harassment == 3 ~ "Questioning Authority",
+    severity_of_harassment == 4 ~ "Name-calling/Gender insults",
+    severity_of_harassment == 5 ~ "Vicious language",
+    severity_of_harassment == 6 ~ "Credible threats",
+    severity_of_harassment == 7 ~ "Hate speech",
+  )) |>
+  select(tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+finalized_may_data
+
+# Case match type of account #
+finalized_may_data <- 
+  finalized_may_data |>
+  mutate("type_of_account" = case_when(
+    type_of_account == 1 ~ "Personal",
+    type_of_account == 2 ~ "Professional",
+    type_of_account == 3 ~ "Bots",
+    type_of_account == 4 ~ "Spammers",
+    type_of_account == 5 ~ "Anonymous",
+    type_of_account == 6 ~ "Suspended/deleted",
+  )) |>
+  select(tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+finalized_may_data
+
+#### Clean Laurel Collins data set ####
+coded_collins_data <-
+  read_csv(
+    file = "~/Desktop/Final Paper/Outputs/Data/Coded_Collins_data.csv",
+    show_col_types = FALSE
+  )
+
+# Name organization #
+finalized_collins_data <-
+  clean_names(coded_collins_data)
+
+# Select columns of interest #
+finalized_collins_data |>
+  select(
+    tweet_text,
+    username,
+    name,
+    bio,
+    severity_of_harassment,
+    type_of_account,
+  ) 
+head(finalized_collins_data)
+
+# Case match severity of harassment #
+finalized_collins_data <- 
+  finalized_collins_data |>
+  mutate("severity_of_harassment" = case_when(
+    severity_of_harassment == 1 ~ "Positive",
+    severity_of_harassment == 2 ~ "Neutral",
+    severity_of_harassment == 3 ~ "Questioning Authority",
+    severity_of_harassment == 4 ~ "Name-calling/Gender insults",
+    severity_of_harassment == 5 ~ "Vicious language",
+    severity_of_harassment == 6 ~ "Credible threats",
+    severity_of_harassment == 7 ~ "Hate speech",
+  )) |>
+  select(tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+finalized_collins_data
+
+# Case match type of account #
+finalized_collins_data <- 
+  finalized_collins_data |>
+  mutate("type_of_account" = case_when(
+    type_of_account == 1 ~ "Personal",
+    type_of_account == 2 ~ "Professional",
+    type_of_account == 3 ~ "Bots",
+    type_of_account == 4 ~ "Spammers",
+    type_of_account == 5 ~ "Anonymous",
+    type_of_account == 6 ~ "Suspended/deleted",
+  )) |>
+  select(tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+finalized_collins_data
+
+#### Save cleaned data in CSV file format ####
+write_csv(
+  x = finalized_mckenna_data,
+  file = "~/Desktop/Final Paper/Outputs/Data/finalized_mckenna_data.csv"
+)
+
+write_csv(
+  x = finalized_may_data,
+  file = "~/Desktop/Final Paper/Outputs/Data/finalized_may_data.csv"
+)
+
+write_csv(
+  x = finalized_collins_data,
+  file = "~/Desktop/Final Paper/Outputs/Data/finalized_collins_data.csv"
+)
+
+#### Save cleaned data in Parquet file format ####
+write_parquet(x = finalized_mckenna_data,
+              sink = "~/Desktop/Final Paper/Outputs/Data/finalized_mckenna_data.parquet")
+
+write_parquet(x = finalized_may_data,
+              sink = "~/Desktop/Final Paper/Outputs/Data/finalized_may_data.parquet")
+
+write_parquet(x = finalized_collins_data,
+              sink = "~/Desktop/Final Paper/Outputs/Data/finalized_collins_data.parquet")
