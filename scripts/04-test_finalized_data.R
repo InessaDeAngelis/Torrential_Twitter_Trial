@@ -5,11 +5,10 @@
 # Contact: inessa.deangelis@mail.utoronto.ca 
 # License: MIT
 # Pre-requisites
-# 02-coded_data_cleaning.R
+  # 02-coded_data_cleaning.R
 
 #### Workspace setup ####
 library(tidyverse)
-library(testthat)
 library(validate)
 
 #### Read in the coded cleaned data sets ####
@@ -24,6 +23,7 @@ cleaned_may_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/fina
 cleaned_collins_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_collins_data.csv"))
 
 #### Check the coded and cleaned McKenna data set ####
+# Check variable type #
 # Code referenced from: https://tellingstorieswithdata.com/09-clean_and_prepare.html#checking-and-testing #
 rules <- validator(
   is.character(tweet_text),
@@ -32,7 +32,8 @@ rules <- validator(
   is.character(bio),
   is.character(severity_of_harassment),
   is.character(type_of_account),
-  severity_of_harassment %in% c("Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech")
+  severity_of_harassment %in% c("Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech"),
+  type_of_account %in% c("Personal", "Professional", "Bots", "Spammers", "Anonymous", "Suspended/deleted")
 )
 
 out <-
@@ -41,6 +42,37 @@ out <-
 summary(out)
 
 #### Check the coded and cleaned May data set ####
+# Check variable type #
+rules <- validator(
+  is.character(tweet_text),
+  is.character(username),
+  is.character(name),
+  is.character(bio),
+  is.character(severity_of_harassment),
+  is.character(type_of_account),
+  severity_of_harassment %in% c("Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech"),
+  type_of_account %in% c("Personal", "Professional", "Bots", "Spammers", "Anonymous", "Suspended/deleted")
+)
 
+out <-
+  confront(finalized_may_data, rules)
+
+summary(out)
 
 #### Check the coded and cleaned Collins data set ####
+# Check variable type #
+rules <- validator(
+  is.character(tweet_text),
+  is.character(username),
+  is.character(name),
+  is.character(bio),
+  is.character(severity_of_harassment),
+  is.character(type_of_account),
+  severity_of_harassment %in% c("Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech"),
+  type_of_account %in% c("Personal", "Professional", "Bots", "Spammers", "Anonymous", "Suspended/deleted")
+)
+
+out <-
+  confront(finalized_collins_data, rules)
+
+summary(out)
