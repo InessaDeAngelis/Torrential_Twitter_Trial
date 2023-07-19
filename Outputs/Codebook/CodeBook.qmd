@@ -19,9 +19,9 @@ Severity of Harassment includes:
 
 - Neutral
 
-- Name-calling
+- Questioning Authority 
 
-- Gender-based insults
+- Name-calling/Gender insults
 
 - Vicious language
 
@@ -51,6 +51,7 @@ The coding of sentiment in Tweets will be conducted to determine the severity of
 1. **Positive**
 a. Tweets that employ positive wording and tone without expressing complaints [@zavattaro].
 b. Punctuation, such as exclamation marks, may be used to covey a positive message [@twitterpower]. See @tbl-positive-example for an example and note the use of the exclamation mark. 
+c. May include complimenting the work ethic and policies of the female politicians or congratulating them on introducing specific policies or winning an election. 
 
 | Tweet                                                                                                             | 
 |--------------------------------------------------------------------------------------------------------------------|
@@ -61,6 +62,8 @@ b. Punctuation, such as exclamation marks, may be used to covey a positive messa
 2. **Neutral**
 a. A neutral Tweet states a matter-of-fact without expressing an opinion or exuding judgement [@twitterpower].
 b. No specific punctuation is used and the overall tone of the Tweet is neither positive or harassing. Reference @tbl-neutral-example for an example of a user stating something that occurred during proceedings in the House of Commons.
+c. May include Tweets that quote government policies, election platforms, and news media articles.
+d. Tweets authored by the female politicians where they mention themselves will likely fall in this category. 
 
 | Tweet                                               |                                                              
 |-----------------------------------------------------|
@@ -68,9 +71,9 @@ b. No specific punctuation is used and the overall tone of the Tweet is neither 
 
 : Sample of a **neutral** Tweet sent to MP Laurel Collins. {#tbl-neutral-example}
 
-3.	**Name-calling** 
+3.	**Questioning Authority** 
 
-a. The use of derogatory and offensive language, often grounded in stereotypes to refer to female politicians, their policies, and assumed qualifications [@silencingwomen], [@theocharis]. For an example, see @tbl-name_calling-example, where a Twitter user utilizes the term "climate barbie". 
+a. For an example, see @tbl-name_calling-example, where a Twitter user utilizes the term "climate barbie". 
 
 | Tweet                                                                                                    |
 |----------------------------------------------------------------------------------------------------------|
@@ -80,7 +83,8 @@ a. The use of derogatory and offensive language, often grounded in stereotypes t
 
 4. **Gender-based insults**
 
-a. Derogatory comments and terms used against women, including “whore” and “slut” which are “… designed to insult and humiliate women, especially in regard to their weight and physical appearance” [@mantilla2013, p. 564]. See @tbl-gender_insult-example for an example where the user references MP McKenna's physical appearance. 
+a. The use of derogatory and offensive language, often grounded in stereotypes to refer to female politicians, their policies, and assumed qualifications [@silencingwomen], [@theocharis].
+b. Derogatory comments and terms used against women, including “whore” and “slut” which are “… designed to insult and humiliate women, especially in regard to their weight and physical appearance” [@mantilla2013, p. 564]. See @tbl-gender_insult-example for an example where the user references MP McKenna's physical appearance. 
 
 | Tweet                                                                                                           |
 |-----------------------------------------------------------------------------------------------------------------|
