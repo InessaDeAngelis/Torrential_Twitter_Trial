@@ -11,9 +11,9 @@ bibliography: Codebook_ref.bib
 ---
 
 # Overview #
-This codebook is designed to inform the coding process for my Torrential Twitter trial study. Prior to coding Tweets, the raw data sets were initially cleaned using the statistical programming software R [@r], utilizing functions from `Janitor` [@rJanitor]. Tweets will then be coded using an application designed with Shiny [@shiny] to determine the severity of harassment and type of account. 
+This codebook is designed to inform the coding process for my Torrential Twitter trial study. Prior to coding Tweets, the raw data sets were initially cleaned and tested using the statistical programming software R [@r], utilizing functions from `Janitor` [@rJanitor] and `testthat` [@testthat]. Tweets will then be coded using an application designed with Shiny [@shiny] to determine the severity of harassment and type of account. 
 
-Severity of Harassment includes:
+Harassment or gendertrolling is defined as sexist or misogynistic remarks that target a person based on their gender or sexuality and have varying levels of severity [@wagner]. Severity of harassment includes:
 
 - Positive
 
@@ -30,7 +30,7 @@ Severity of Harassment includes:
 - Hate speech
 
 
-Type of account includes:
+Type of account is defined as the dynamics of relationships between followers, followings, and lists and will be determined by analyzing the accounts’ bio, profile image, and other characteristics [@singh; @uddin] and includes:
 
 - Personal
 
@@ -51,11 +51,11 @@ The coding of sentiment in Tweets will be conducted to determine the severity of
 1. **Positive**
 a. Tweets that employ positive wording and tone without expressing complaints [@zavattaro].
 b. Punctuation, such as exclamation marks, may be used to covey a positive message [@twitterpower]. See @tbl-positive-example for an example and note the use of the exclamation mark. 
-c. May include complimenting the work ethic and policies of the female politicians or congratulating them on introducing specific policies or winning an election. 
+c. May include language complimenting the work ethic and policies of the female politicians or congratulating them on introducing specific policies or winning an election. 
 
 | Tweet                                                                                                             | 
 |--------------------------------------------------------------------------------------------------------------------|
-| @ ElizabethMay @ paulmanly The forefront of the climate revolution. They're pushing big on Vancouver Island and for good reason!   |  
+| @ ElizabethMay thank you May for keeping us on climate change!!! #weonlyhaveoneplanet |  
 
 : Sample of a **positive** Tweet sent to MP Elizabeth May. {#tbl-positive-example}
 
@@ -73,24 +73,26 @@ d. Tweets authored by the female politicians where they mention themselves will 
 
 3.	**Questioning Authority** 
 
-a. For an example, see @tbl-name_calling-example, where a Twitter user utilizes the term "climate barbie". 
+a. Tweets that question the qualifications and abilities of female politicians, including questioning their ability to understand science, be effective leaders and govern based on their gender, age, and party affiliation, and question their common sense and ability to act rationally [@microaggressions]. 
+b. For an example, see @tbl-authority_example, where a Twitter user questions MP May's understanding of climate science. 
 
 | Tweet                                                                                                    |
 |----------------------------------------------------------------------------------------------------------|
-|@ cathmckenna CO2 is NOT pollution climate barbie, no matter how many times or how loudly you proclaim it |
+|@ ElizabethMay Really Elizabeth? Describe to us in detail the climate catastrophe that would take place. I am real curious what it would entail. |
 
-: Sample of a Tweet containing **Name-calling** sent to former MP Catherine McKenna. {#tbl-name_calling-example}
+: Sample of a Tweet **Questioning authority** of MP Elizabeth May. {#tbl-authority_example}
 
-4. **Gender-based insults**
+4. **Name-calling/Gender insults**
 
-a. The use of derogatory and offensive language, often grounded in stereotypes to refer to female politicians, their policies, and assumed qualifications [@silencingwomen], [@theocharis].
-b. Derogatory comments and terms used against women, including “whore” and “slut” which are “… designed to insult and humiliate women, especially in regard to their weight and physical appearance” [@mantilla2013, p. 564]. See @tbl-gender_insult-example for an example where the user references MP McKenna's physical appearance. 
+a. The use of offensive language, often grounded in stereotypes to refer to female politicians, their policies, and assumed qualifications [@silencingwomen; @theocharis].
+b. Derogatory comments and terms used against women, including “whore” and “slut” which are “… designed to insult and humiliate women, especially in regard to their weight and physical appearance” [@mantilla2013, p. 564].
+c. Tweets that are likely to fall under this category may call MP McKenna a "climate barbie" and call MP May "Lizzie" and claim that she is an alcoholic and that it is impairing her ability to effectively govern. See @tbl-nc_gender_insult-example for an example where the user calls MP McKenna a "barbie" and comments on her physical appearance in a way male politicians would not be spoken about. 
 
 | Tweet                                                                                                           |
 |-----------------------------------------------------------------------------------------------------------------|
 |@ cathmckenna Hey Blonde Bimbo Barbie why do you look like you always just scraped outta bed |  
 
-: Sample of a Tweet containing **Gender-based insults** sent to former MP Catherine McKenna. {#tbl-gender_insult-example}
+: Sample of a Tweet containing **Name-calling and gender-based insults** sent to former MP Catherine McKenna. {#tbl-nc_gender_insult-example}
 
 5.	**Vicious language** 
 a. Descriptions using vile language of behaviour that gendertrolls (who are men) claim that they would like to subject the female user to [@mantilla2013]. @tbl-viciouslang-example provides an example. 
@@ -132,20 +134,26 @@ a.	People who represent their own views and interests and use their account for 
 
 2. **Professional**
 a.	Share information about their area of expertise and may include businesses who use the platform to market their products and reach new audiences [@uddin, p. 2]
+b. This category includes politicians, political parties, and organizations and can be distinguished by looking at logos, branding, and URLs linked to the profile. 
 
 3.	**Bots**
 a.	Automated “… online agents that are used to intervene in political discourse online” and are intentionally created to circulate disinformation, malicious content, and flood the notifications of users [@Duboisbots, p. 28], [@marlow].
+b. However, not all bots are bad. There are some automated agents which circulate helpful information and will be labeled as "automated" by Twitter.
 
 4. **Spammers**
 a.	Intentionally “spread malicious content” [@singh, p. 2].
-b.	May show up as one individual who has created multiple accounts to bolster their ability to send harassing content (Mantilla, 2015).
+b.	May show up as one individual who has created multiple accounts to bolster their ability to send harassing content [@mantilla2015].
+c. Can be determined by looking at the frequency of replies, randomness of the profile picture and bio (or lack of both/either), and may have a default, Twitter generated username (such as @ Bob047328416). 
 
 5.	**Anonymous** 
 a.	An individually intentionally hiding information about their identity and location for the purposes of using the platform maliciously. May include not adding a profile picture or using an obscured, random picture and not revealing their actual name, age, gender, and other identifying characteristics [@trifiro].
 b.	Hide behind fake usernames and “… express sexist, racist, or homophobic views with little fear of being held accountable for their comments” [@wagner, p. 8]. 
+c. Can be determined by looking at a user's bio which will either be blank (listed as NA in the data set) or say something very random and unidentifiable such as "love the outdoors". The user's profile picture will either be Twitter's default, a picture of a random animal, or a political meme (such as Prime Minister Trudeau wearing a silly hat). 
+ 
 
 6.	**Suspended/Deleted** 
-a. Accounts found to be in violation of Twitter's Terms of Services and temporarily or permanently removed from the platform. 
+a. Accounts found to be in violation of Twitter's Terms of Services and temporarily or permanently removed from the platform.
+b. May include people who chose to terminate their account, especially following Elon Musk's takeover of the platform. 
 
 # Other Guidelines
 ## Retweets ##
@@ -159,9 +167,9 @@ For the purposes of this study, each Tweet in a threaded response will be analyz
 ## Media ##
 Twitter defines any gifs, memes, images, and videos as media [@Twittermedia]. Media embedded in Tweets should be considered as part of the written text of the Tweet and coded accordingly, given that hateful speech can also be expressed through images and symbols [@carlson]. With increasing doctoring and creation of media for the purpose of deception and political gain, any media embedded in Tweets should be analyzed for manipulation and machine-learning generated deepfakes, which are compelling fake pictures and videos [@farid], [@appel]. 
 
-For Tweets that contain a picture without additional text, the nature, context, and suggestiveness of the picture should be analysed to determine the severity of harassment [@sagemethods]. Emojis, if included in a Tweet, should be interpreted as both a picture and text, analysing the rest of the Tweet for context [@swartz]. Moreover, hashtags will be coded in the same manner as regular text in Tweets [@sagemethods]. 
+For Tweets that contain a picture without additional text, the nature, context, and suggestiveness of the picture should be analysed to determine the severity of harassment [@sagemethods]. Emojis, if included in a Tweet, should be interpreted as both a picture and text, analysing the rest of the Tweet for context [@swartz]. Moreover, hashtags will be coded in the same manner as regular text in Tweets [@sagemethods]. Any URLs in Tweets should be opened and examine to assist in determining the severity of harassment. 
 
 ## Hate Speech ##
-It is anticipated that the quantity of hate speech detected in this sample of Tweets will be quite low, given that these Tweets are from 2019 when Canadian politics was slightly less polarized on Twitter and Twitter employed their content moderation rules more frequently. However, given changes to Canadian politics and the affordances of Twitter, this is likely to change in the full-scale version of this study. 
+It is anticipated that the quantity of hate speech detected in this sample of Tweets will be quite low, given that these Tweets are from 2019 when Canadian politics was slightly less polarized on Twitter and Twitter employed their content moderation rules more frequently. The few Tweets identified as hate speech in this trial study may not be deemed hate speech in the context of the full scale version of the study. However, given changes to Canadian politics and the affordances of Twitter, the number of Tweets containing hate speech is likely to change in the full-scale version of this study. 
 
 # References 
