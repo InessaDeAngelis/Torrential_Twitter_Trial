@@ -29,6 +29,7 @@ show_col_types = FALSE
 # Code referenced from: https://tellingstorieswithdata.com/09-clean_and_prepare.html#checking-and-testing #
 rules <- validator(
   is.integer(ID),
+  is.character(name_of_politician),
   is.character(tweet_text),
   is.character(username),
   is.character(name),
@@ -48,6 +49,7 @@ summary(out)
 # Check variable type #
 rules <- validator(
   is.integer(ID),
+  is.character(name_of_politician),
   is.character(tweet_text),
   is.character(username),
   is.character(name),
@@ -67,6 +69,7 @@ summary(out)
 # Check variable type #
 rules <- validator(
   is.integer(ID),
+  is.character(name_of_politician),
   is.character(tweet_text),
   is.character(username),
   is.character(name),
