@@ -14,7 +14,7 @@ library(testthat)
 # Severity of harassment will vary on a 7-point scale from positive to hate speech 
 # Type of account will vary from Personal, Professional, Bots, Spammers, and Anonymous 
 # The more severe forms of harassment will come from Personal and Suspended/Deleted accounts 
-# Harassing Tweets are more likely to be categorized as "name-calling", "gender-based insults", and/or "vicious language"
+# Harassing Tweets are more likely to be categorized as "Questioning authority", "Name-calling/gender insults", and/or "vicious language"
 # Personal accounts that send Tweets containing mid to high levels of harassment on the 7-point scale are likely to belong to people who support the Conservative Party or People's Party
 
 #### Simulate varying harassment on the 7-point scale ####
@@ -24,7 +24,7 @@ num_people <- 1000
 
 harassing_tweets <- tibble(
   person = 1:num_people,
-  severity_of_harassment = sample(c("Positive", "Neutral", "Name-calling", "Gender-based insults", "Vicious language", "Credible threats", "Hate speech"), size = num_people, replace = TRUE),
+  severity_of_harassment = sample(c("Positive", "Neutral", "Questioning authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech"), size = num_people, replace = TRUE),
 )
 harassing_tweets
 
@@ -68,13 +68,13 @@ simulated_data
 simulated_data |>
  count(severity_of_harassment, account_type) 
 
-#### Harassing Tweets are more likely to be categorized as "name-calling", "gender-based insults", and/or "vicious language" ####
+#### Harassing Tweets are more likely to be categorized as "Questioning authority", "Name-calling/Gender insults", and/or "vicious language" ####
 set.seed(416)
 
 simulate_data <- tibble(
   Tweet = 1:1000,
   severity_of_harassment =
-    sample(x = c("Name-calling", "Gender-based insults", "Vicious language"), 
+    sample(x = c("Questioning authority", "Name-calling/Gender insults", "Vicious language"), 
            size = 1000, 
            replace = TRUE, 
            prob = c(0.5, 0.3, 0.2)), 
@@ -95,7 +95,7 @@ set.seed(416)
 personal_accounts <- tibble(
   Account = 1:1000,
   severity_of_harassment =
-    sample(x = c("Questioning Authority", "Name-calling/Gender-based insults"), 
+    sample(x = c("Questioning Authority", "Name-calling/Gender insults"), 
            size = 1000, 
            replace = TRUE, 
            prob = c(0.6, 0.4)), 
@@ -118,8 +118,8 @@ class(harassing_tweets$severity_of_harassment) == "character"
 sum(!(harassing_tweets$severity_of_harassment) %in%
       c("Positive",
         "Neutral",
-        "Name-calling",
-        "Gender-based insults",
+        "Questioning authority",
+        "Name-calling/Gender insults",
         "Vicious language",
         "Credible threats",
         "Hate speech",
