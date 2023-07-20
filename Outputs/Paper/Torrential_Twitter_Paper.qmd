@@ -25,27 +25,77 @@ library(kableExtra)
 library(here)
 library(ggplot2)
 
-# Read in cleaned data set #
+# Read in the cleaned McKenna data # 
+cleaned_mckenna_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_mckenna_data.csv"))
+show_col_types = FALSE
+
+# Read in the cleaned May data #
+cleaned_may_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_may_data.csv"))
+show_col_types = FALSE
+
+# Read in the cleaned Collins data #
+cleaned_collins_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_collins_data.csv"))
+show_col_types = FALSE
+
+# Create specific data sets #
 
 ```
 
 # Introduction
 
+## Theoretical Framework
+This study is conducted under the theory of deliberative democracy which emphasizes the importance of having open, respectful, and diverse discourse for a healthy democracy [@pmc2019; @trifiro]. Democratic legitimacy is established by allowing the public to collectively have the opportunity “... to participate in consequential deliberation about the content of decisions” [@mckaytenove, p. 704]. Masullo Chen categorizes the characteristics of a deliberative debate by stating that there must be “… more than one side of an issue to consider [and that] the stakes also must be high” [@masullochen, pp. 83-84]. The harassment of female politicians who communicate about climate change, one of the most crucial areas of policymaking, challenges the core values of Canada’s deliberative democracy by trying to minimize the diverse range of opinions and politicize the subject matter, therefore risking the future of public discourse online and offline.
+
+Results from the analyzed Tweets from the three female politicians will then be compared to see if the level of discourse about climate change on Twitter matches the characteristics of what is considered healthy discourse under the theory of deliberative democracy. 
+
 # Data
+
+## Data Coding
 
 ## Data Limitations
 
 ## Data Cleaning
+Data was collected via Twitter API using Python (see datasheet in [Appendix] for more information) and cleaned, tested, modeled, and analyzed using the statistical programming software R [@r], using functions from `tidyverse` [@rTidyverse], `ggplot2` [@rGgplot2], `janitor` [@rJanitor], `KableExtra` [@rKableExtra], `knitr` [@rknitr], `here` [@rHere], `arrow` [@arrow], `validate` [@validate], and `testthat` [@testthat]. 
+
+After retrieving the data sets from my archived files, I performed the first round of data cleaning based on the design of my trial study. I removed the columns which presented information not required for this study and using the `filter` function, I filtered all Tweets by the key word "climate", and then took a sample using the `slice_sample` function of 500 Tweets from both MP McKenna and MP May's data sets. Only 13 Tweets from MP Collins matched the criteria, so there was no need to take a sample. 
+
+### Raw Data 
+In preparation to code my Tweets, 
+
+I renamed columns and capitalized the first letter of every word using Twitter Developer's guidelines and my Codebook [@Twittermedia]. I renamed `text` to `Text`, `user_name` to `Name`, `user_sname` to `Username`, `user_description` to `Bio`, `user_location` to `Location`, `followers` to `Followers`, `friends` to `Following`, and `tweet_URL` to `URL`. 
+
+I then tested the raw data using the `testthat` [@testthat] package to ensure the data set was ready to be manually coded.
+
+### Coded Data 
+After coding the 1,013 Tweets manually using my Google form, I then visually checked for missing data, such as Tweet URLs, severity of harassment, and type of account and went back and added in the few that I missed coding the first time. A number of Twitter accounts opted not have bios (listed as NA in the data sets), which is missing data that was anticipated within the data sets. After my data set passed this initial, informal test, I proceeded to clean it a second time. 
+
+For my `severity of harassment` data, I updated value 1 to "Positive", 2 to "Neutral", 3 to "Questioning authority", 4 to "Name-calling/Gender insults", 5 to "Vicious language", 6 to "Credible threats", and 7 to "Hate speech" based on my Codebook. 
+
+For my `type of account` data, I changed value 1 to "Personal", 2 to "Professional", 3 to "Bots", 4 to "Spammers", 5 to "Anonymous", and 6 to "Suspended/deleted" based on my Codebook. 
+
+I tested the cleaned data using the `validate` [@validate] package, primarily validating variable types and ensuring all Tweets were coded (500 for both MP McKenna and MP May and 13 for MP Collins). 
 
 # Results
+
+## Severity of Harassment
+
+## Type of Account
+
+## Catherine McKenna
+
+## Elizabeth May
+
+## Laurel Collins
 
 # Discussion
 
 ## Deliberative Democracy
+Referencing previous discussions of the characteristics of what constitutes a healthy deliberative democracy, findings from this trial study will be compared and contrasted to evaluate the extent at which the discourse is healthy for Canadian democracy. 
 
 ## Limitations
 
 ## Future Research
+Given the changes to Twitter's affordances and the increasingly polarized political climate in Canada following the Covid-19 pandemic, there are multiple aspects of this trial study that will differ in the full-scale version of this study. 
 
 # Conclusion
 
@@ -151,7 +201,7 @@ This datasheet provides background on who originally collected the raw Twitter d
 
 1. *Will the dataset be distributed to third parties outside of the entity (for example, company, institution, organization) on behalf of which the dataset was created?* 
 
-    - No. Due to Twitter’s policies about sharing data, this dataset is not publicly available but can be obtained by       contacting Inessa De Angelis (inessa.deangelis@mail.utoronto.ca). Twitter’s policies outline that datasets are        not to be uploaded to GitHub or similar sites/repositories. 
+    - No. Due to Twitter’s policies about sharing data, this dataset is not publicly available but can be obtained by       contacting Inessa De Angelis (inessa.deangelis@mail.utoronto.ca). Twitter’s policies outline that datasets are not to be uploaded to GitHub or similar sites/repositories without removing all identifying information and only including the Tweet ID or User ID. 
 
 
 # References
