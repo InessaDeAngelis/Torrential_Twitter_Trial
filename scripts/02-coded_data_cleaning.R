@@ -39,6 +39,7 @@ clean_names(coded_mckenna_data)
 finalized_mckenna_data <-
 finalized_mckenna_data |>
 select(
+  name_of_politician, 
   tweet_text,
   username,
   name,
@@ -54,7 +55,7 @@ finalized_mckenna_data <-
 finalized_mckenna_data |>
   mutate(ID=c(1:500),
          .before=tweet_text) |>
-  select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+  select(ID, name_of_politician, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
 
 # Case match severity of harassment #
 finalized_mckenna_data <- 
@@ -68,7 +69,7 @@ finalized_mckenna_data <-
     severity_of_harassment == 6 ~ "Credible threats",
     severity_of_harassment == 7 ~ "Hate speech",
   )) |>
-  select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+  select(ID, name_of_politician, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
 finalized_mckenna_data
 
 # Case match type of account #
@@ -82,7 +83,7 @@ finalized_mckenna_data <-
       type_of_account == 5 ~ "Anonymous",
       type_of_account == 6 ~ "Suspended/deleted",
            )) |>
-  select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+  select(ID, name_of_politician, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
 finalized_mckenna_data
 
 #### Clean Elizabeth May data set ####
@@ -100,6 +101,7 @@ finalized_may_data <-
 finalized_may_data <-
   finalized_may_data |>
   select(
+    name_of_politician, 
     tweet_text,
     username,
     name,
@@ -114,7 +116,7 @@ finalized_may_data <-
 finalized_may_data |>
   mutate(ID=c(1:500),
          .before=tweet_text) |>
-  select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+  select(ID, name_of_politician, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
 finalized_may_data
 
 # Case match severity of harassment #
@@ -129,7 +131,7 @@ finalized_may_data <-
     severity_of_harassment == 6 ~ "Credible threats",
     severity_of_harassment == 7 ~ "Hate speech",
   )) |>
-  select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+  select(ID, name_of_politician, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
 finalized_may_data
 
 # Case match type of account #
@@ -143,7 +145,7 @@ finalized_may_data <-
     type_of_account == 5 ~ "Anonymous",
     type_of_account == 6 ~ "Suspended/deleted",
   )) |>
-  select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+  select(ID, name_of_politician, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
 finalized_may_data
 
 #### Clean Laurel Collins data set ####
@@ -161,6 +163,7 @@ finalized_collins_data <-
 finalized_collins_data <-
 finalized_collins_data |>
   select(
+    name_of_politician,
     tweet_text,
     username,
     name,
@@ -175,7 +178,7 @@ finalized_collins_data <-
 finalized_collins_data |>
   mutate(ID=c(1:13),
          .before=tweet_text) |>
-  select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+  select(ID, name_of_politician, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
 finalized_collins_data
 
 # Case match severity of harassment #
@@ -190,7 +193,7 @@ finalized_collins_data <-
     severity_of_harassment == 6 ~ "Credible threats",
     severity_of_harassment == 7 ~ "Hate speech",
   )) |>
-  select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+  select(ID, name_of_politician, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
 finalized_collins_data
 
 # Case match type of account #
@@ -204,7 +207,7 @@ finalized_collins_data <-
     type_of_account == 5 ~ "Anonymous",
     type_of_account == 6 ~ "Suspended/deleted",
   )) |>
-  select(ID, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
+  select(ID, name_of_politician, tweet_text, username, name, bio, severity_of_harassment, type_of_account) 
 finalized_collins_data
 
 #### Save cleaned data in CSV file format ####
