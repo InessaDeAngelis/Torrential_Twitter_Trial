@@ -24,6 +24,7 @@ library(knitr)
 library(kableExtra)
 library(here)
 library(ggplot2)
+library(formattable)
 
 # Read in the cleaned McKenna data # 
 cleaned_mckenna_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_mckenna_data.csv"))
@@ -38,7 +39,9 @@ cleaned_collins_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/
 show_col_types = FALSE
 
 # Create specific data sets #
-
+combined_data <- rbind(cleaned_mckenna_data, cleaned_may_data, cleaned_collins_data)
+combined_data
+  
 ```
 
 # Introduction
@@ -48,19 +51,24 @@ This study is conducted under the theory of deliberative democracy which emphasi
 
 Results from the analyzed Tweets from the three female politicians will then be compared to see if the level of discourse about climate change on Twitter matches the characteristics of what is considered healthy discourse under the theory of deliberative democracy. 
 
-# Data
+# Data 
 
 ## Data Coding
 
 ## Data Limitations
+Twitter, the platform's affordances, and the types of accounts and content circulate is ever-changing. Consequently, Tweets authored in 2019, collected in 2021, and analyzed for this trial study in 2023 are faced with changing contexts and affordances which must be accounted for. There are potential inaccuracies in reporting which accounts are still on the        platform and which have been suspended/deleted, especially following successive waves of Covid-19 mis- and dis-information on the platform. Although this was anticipated, some users do not have bios or locations indicated (listed as NA), which may impact how `type of account` is coded. The sheer volume of Tweets collected in 2021 also means that only a small sample is being used for this trial study, which means there is a higher chance of inaccuracies and ability to not establish patterns to see the larger picture. 
+
+During the 2019 Federal election campaign, MP Collins was a City Councillor in Victoria, BC, never having been elected to the House of Commons or faced the scrutiny of traditional and social media on a national level. This means that she received far fewer Tweets during the same period as MP McKenna and MP May and that the results from her study are far less generalizable, but are still important to include given her current prominence in 2023 and anticipated prominence in the full-scale version of this study. 
 
 ## Data Cleaning
-Data was collected via Twitter API using Python (see datasheet in [Appendix] for more information) and cleaned, tested, modeled, and analyzed using the statistical programming software R [@r], using functions from `tidyverse` [@rTidyverse], `ggplot2` [@rGgplot2], `janitor` [@rJanitor], `KableExtra` [@rKableExtra], `knitr` [@rknitr], `here` [@rHere], `arrow` [@arrow], `validate` [@validate], and `testthat` [@testthat]. 
+Data was collected via Twitter API using Python (see datasheet in [Appendix] for more information) and cleaned, tested, modeled, and analyzed using the statistical programming software R [@r], using functions from `tidyverse` [@rTidyverse], `ggplot2` [@rGgplot2], `janitor` [@rJanitor], `KableExtra` [@rKableExtra], `knitr` [@rknitr], `here` [@rHere], `formattable` [@rFormattable], `arrow` [@arrow], `validate` [@validate], and `testthat` [@testthat]. 
 
-After retrieving the data sets from my archived files, I performed the first round of data cleaning based on the design of my trial study. I removed the columns which presented information not required for this study and using the `filter` function, I filtered all Tweets by the key word "climate", and then took a sample using the `slice_sample` function of 500 Tweets from both MP McKenna and MP May's data sets. Only 13 Tweets from MP Collins matched the criteria, so there was no need to take a sample. 
+The data utilized in this trial study underwent two rounds of cleaning: the first was to clean and select the Tweets to manually code and the second was to clean the coded Tweets to prepare for analysis and visualization. 
 
 ### Raw Data 
-In preparation to code my Tweets, 
+In preparation to code my Tweets for severity of harassment and type of account, I first had to eliminate extra information in the data sets and take a sample, given that there were 116,649 Tweets between the three politicians in the raw data sets. 
+
+After retrieving the data sets from my archived files, I performed the first round of data cleaning based on the design of my trial study. I removed the columns which presented information not required for this study and using the `filter` function, I filtered all Tweets by the key word "climate", and then took a sample using the `slice_sample` function of 500 Tweets from both MP McKenna and MP May's data sets. Only 13 Tweets from MP Collins matched the criteria, so there was no need to take a sample. 
 
 I renamed columns and capitalized the first letter of every word using Twitter Developer's guidelines and my Codebook [@Twittermedia]. I renamed `text` to `Text`, `user_name` to `Name`, `user_sname` to `Username`, `user_description` to `Bio`, `user_location` to `Location`, `followers` to `Followers`, `friends` to `Following`, and `tweet_URL` to `URL`. 
 
@@ -76,16 +84,158 @@ For my `type of account` data, I changed value 1 to "Personal", 2 to "Profession
 I tested the cleaned data using the `validate` [@validate] package, primarily validating variable types and ensuring all Tweets were coded (500 for both MP McKenna and MP May and 13 for MP Collins). 
 
 # Results
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| label: tbl-overall_severity
+#| tbl-cap: Breakdown of the Results for Severity of Harassment on the Seven-Point Scale
+
+# Come back and fix this!
+# Code to order the 7-point scale referenced from: https://stackoverflow.com/questions/23995285/custom-sorting-non-alphabetical
+
+combined_data |>
+  group_by(severity_of_harassment) |>
+  count() |>
+  kable(
+    col.names = c("Number of Responses", "Severity of Harassment"),
+    booktabs = TRUE,
+  )
+
+```
 
 ## Severity of Harassment
 
 ## Type of Account
 
 ## Catherine McKenna
+Among the sample of 500 Tweets, 270 (54%) were identified as **Questioning authority**, 153 (30.6%) as **Name-calling/Gender insults**, and 54 (10.8%) as **Neutral**. 10 Tweets (or 2.0%) were identified for both the **Positive** and **Vicious language** categories, while 2 Tweets (0.4%) contained **Credible threats** and 1 Tweet (0.2%) contained **Hate speech** (see @tbl-mckenna_severity). 
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| label: tbl-mckenna_severity
+#| tbl-cap: Breakdown of the Severity of Harassment detected among MP McKenna's Tweets
+
+finalized_mckenna_data |>
+  group_by(severity_of_harassment) |>
+  count() |>
+  ungroup() |>
+  mutate (pct = percent(n / sum(n), digit = 1)) |>
+  kable(
+    col.names = c("Severity of Harassment", "Number of Responses", "Percentage"),
+    booktabs = TRUE,
+  )
+
+```
+
+For `Type of account`, 222 (44.4%) were detected as **Suspended/deleted**, 131 (26.2%) identified as **Personal**, 109 (21.8%) as **Anonymous**, 28 (5.6%) as **Professional**, 10 (2.0%) as **Spammers**, with no **bots** being detected (see @tbl-mckenna_account). 
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| label: tbl-mckenna_account
+#| tbl-cap: Breakdown of the Type of Accounts detected among MP McKenna's Tweets
+
+finalized_mckenna_data |>
+  group_by(type_of_account) |>
+  count() |>
+  ungroup() |>
+  mutate (pct = percent(n / sum(n), digit = 1)) |>
+  kable(
+    col.names = c("Type of Account", "Number of Responses", "Percentage"),
+    booktabs = TRUE,
+  )
+
+```
 
 ## Elizabeth May
+Among the sample of 500 Tweets, 250 (50.0%) were identified as **Questioning authority**, 143 (28.6%) as **Neutral**, and 90 (18.0%) as **Name-calling/Gender insults**. 14 Tweets (2.8%) were identified as being **Positive**, while 2 Tweets (0.4%) contained **Vicious language** and 1 Tweet (0.2%) contained **Hate speech** (see @tbl-may_severity). No Tweets containing **Credible threats** were detected in this sample.
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| label: tbl-may_severity
+#| tbl-cap: Breakdown of the Severity of Harassment detected among MP May's Tweets
+
+finalized_may_data |>
+  group_by(severity_of_harassment) |>
+  count() |>
+  ungroup() |>
+  mutate (pct = percent(n / sum(n), digit = 1)) |>
+  kable(
+    col.names = c("Severity of Harassment", "Number of Responses", "Percentage"),
+    booktabs = TRUE,
+  )
+
+```
+
+For `Type of account`, 199 (39.8%) were detected as **Suspended/deleted**, 193 (38.6%) identified as **Personal**, 65 (13.0%) as **Professional**, and 41 (8.2%) as **Anonymous**. 1 (0.2%) of each **Bots** and **Spammers** were detected (see @tbl-may_account). 
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| label: tbl-may_account
+#| tbl-cap: Breakdown of the Type of Accounts detected among MP May's Tweets
+
+finalized_may_data |>
+  group_by(type_of_account) |>
+  count() |>
+  ungroup() |>
+  mutate (pct = percent(n / sum(n), digit = 1)) |>
+  kable(
+    col.names = c("Type of Account", "Number of Responses", "Percentage"),
+    booktabs = TRUE,
+  )
+
+```
 
 ## Laurel Collins
+Among this small sample of 13 Tweets, 11 (84.6%) were identified as **Neutral** and 2 (15.4%) as **Questioning authority** (see @tbl-collins_severity). No Tweets containing **Positive**, **Name-calling/Gender insults**, **Vicious language**, **Credible threats**, or **Hate speech** were detected in this sample.
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| label: tbl-collins_severity
+#| tbl-cap: Breakdown of the Severity of Harassment detected among MP Collins' Tweets
+
+finalized_collins_data |>
+  group_by(severity_of_harassment) |>
+  count() |>
+  ungroup() |>
+  mutate (pct = percent(n / sum(n), digit = 1)) |>
+  kable(
+    col.names = c("Severity of Harassment", "Number of Responses", "Percentage"),
+    booktabs = TRUE,
+  )
+
+```
+
+For `Type of account`, 9 (69.2%) were detected as **Professional**, 3 (23.1%) as **Personal**, and 1 (7.7%) as **Suspended/deleted** (see @tbl-collins_account). No **Bots**, **Spammers**, or **Anonymous** were detected in this sample. 
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| label: tbl-collins_account
+#| tbl-cap: Breakdown of the Type of Accounts detected among MP Collins' Tweets
+
+finalized_collins_data |>
+  group_by(type_of_account) |>
+  count() |>
+  ungroup() |>
+  mutate (pct = percent(n / sum(n), digit = 1)) |>
+  kable(
+    col.names = c("Type of Account", "Number of Responses", "Percentage"),
+    booktabs = TRUE,
+  )
+
+```
 
 # Discussion
 
@@ -95,7 +245,7 @@ Referencing previous discussions of the characteristics of what constitutes a he
 ## Limitations
 
 ## Future Research
-Given the changes to Twitter's affordances and the increasingly polarized political climate in Canada following the Covid-19 pandemic, there are multiple aspects of this trial study that will differ in the full-scale version of this study. 
+Given the changes to Twitter's affordances and the increasingly polarized political climate in Canada following the Covid-19 pandemic, there are multiple aspects of this trial study that will differ in the full-scale version of this study. MP Collins has raised her profile, through her national work as the NDP's Environment Critic and local work as the MP for Victoria, so it is anticipated that there will be more Tweets of hers to analyze and the severity of harassment will fall higher on the seven-point scale. 
 
 # Conclusion
 
