@@ -27,24 +27,84 @@ library(ggplot2)
 library(formattable)
 
 # Read in the cleaned McKenna data # 
-cleaned_mckenna_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_mckenna_data.csv"))
+finalized_mckenna_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_mckenna_data.csv"))
 show_col_types = FALSE
 
 # Read in the cleaned May data #
-cleaned_may_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_may_data.csv"))
+finalized_may_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_may_data.csv"))
 show_col_types = FALSE
 
 # Read in the cleaned Collins data #
-cleaned_collins_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_collins_data.csv"))
+finalized_collins_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_collins_data.csv"))
 show_col_types = FALSE
 
-# Create specific data sets #
-combined_data <- rbind(cleaned_mckenna_data, cleaned_may_data, cleaned_collins_data)
+# Create one combined data set with all three politicians #
+combined_data <- rbind(finalized_mckenna_data, finalized_may_data, finalized_collins_data)
 combined_data
+
+# Create data set filtering bio data #
+bio_data_MAGA <-
+combined_data |>
+  select(ID,
+  name_of_politician,
+  bio,
+  severity_of_harassment, 
+  type_of_account
+  ) |>
+  filter(grepl('MAGA', bio)) 
+
+# Check Telling Stories: for filtering the same thing when the capitalization is different
+
+bio_data_PPC <-
+combined_data |>
+  select(ID,
+  name_of_politician,
+  bio,
+  severity_of_harassment, 
+  type_of_account
+  ) |>
+  filter(grepl('PPC', bio)) 
+
+bio_data_CPC <-
+combined_data |>
+  select(ID,
+  name_of_politician,
+  bio,
+  severity_of_harassment, 
+  type_of_account
+  ) |>
+  filter(grepl('conservative', bio)) 
+
+bio_data_CPC2 <-
+combined_data |>
+  select(ID,
+  name_of_politician,
+  bio,
+  severity_of_harassment, 
+  type_of_account
+  ) |>
+  filter(grepl('Conservative', bio)) 
+
+bio_data_trudeau <-
+combined_data |>
+  select(ID,
+  name_of_politician,
+  bio,
+  severity_of_harassment, 
+  type_of_account
+  ) |>
+  filter(grepl('TrudeauMustGo', bio)) 
+
+# Merge together all bio data sets #
+combined_bio_data <- rbind(bio_data_CPC, bio_data_MAGA, bio_data_PPC, bio_data_trudeau, bio_data_CPC2)
+combined_bio_data
   
 ```
 
 # Introduction
+Women in politics face considerable online and offline harassment, such as former Minister of the Environment and Climate Change Catherine McKenna and current Deputy Prime Minister Hon. Chrystia Freeland (Southern & Harmer, 2021; Paas-Lang, 2022). Known as “gendertrolling,” this harassment is part of a global trend of violence against women (Mantilla, 2013). Gender-based harassment on Twitter is well documented in academic literature and inexplicably pro-environmental behaviors are often viewed as “feminine” (Citron, 2014; Vickery & Everbach, 2018; Anshelm & Hultman, 2014). Female politicians who adopt strong policy stances are more likely to face online misogyny and harassment because it is not consistent with existing gender stereotypes and notions of power, and poses a threat to male climate deniers (Courtemanche & Green, 2020; Gregory & Raney, 2019; McKeon, 2020; Rheault et al., 2019).
+
+In this trial study, I will measure the severity of harassment Canadian female politicians receive when Tweeting about climate change. 
 
 ## Theoretical Framework
 This study is conducted under the theory of deliberative democracy which emphasizes the importance of having open, respectful, and diverse discourse for a healthy democracy [@pmc2019; @trifiro]. Democratic legitimacy is established by allowing the public to collectively have the opportunity “... to participate in consequential deliberation about the content of decisions” [@mckaytenove, p. 704]. Masullo Chen categorizes the characteristics of a deliberative debate by stating that there must be “… more than one side of an issue to consider [and that] the stakes also must be high” [@masullochen, pp. 83-84]. The harassment of female politicians who communicate about climate change, one of the most crucial areas of policymaking, challenges the core values of Canada’s deliberative democracy by trying to minimize the diverse range of opinions and politicize the subject matter, therefore risking the future of public discourse online and offline.
@@ -56,9 +116,12 @@ Results from the analyzed Tweets from the three female politicians will then be 
 ## Data Coding
 
 ## Data Limitations
-Twitter, the platform's affordances, and the types of accounts and content circulate is ever-changing. Consequently, Tweets authored in 2019, collected in 2021, and analyzed for this trial study in 2023 are faced with changing contexts and affordances which must be accounted for. There are potential inaccuracies in reporting which accounts are still on the        platform and which have been suspended/deleted, especially following successive waves of Covid-19 mis- and dis-information on the platform. Although this was anticipated, some users do not have bios or locations indicated (listed as NA), which may impact how `type of account` is coded. The sheer volume of Tweets collected in 2021 also means that only a small sample is being used for this trial study, which means there is a higher chance of inaccuracies and ability to not establish patterns to see the larger picture. 
+Twitter, the platform's affordances, and the types of accounts and content circulate is ever-changing. Consequently, Tweets authored in 2019, collected in 2021, and analyzed for this trial study in 2023 are faced with changing contexts and affordances which must be accounted for. There are potential inaccuracies in reporting which accounts are still on the platform and which have been suspended/deleted, especially following successive waves of Covid-19 mis- and dis-information on the platform. Although this was anticipated, some users do not have bios or locations indicated (listed as NA), which may impact how `type of account` is coded. The sheer volume of Tweets collected in 2021 also means that only a small sample is being used for this trial study, which means there is a higher chance of inaccuracies and ability to not establish patterns to see the larger picture. 
 
 During the 2019 Federal election campaign, MP Collins was a City Councillor in Victoria, BC, never having been elected to the House of Commons or faced the scrutiny of traditional and social media on a national level. This means that she received far fewer Tweets during the same period as MP McKenna and MP May and that the results from her study are far less generalizable, but are still important to include given her current prominence in 2023 and anticipated prominence in the full-scale version of this study. 
+
+When working with text, such as Tweets, as data in a context where the text
+must be sensitive to the personal information and privacy, which is why the raw and cleaned data sets utilized in this study have not been pushed to GitHub. 
 
 ## Data Cleaning
 Data was collected via Twitter API using Python (see datasheet in [Appendix] for more information) and cleaned, tested, modeled, and analyzed using the statistical programming software R [@r], using functions from `tidyverse` [@rTidyverse], `ggplot2` [@rGgplot2], `janitor` [@rJanitor], `KableExtra` [@rKableExtra], `knitr` [@rknitr], `here` [@rHere], `formattable` [@rFormattable], `arrow` [@arrow], `validate` [@validate], and `testthat` [@testthat]. 
@@ -84,6 +147,9 @@ For my `type of account` data, I changed value 1 to "Personal", 2 to "Profession
 I tested the cleaned data using the `validate` [@validate] package, primarily validating variable types and ensuring all Tweets were coded (500 for both MP McKenna and MP May and 13 for MP Collins). 
 
 # Results
+## Severity of Harassment
+Among the 1,013 Tweets selected for content analysis, 522 (51.5%) were identified as **Questioning authority**, 243 (24.0%) as **Name-calling/Gender insults**, and 208 (20.5%) as **Neutral**. 24 (2.4%) were coded as **Positive**, 12 (1.2%) as **Vicious language**, while 2 Tweets (or 0.2%) were identified for both the **Credible threats** and **Hate speech** categories (see @tbl-overall_severity). 
+
 ```{r}
 #| message: false
 #| echo: false
@@ -97,16 +163,36 @@ I tested the cleaned data using the `validate` [@validate] package, primarily va
 combined_data |>
   group_by(severity_of_harassment) |>
   count() |>
+  ungroup() |>
+  mutate (pct = percent(n / sum(n), digit = 1)) |>
   kable(
-    col.names = c("Number of Responses", "Severity of Harassment"),
+    col.names = c("Number of Responses", "Severity of Harassment", "Percent"),
     booktabs = TRUE,
   )
 
 ```
 
-## Severity of Harassment
-
 ## Type of Account
+Among the 1,013 Tweets selected for content analysis, 422 (41.7%) were identified as **Suspended/deleted**, 327 (32.3%) as **Personal**, and 150 (14.8%) as **Anonymous**. 102 (10.1%) were coded as **Professional**, 11 (1.1%) as **Spammers**, while 1 account (or 0.1%) was identified as a **Bot** (see @tbl-overall_account). 
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| label: tbl-overall_account
+#| tbl-cap: Breakdown of the Results for Type of Account
+
+combined_data |>
+  group_by(type_of_account) |>
+  count() |>
+  ungroup() |>
+  mutate (pct = percent(n / sum(n), digit = 1)) |>
+  kable(
+    col.names = c("Number of Responses", "Type of Account", "Percent"),
+    booktabs = TRUE,
+  )
+
+```
 
 ## Catherine McKenna
 Among the sample of 500 Tweets, 270 (54%) were identified as **Questioning authority**, 153 (30.6%) as **Name-calling/Gender insults**, and 54 (10.8%) as **Neutral**. 10 Tweets (or 2.0%) were identified for both the **Positive** and **Vicious language** categories, while 2 Tweets (0.4%) contained **Credible threats** and 1 Tweet (0.2%) contained **Hate speech** (see @tbl-mckenna_severity). 
@@ -120,9 +206,9 @@ Among the sample of 500 Tweets, 270 (54%) were identified as **Questioning autho
 
 finalized_mckenna_data |>
   group_by(severity_of_harassment) |>
-  count() |>
+count() |>
   ungroup() |>
-  mutate (pct = percent(n / sum(n), digit = 1)) |>
+  mutate(pct = percent(n / sum(n), digit = 1)) |>
   kable(
     col.names = c("Severity of Harassment", "Number of Responses", "Percentage"),
     booktabs = TRUE,
@@ -243,6 +329,9 @@ finalized_collins_data |>
 Referencing previous discussions of the characteristics of what constitutes a healthy deliberative democracy, findings from this trial study will be compared and contrasted to evaluate the extent at which the discourse is healthy for Canadian democracy. 
 
 ## Limitations
+The context in which these data sets were initially collected, focusing on mentions the three MPs received, means that my analysis and ability to draw conclusions is limited (further discussed in [Appendix]). 
+
+I chose not to remove mentions during the first cleaning stage where the three MPs mentioned themselves, because it meant there would be even fewer Tweets from the MP Collins data set to analyze. 
 
 ## Future Research
 Given the changes to Twitter's affordances and the increasingly polarized political climate in Canada following the Covid-19 pandemic, there are multiple aspects of this trial study that will differ in the full-scale version of this study. MP Collins has raised her profile, through her national work as the NDP's Environment Critic and local work as the MP for Victoria, so it is anticipated that there will be more Tweets of hers to analyze and the severity of harassment will fall higher on the seven-point scale. 
