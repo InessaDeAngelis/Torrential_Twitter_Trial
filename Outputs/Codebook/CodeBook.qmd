@@ -11,7 +11,7 @@ bibliography: Codebook_ref.bib
 ---
 
 # Overview #
-This codebook is designed to inform the coding process for my Torrential Twitter trial study. Prior to coding Tweets, the raw data sets were initially cleaned and tested using the statistical programming software R [@r], utilizing functions from `Janitor` [@rJanitor] and `testthat` [@testthat]. Tweets will then be coded using an application designed with Shiny [@shiny] to determine the severity of harassment and type of account. 
+This codebook is designed to inform the coding process for my Torrential Twitter trial study. Prior to coding Tweets, the raw data sets were initially cleaned and tested using the statistical programming software R [@r], utilizing functions from `Janitor` [@rJanitor] and `testthat` [@testthat]. Tweets will then be coded using a Google Form to determine the severity of harassment and type of account. 
 
 Harassment or gendertrolling is defined as sexist or misogynistic remarks that target a person based on their gender or sexuality and have varying levels of severity [@wagner]. Severity of harassment includes:
 
@@ -46,7 +46,7 @@ Type of account is defined as the dynamics of relationships between followers, f
 
 # Coding Schedule #
 ## Severity of Harassment ##
-The coding of sentiment in Tweets will be conducted to determine the severity of harassment, measuring Tweets on a seven-point scale ranging from positive to hate speech [@mantilla2013], [@silencingwomen]. The sentiment categories will be mutually exclusive, therefore only one of the seven types of harassment can be selected per reply [@krippendorff]. The seven-point scale contains the following categories, and they are: 
+The coding of sentiment in Tweets will be conducted to determine the severity of harassment, measuring Tweets on a seven-point scale ranging from positive to hate speech [@mantilla2013; @silencingwomen]. The sentiment categories will be mutually exclusive, therefore only one of the seven types of harassment can be selected per reply [@krippendorff]. The seven-point scale contains the following categories, and they are: 
 
 1. **Positive**
 a. Tweets that employ positive wording and tone without expressing complaints [@zavattaro].
@@ -95,7 +95,7 @@ c. Tweets that are likely to fall under this category may call MP McKenna a "cli
 : Sample of a Tweet containing **Name-calling and gender-based insults** sent to former MP Catherine McKenna. {#tbl-nc_gender_insult-example}
 
 5.	**Vicious language** 
-a. Descriptions using vile language of behaviour that gendertrolls (who are men) claim that they would like to subject the female user to [@mantilla2013]. @tbl-viciouslang-example provides an example. 
+a. The use of offensive and derogatory language, often grounded in stereotypes regarding weight and physical appearance, used to refer to female politicians, their gender, policies, and assumed qualifications [@silencingwomen; @digitalsuffragists]. @tbl-viciouslang-example provides an example. 
 
 | Tweet                                            |                                                              
 |--------------------------------------------------|
@@ -113,7 +113,7 @@ a. Tangible threats of violent sexual behaviour, rape, doxxing, and stalking whi
 : Sample of Tweet containing **Credible Threats** sent to former MP Catherine McKenna. {#tbl-threats-example}
 
 7. **Hate speech** 
-a.	Hateful comments which oppose freedom of speech, violate human rights, and may even be unlawful [@silencingwomen] [@chettyalathur] 
+a.	Hateful comments which oppose freedom of speech, violate human rights, and may even be unlawful [@silencingwomen; @chettyalathur] 
 b. Online or offline vilification of an individual communicated in a specific context based on “… their immutable characteristics, such as their race, ethnicity, national origin, religion, gender, gender identity, sexual orientation, age, or disability” [@carlson, p. 4].
 c. Any form of expression that “… seeks to promote, or has the capacity to increase hatred against a person or group of people because of a characteristic they share, or a group to which they belong” [@saleem, p. 1]
 d. See @tbl-hatespeech-example for an example of the most hateful speech found in this sample and the [Other Guidelines] section for notes on the frequency of hate speech found in this trial.
@@ -137,7 +137,7 @@ a.	Share information about their area of expertise and may include businesses wh
 b. This category includes politicians, political parties, and organizations and can be distinguished by looking at logos, branding, and URLs linked to the profile. 
 
 3.	**Bots**
-a.	Automated “… online agents that are used to intervene in political discourse online” and are intentionally created to circulate disinformation, malicious content, and flood the notifications of users [@Duboisbots, p. 28], [@marlow].
+a.	Automated “… online agents that are used to intervene in political discourse online” and are intentionally created to circulate disinformation, malicious content, and flood the notifications of users [@Duboisbots, p. 28; @marlow].
 b. However, not all bots are bad. There are some automated agents which circulate helpful information and will be labeled as "automated" by Twitter.
 
 4. **Spammers**
@@ -165,7 +165,7 @@ Threaded responses occur when one user posts a connected series of Tweets which 
 For the purposes of this study, each Tweet in a threaded response will be analyzed and coded as a separate Tweet. 
 
 ## Media ##
-Twitter defines any gifs, memes, images, and videos as media [@Twittermedia]. Media embedded in Tweets should be considered as part of the written text of the Tweet and coded accordingly, given that hateful speech can also be expressed through images and symbols [@carlson]. With increasing doctoring and creation of media for the purpose of deception and political gain, any media embedded in Tweets should be analyzed for manipulation and machine-learning generated deepfakes, which are compelling fake pictures and videos [@farid], [@appel]. 
+Twitter defines any gifs, memes, images, and videos as media [@Twittermedia]. Media embedded in Tweets should be considered as part of the written text of the Tweet and coded accordingly, given that hateful speech can also be expressed through images and symbols [@carlson]. With increasing doctoring and creation of media for the purpose of deception and political gain, any media embedded in Tweets should be analyzed for manipulation and machine-learning generated deepfakes, which are compelling fake pictures and videos [@farid; @appel]. 
 
 For Tweets that contain a picture without additional text, the nature, context, and suggestiveness of the picture should be analysed to determine the severity of harassment [@sagemethods]. Emojis, if included in a Tweet, should be interpreted as both a picture and text, analysing the rest of the Tweet for context [@swartz]. Moreover, hashtags will be coded in the same manner as regular text in Tweets [@sagemethods]. Any URLs in Tweets should be opened and examine to assist in determining the severity of harassment. 
 
