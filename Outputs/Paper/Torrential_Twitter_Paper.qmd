@@ -96,16 +96,36 @@ combined_data |>
   ) |>
   filter(grepl('TrudeauMustGo', bio)) 
 
+bio_data_ppc2 <-
+combined_data |>
+  select(ID,
+  name_of_politician,
+  bio,
+  severity_of_harassment, 
+  type_of_account
+  ) |>
+  filter(grepl('ppc', bio)) 
+
 # Merge together all bio data sets #
-combined_bio_data <- rbind(bio_data_CPC, bio_data_MAGA, bio_data_PPC, bio_data_trudeau, bio_data_CPC2)
+combined_bio_data <- rbind(bio_data_CPC, bio_data_MAGA, bio_data_PPC, bio_data_trudeau, bio_data_CPC2, bio_data_ppc2)
 combined_bio_data
   
 ```
 
 # Introduction
-Women in politics face considerable online and offline harassment, such as former Minister of the Environment and Climate Change Catherine McKenna and current Deputy Prime Minister Hon. Chrystia Freeland (Southern & Harmer, 2021; Paas-Lang, 2022). Known as “gendertrolling,” this harassment is part of a global trend of violence against women (Mantilla, 2013). Gender-based harassment on Twitter is well documented in academic literature and inexplicably pro-environmental behaviors are often viewed as “feminine” (Citron, 2014; Vickery & Everbach, 2018; Anshelm & Hultman, 2014). Female politicians who adopt strong policy stances are more likely to face online misogyny and harassment because it is not consistent with existing gender stereotypes and notions of power, and poses a threat to male climate deniers (Courtemanche & Green, 2020; Gregory & Raney, 2019; McKeon, 2020; Rheault et al., 2019).
+Women in politics face considerable online and offline harassment, such as former Minister of the Environment and Climate Change Catherine McKenna and current Deputy Prime Minister Hon. Chrystia Freeland [@southern]. Known as “gendertrolling,” this harassment is part of a global trend of violence against women [@Mantilla2013; @wagner]. Gender-based harassment on Twitter is well documented in academic literature and inexplicably pro-environmental behaviors are often viewed as “feminine” [@Citron; @mediatingmisogyny; @Anshelm]. Female politicians who adopt strong policy stances are more likely to face online misogyny and harassment because it is not consistent with existing gender stereotypes and notions of power, and poses a threat to male climate deniers [@courtemanche; @rheault; @degeus]
 
-In this trial study, I will measure the severity of harassment Canadian female politicians receive when Tweeting about climate change on a seven-point scale and see the types of accounts behind the harassing messages. 
+To gain a deeper understanding of the intersection of climate denialism and online gendered-harassment faced by Canadian female politicians, I will measure the severity of harassment Canadian female politicians receive when Tweeting about climate change on a seven-point scale and then see the types of accounts behind the harassing messages. 
+
+My analysis emphasizes that more than two-thirds of the Tweets in my sample had some level of severity of harassment, while the remaining Tweets were either positive or neutral. Suspended/deleted accounts 
+
+In the remainder of this paper, I commence with the [Data] section which outlines the nature of the data used for this trial study, limitations, coding, and cleaning procedures. In the [Results] section, I present trends found during the analysis process. Then, in the [Discussion] section, I provide further insights and outline areas where my thesis will differ from this trial study. Finally, in the [Conclusion], I summarize the main findings. 
+
+# Data
+The data used in this paper was retrieved from the US General Social Survey (GSS) from NORC at the University of Chicago [@gss]. I obtained both demographic data and data relating to the perceived emotional viability of women in politics, political party affiliation and identification, from 1974 to 2022.
+
+## Source Data
+
 
 ## Theoretical Framework
 This study will be conducted under the theory of deliberative democracy which emphasizes having open, respectful, and diverse discourse for a healthy democracy [@pmc2019; @trifiro]. Democratic legitimacy is established by allowing the public to collectively participate in deliberation about consequential decisions, while recognizing there are multiple viewpoints on every issue [@mckaytenove; @masullochen]. The harassment of female politicians who communicate about climate change, one of the most crucial areas of policymaking, challenges the core values of Canada’s deliberative democracy by trying to minimize the diverse range of opinions and politicizes the subject matter, therefore risking the future of public discourse online and offline. 
@@ -120,13 +140,15 @@ Twitter, the platform's affordances, and the types of accounts and content circu
 
 During the 2019 Federal election campaign, MP Collins was a City Councillor in Victoria, BC, never having been elected to the House of Commons or faced the scrutiny of traditional and social media on a national level. This means that she received far fewer Tweets during the same period as MP McKenna and MP May and that the results from her study are far less generalizable, but are still important to include given her current prominence in 2023 and anticipated prominence in the full-scale version of this study. 
 
-When working with text, such as Tweets, as data in a context where the text
-must be sensitive to the personal information and privacy, which is why the raw and cleaned data sets utilized in this study have not been pushed to GitHub. 
+Relying on Twitter data to generalize public opinion is unwise 
+
+“semantic polling”
+focus on the population who is active on Twitter and not the wider population [@grimmer; @publicopinion]
 
 ## Data Coding
 This trial study employs a novel approach of conducting quantitative content analysis, combining the level of nuance and detail captured in qualitative content analysis and interviews [@wagner; @erikson] with more binary quantitative methods [@theocharis; @rheault]. By offering this quantitative, seven-point scale to measure the severity of harassment, we can begin to better understand the full extent of harassment faced by Canadian female politicians and implement solutions. 
 
-To code the Tweets, I designed a Google Form (available in [Second Appendix]) which allowed coders to enter key information about each Tweet and the type of account behind the Tweet. Coders coded `severity of harassment` on the previously discussed seven-point scale based on the Tweet text provided in the dataset. `Type of account` was determined by coders by looking at a user's username, display name, and bio displayed in the dataset and then by looking at a user's profile and header pictures, frequency of replies and likes, as it stands of July 2023 on Twitter. Although there is a significant amount of time between when the Tweet was originally authored, collected, and coded for this project, it was determined that this was the best approach. 
+To code the Tweets, I designed a Google Form (available in [Second Appendix]) which allowed coders to enter key information about each Tweet and the type of account behind the Tweet. Coders code `severity of harassment` on the previously discussed seven-point scale based on the Tweet text provided in the dataset. `Type of account` was determined by coders by looking at a user's username, display name, and bio displayed in the dataset and then by looking at a user's profile and header pictures, frequency of replies and likes, as it stands of July 2023 on Twitter. Although there is a significant amount of time between when the Tweet was originally authored, collected, and coded for this project, it was determined that this was the best approach. 
 
 ## Data Cleaning
 Data was collected via Twitter API using Python (see datasheet in [First Appendix] for more information) and cleaned, tested, modeled, and analyzed using the statistical programming software R [@r], using functions from `tidyverse` [@rTidyverse], `ggplot2` [@rGgplot2], `tayloRswift` [@taylor], `janitor` [@rJanitor], `KableExtra` [@rKableExtra], `knitr` [@rknitr], `here` [@rHere], `formattable` [@rFormattable], `arrow` [@arrow], `validate` [@validate], and `testthat` [@testthat]. 
