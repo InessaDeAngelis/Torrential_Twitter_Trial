@@ -113,19 +113,44 @@ combined_bio_data
 ```
 
 # Introduction
-Women in politics face considerable online and offline harassment, such as former Minister of the Environment and Climate Change Catherine McKenna and current Deputy Prime Minister Hon. Chrystia Freeland [@southern]. Known as “gendertrolling,” this harassment is part of a global trend of violence against women [@Mantilla2013; @wagner]. Gender-based harassment on Twitter is well documented in academic literature and inexplicably pro-environmental behaviors are often viewed as “feminine” [@Citron; @mediatingmisogyny; @Anshelm]. Female politicians who adopt strong policy stances are more likely to face online misogyny and harassment because it is not consistent with existing gender stereotypes and notions of power, and poses a threat to male climate deniers [@courtemanche; @rheault; @degeus]
+Women in politics face considerable online and offline harassment, such as former Minister of the Environment and Climate Change Catherine McKenna and current Deputy Prime Minister Hon. Chrystia Freeland [@southern]. Known as “gendertrolling,” this harassment is part of a global trend of violence against women [@mantilla2013; @wagner]. Gender-based harassment on Twitter is well documented in academic literature and inexplicably pro-environmental behaviors are often viewed as “feminine” [@Citron; @mediatingmisogyny; @Anshelm]. Female politicians who adopt strong policy stances are more likely to face online misogyny and harassment because it is not consistent with existing gender stereotypes and notions of power, and poses a threat to male climate deniers [@courtemanche; @rheault; @degeus]
 
-To gain a deeper understanding of the intersection of climate denialism and online gendered-harassment faced by Canadian female politicians, I will measure the severity of harassment Canadian female politicians receive when Tweeting about climate change on a seven-point scale and then see the types of accounts behind the harassing messages. 
+To gain a deeper understanding of the intersection of climate denialism and online gendered-harassment faced by Canadian female politicians, I measure the severity of harassment former Liberal Party MP Catherine McKenna, Green Party MP Elizabeth May, and New Democratic Party MP Laurel Collins receive when Tweeting about climate change on a seven-point scale, using Tweets sent leading up to and during the 2019 Federal election. I then analysed the types of accounts behind the Tweets sent to MP McKenna, MP May, and MP Collins. 
 
-My analysis emphasizes that more than two-thirds of the Tweets in my sample had some level of severity of harassment, while the remaining Tweets were either positive or neutral. Suspended/deleted accounts 
+Harassment or gendertrolling is defined as sexist or misogynistic remarks that target a person based on their gender or sexuality and have varying levels of severity [@wagner]. Severity of harassment includes:
+
+  1. Positive
+
+  2. Neutral
+
+  3. Questioning Authority 
+
+  4. Name-calling/Gender insults
+
+  5. Vicious language
+
+  6. Credible threats
+
+  7. Hate speech
+
+
+Type of account is defined as the dynamics of relationships between followers, followings, and lists and will be determined by analyzing the accounts’ bio, profile image, and other characteristics [@singh; @uddin] and includes:
+
+  1. Personal
+
+  2. Professional
+
+  3. Bots
+
+  4. Spammers
+
+  5. Anonymous 
+
+  6. Suspended/Deleted
+
+My analysis emphasizes that more than two-thirds of the Tweets in my sample contained some level harassment, ranging from questioning authority to hate speech, while the remaining Tweets were either positive or neutral. Nearly half of the accounts analysed were coded as Suspended/deleted, followed by Personal at 32.3%, and 14.8% as Anonymous. My [Discussion] section further explore these key findings and others of note. 
 
 In the remainder of this paper, I commence with the [Data] section which outlines the nature of the data used for this trial study, limitations, coding, and cleaning procedures. In the [Results] section, I present trends found during the analysis process. Then, in the [Discussion] section, I provide further insights and outline areas where my thesis will differ from this trial study. Finally, in the [Conclusion], I summarize the main findings. 
-
-# Data
-The data used in this paper was retrieved from the US General Social Survey (GSS) from NORC at the University of Chicago [@gss]. I obtained both demographic data and data relating to the perceived emotional viability of women in politics, political party affiliation and identification, from 1974 to 2022.
-
-## Source Data
-
 
 ## Theoretical Framework
 This study will be conducted under the theory of deliberative democracy which emphasizes having open, respectful, and diverse discourse for a healthy democracy [@pmc2019; @trifiro]. Democratic legitimacy is established by allowing the public to collectively participate in deliberation about consequential decisions, while recognizing there are multiple viewpoints on every issue [@mckaytenove; @masullochen]. The harassment of female politicians who communicate about climate change, one of the most crucial areas of policymaking, challenges the core values of Canada’s deliberative democracy by trying to minimize the diverse range of opinions and politicizes the subject matter, therefore risking the future of public discourse online and offline. 
@@ -140,10 +165,7 @@ Twitter, the platform's affordances, and the types of accounts and content circu
 
 During the 2019 Federal election campaign, MP Collins was a City Councillor in Victoria, BC, never having been elected to the House of Commons or faced the scrutiny of traditional and social media on a national level. This means that she received far fewer Tweets during the same period as MP McKenna and MP May and that the results from her study are far less generalizable, but are still important to include given her current prominence in 2023 and anticipated prominence in the full-scale version of this study. 
 
-Relying on Twitter data to generalize public opinion is unwise 
-
-“semantic polling”
-focus on the population who is active on Twitter and not the wider population [@grimmer; @publicopinion]
+A major limitation of using Twitter data for any research project is the inability to draw generalizable results about public opinion on any issue. The segment of the general population who is active on Twitter is motivated to share their opinions and interact directly with politicians and is not representative of all Canadians [@grimmer; @publicopinion]. With Twitter, we are limited by the information users chose to display publicly, such as their location, so it is not always possible to confirm if an individual is Canadian or other identifying demographic information [@holmberg]. Measurement bias exists because Twitter only represents the views of a small group of people who self-select to be active Twitter users because they are passionate about certain policy issues or politicians. Consequently, some users may show up more than once in the data set, over representing some of the severity of harassment categories and types of accounts. 
 
 ## Data Coding
 This trial study employs a novel approach of conducting quantitative content analysis, combining the level of nuance and detail captured in qualitative content analysis and interviews [@wagner; @erikson] with more binary quantitative methods [@theocharis; @rheault]. By offering this quantitative, seven-point scale to measure the severity of harassment, we can begin to better understand the full extent of harassment faced by Canadian female politicians and implement solutions. 
@@ -471,14 +493,16 @@ finalized_collins_data |>
 “Few studies have specifically considered the role of status—the visibility or public profile of a politician—as a condition for the occurrence of negativity toward women”(Rheault et al., 2019, p. 2)
 
 ## Catherine McKenna
-MP McKenna chose not to seek election during the 2021 Federal Election and has since returned to public life. Although she cites wanting to help other countries around the world fight climate change as her main reason for leaving, the online and offline harassment she has and continues to face surely impacted her decision. 
+MP McKenna chose not to seek election during the 2021 Federal Election and has since returned to public life. Although she cites wanting to help other countries around the world fight climate change as her main reason for leaving, the online and offline harassment she has and continues to face surely impacted her decision. Within the small sample of Tweets used in this trial study, MP McKenna's were found to be the most harassing, with 270 (54%) questioning her authority and 153 (30.6%) employing name-calling/gender insults. 13 Tweets (2.6%) were found to either contain vicious language, credible threats, or hate speech, which is a larger number then the 10 Tweets (2.0%) that were positive. 54 (10.8%) of the Tweets were determined to be neutral - a much smaller percent then MP May and MP Collins. 
 
 ## Elizabeth May
+Unlike MP McKenna, the Tweets sent to MP May were more neutral in tone and were interesting in debating policies surrounding climate change.  
 
 ## Laurel Collins 
+Of the 13 Tweets in MP Collins' sample, 11 (84.6%) were neutral in tone, discussing NDP platform commitments and events MP Collins attended on the campaign trail. The other 2 Tweets (15.4%) unsurprisingly questioned her authority, a likely harbinger of the severity of harassment that will be detected in the full-scale version of this study.  
 
 ## Political Identification & Type of Account
-As hypothesized, it was anticipated that accounts belonging to right-wing, ideologically driven users will send Tweets containing harassing content. MP Collins had no Tweets in her sample that matched the search terms. 
+As hypothesized, accounts belonging to right-wing, ideologically driven users will sent Tweets containing harassing content to the three female politicians. MP Collins had no Tweets in her sample that matched the search terms. 
 
 ```{r}
 #| message: false
@@ -511,8 +535,6 @@ Referencing previous discussions of the characteristics of what constitutes a he
 The context in which these data sets were initially collected, focusing on mentions the three MPs received, means that my analysis and ability to draw conclusions is limited (further discussed in [First Appendix]). 
 
 I chose not to remove mentions during the first cleaning stage where the three MPs mentioned themselves, because it meant there would be even fewer Tweets from the MP Collins data set to analyze. 
-
-“As we are limited to the information that the Twitter users have entered in their profiles on Twitter, we cannot rule out any non-gender-related differences between the groups, such as education level, age, political opinions or geographical location. Only the tweets for which the tweeters gender could be identified were used for analysis.”(Holmberg and Hellsten, 2015, p. 815)
 
 ## Future Research
 Given the changes to Twitter's affordances and the increasingly polarized political climate in Canada following the Covid-19 pandemic, there are multiple aspects of this trial study that will differ in the full-scale version of this study. MP Collins has raised her profile, through her national work as the NDP's Environment Critic and local work as the MP for Victoria, so it is anticipated that there will be more Tweets of hers to analyze and the severity of harassment will fall higher on the seven-point scale. 
