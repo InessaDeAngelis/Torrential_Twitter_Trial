@@ -12,16 +12,16 @@ library(tidyverse)
 library(validate)
 
 #### Read in the coded cleaned data sets ####
-# Read in the cleaned McKenna data # 
-cleaned_mckenna_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_mckenna_data.csv"))
+# Read in the finalized McKenna data # 
+finalized_mckenna_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_mckenna_data.csv"))
 show_col_types = FALSE
 
-# Read in the cleaned May data #
-cleaned_may_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_may_data.csv"))
+# Read in the finalized May data #
+finalized_may_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_may_data.csv"))
 show_col_types = FALSE
 
-# Read in the cleaned Collins data #
-cleaned_collins_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_collins_data.csv"))
+# Read in the finalized Collins data #
+finalized_collins_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_collins_data.csv"))
 show_col_types = FALSE
 
 #### Check the coded and cleaned McKenna data set ####
