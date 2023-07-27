@@ -54,8 +54,6 @@ combined_data |>
   ) |>
   filter(grepl('MAGA', bio)) 
 
-# Check Telling Stories: for filtering the same thing when the capitalization is different
-
 bio_data_PPC <-
 combined_data |>
   select(ID,
@@ -502,7 +500,7 @@ Unlike MP McKenna, the Tweets sent to MP May were more neutral in tone and were 
 Of the 13 Tweets in MP Collins' sample, 11 (84.6%) were neutral in tone, discussing NDP platform commitments and events MP Collins attended on the campaign trail. The other 2 Tweets (15.4%) unsurprisingly questioned her authority, a likely harbinger of the severity of harassment that will be detected in the full-scale version of this study.  
 
 ## Political Identification & Type of Account
-As hypothesized, accounts belonging to right-wing, ideologically driven users will sent Tweets containing harassing content to the three female politicians. MP Collins had no Tweets in her sample that matched the search terms. 
+As hypothesized, accounts belonging to right-wing, ideologically driven users will sent Tweets containing harassing content to the three female politicians. This data was gleaned by employing key word selection functions for user's bios. 114 accounts had information in their bios that emphasized their right-wing political views. 
 
 ```{r}
 #| message: false
@@ -526,6 +524,74 @@ combined_bio_data |>
   discrete = TRUE,
   reverse = FALSE)
    
+```
+
+We can see in @tbl-con_accounts the breakdown of the different types of accounts that belong to people with right-wing views. 65 (57.0%) of the accounts are **Suspended/deleted**, while 32 (28.1%) are **Personal** and 13 (11.4%) are **Anonymous**. 2 (1.8%) of the accounts **Spammers** and similarly, 2 (1.8%) of the accounts are **Professional**. No **Bots** were identified. 
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| label: tbl-con_accounts
+#| tbl-cap: Breakdown of the Type of Accounts detected among accounts that hold right-wing views
+
+combined_bio_data |>
+  group_by(type_of_account) |>
+  count() |>
+  ungroup() |>
+  mutate (pct = percent(n / sum(n), digit = 1)) |>
+  kable(
+    col.names = c("Type of Account", "Number of Accounts", "Percentage"),
+    booktabs = TRUE,
+  )
+
+```
+
+Unsurprisingly, @tbl-con_severity illustrates that 64 (56.1%) of the Tweets were **Questioning authority**, 45 (39.5%) were **Name-calling/Gender insults**, 4 (3.5%) were **Neutral**, and 1 (0.9%) contained **Vicious language**. No Tweets were coded as **Positive**, **Credible threats**, or **Hate speech** which emphasizes that users with right-wing views consistently felt motivated enough to engage with MP McKenna and MP May on Twitter, but not on either extreme of the seven-point scale. 
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| label: tbl-con_severity
+#| tbl-cap: Breakdown of the Type of Accounts detected among accounts that hold right-wing views and Severity of Harassment 
+
+combined_bio_data |>
+  group_by(severity_of_harassment) |>
+  count() |>
+  ungroup() |>
+  mutate (pct = percent(n / sum(n), digit = 1)) |>
+  kable(
+    col.names = c("Severity of Harassment", "Number of Tweets", "Percentage"),
+    booktabs = TRUE,
+  )
+
+```
+
+As shown in @fig-accounts_ideology_all, questioning authority and name-calling/gender insults were most frequently Tweeted by people with suspsended/deleted accounts, followed by personal accounts. 
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| label: fig-accounts_ideology_all 
+#| fig-cap: Relationship between Severity of Harassment, Type of Account, and Political Ideology 
+
+combined_bio_data |>
+  ggplot(mapping = aes(x = severity_of_harassment, fill = type_of_account)) +
+  geom_bar() +
+  theme_minimal() +
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 5)) +
+  theme(axis.text.x = element_text(angle=45, hjust = 1, size = 9)) + 
+  theme(axis.text.y = element_text(size = 6)) +
+  labs(x = "Severity of Harassment", y = "Number of Tweets", fill = "Type of Account") +
+  theme(legend.position = "bottom") +
+  theme(legend.text = element_text(size = 6)) +
+  theme(legend.title = element_text(size = 9)) +
+  scale_fill_taylor(palette = "lover",
+  discrete = TRUE,
+  reverse = TRUE)
+
 ```
 
 ## Deliberative Democracy
