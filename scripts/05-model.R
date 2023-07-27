@@ -12,6 +12,8 @@
 library(tidyverse)
 library(rstanarm)
 library(modelsummary)
+library(marginaleffects)
+library(knitr)
 
 #### Read data ####
 # Read in the cleaned McKenna data # 
@@ -65,3 +67,12 @@ modelsummary(
     "Harassment" = harassment_rstanarm
   )
 )
+
+# Model interpretation #
+slopes(harassment_rstanarm) |>
+  summary() |>
+  select(-severity_of_harassment) |>
+  kable(
+    col.names = c("ID", "Severity of Harassment"),
+    digits = 2, booktabs = TRUE, linesep = ""
+  )
