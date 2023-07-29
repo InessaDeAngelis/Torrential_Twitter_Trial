@@ -4,7 +4,7 @@ author: "Inessa De Angelis"
 thanks: "Code and other information available at: https://github.com/InessaDeAngelis/Torrential_Twitter_Trial "
 date: "today"
 date-format: "long"
-abstract: "This paper analyzes Tweets which specifically discuss climate change from former MP Catherine McKenna, MP Elizabeth May, and MP Laurel Collins to investigate the severity of harassment on a seven-point scale and type of accounts behind the Tweets."
+abstract: "Women in politics face considerable online and offline harassment for their participation, especially when adopting strong policy stances on issues such as climate change. Known as gendertrolling, this specific form of harassment, in part, is due to male climate deniers feeling threatened by the perceived power and qualifications of female politicians. This paper analyzes Tweets which specifically discuss climate change from former MP Catherine McKenna, MP Elizabeth May, and MP Laurel Collins to investigate the severity of harassment on a seven-point scale and type of accounts behind the Tweets. This trial study reveals that nearly 80% of all Tweets contained some level of harassment, most frequently either questioning the authority of the MPs or calling them names or gender-based insults and came from accounts that were either suspended/deleted or personal users."
 format: pdf
 toc: true
 number-sections: true
@@ -28,16 +28,23 @@ library(formattable)
 library(tayloRswift)
 
 # Read in the cleaned McKenna data # 
-finalized_mckenna_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_mckenna_data.csv"))
-show_col_types = FALSE
+finalized_mckenna_data <-
+  read_csv(here::here(
+      "~/Desktop/Final Paper/Outputs/Data/finalized_mckenna_data.csv"),
+    show_col_types = FALSE
+  )
 
 # Read in the cleaned May data #
-finalized_may_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_may_data.csv"))
+finalized_may_data <- 
+  read_csv(here::here ("~/Desktop/Final Paper/Outputs/Data/finalized_may_data.csv"),
 show_col_types = FALSE
+)
 
 # Read in the cleaned Collins data #
-finalized_collins_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/finalized_collins_data.csv"))
+finalized_collins_data <- 
+  read_csv(here::here ("~/Desktop/Final Paper/Outputs/Data/finalized_collins_data.csv"),
 show_col_types = FALSE
+)
 
 # Create one combined data set with all three politicians #
 combined_data <- rbind(finalized_mckenna_data, finalized_may_data, finalized_collins_data)
@@ -146,17 +153,17 @@ Type of account is defined as the dynamics of relationships between followers, f
 
   6. Suspended/Deleted
 
-My analysis emphasizes that more than two-thirds of the Tweets in my sample contained some level harassment, ranging from questioning authority to hate speech, while the remaining Tweets were either positive or neutral. Nearly half of the accounts analysed were coded as Suspended/deleted, followed by Personal at 32.3%, and 14.8% as Anonymous. My [Discussion] section further explore these key findings and others of note. 
+My analysis emphasizes that nearly 80% of the Tweets in my sample contained some level harassment, ranging from questioning authority to hate speech, while the remaining Tweets had either positive or neutral sentiments. Questioning the authority of female politicians or name-calling/offering up gender-based insults were the most common forms of harassment identified, accounting for 75% of all Tweets and aligning with expectations. Harassing Tweets were most likely to be sent from Suspended/deleted or personal Twitter accounts. My [Discussion] section further explore these key findings and others of note. 
 
-In the remainder of this paper, I commence with the [Data] section which outlines the nature of the data used for this trial study, limitations, coding, and cleaning procedures. In the [Results] section, I present trends found during the analysis process. Then, in the [Discussion] section, I provide further insights and outline areas where my thesis will differ from this trial study. Finally, in the [Conclusion], I summarize the main findings. 
+In the remainder of this paper, I commence with the [Data] section which outlines the nature of the data used for this trial study, limitations, coding, cleaning, and modelling procedures. The [Model] section outlines and justifies the model used in this paper. In the [Results] section, I present trends found during the analysis process and results from my model. Then, in the [Discussion] section, I provide further insights and outline areas where my thesis will differ from this trial study. Finally, in the [Conclusion], I summarize the main findings. 
 
 ## Theoretical Framework
-This study will be conducted under the theory of deliberative democracy which emphasizes having open, respectful, and diverse discourse for a healthy democracy [@pmc2019; @trifiro]. Democratic legitimacy is established by allowing the public to collectively participate in deliberation about consequential decisions, while recognizing there are multiple viewpoints on every issue [@mckaytenove; @masullochen]. The harassment of female politicians who communicate about climate change, one of the most crucial areas of policymaking, challenges the core values of Canada’s deliberative democracy by trying to minimize the diverse range of opinions and politicizes the subject matter, therefore risking the future of public discourse online and offline. 
+This study will be conducted under the theory of deliberative democracy which emphasizes having open, respectful, and diverse discourse for a healthy democracy [@pmc2019; @trifiro]. Democratic legitimacy is established by allowing the public to collectively participate in deliberation about consequential decisions, while recognizing there are multiple viewpoints on every issue, including climate change [@mckaytenove; @masullochen]. 
 
 Results from the analyzed Tweets from the three female politicians will be compared to the aforementioned definition to see if the level of discourse about climate change on Twitter matches the characteristics of what is considered healthy discourse under the theory of deliberative democracy. 
 
 # Data 
-The data used in this paper was collected via Twitter's API in early 2021 for a separate research project I undertook during my undergraduate degree and has since been stored on my personal Mac. A more detailed discussion of the dataset composition and collection process can be found in the [First Appendix]. 
+The data used in this paper was collected via Twitter's API in early 2021 for a separate research project I undertook during my undergraduate degree and has since been stored on my personal Mac. A more detailed discussion of the dataset composition and the collection process can be found in the [First Appendix]. 
 
 ## Data Limitations
 Twitter, the platform's affordances, and the types of accounts and content circulate is ever-changing. Consequently, Tweets authored in 2019, collected in 2021, and analyzed for this trial study in 2023 are faced with changing contexts and affordances which must be accounted for. There are potential inaccuracies in reporting which accounts are still on the platform and which have been suspended/deleted, especially following successive waves of Covid-19 mis- and dis-information on the platform. Although this was anticipated, some users do not have bios or locations indicated (listed as NA), which may impact how `type of account` is coded. The sheer volume of Tweets collected in 2021 also means that only a small sample is being used for this trial study, which means there is a higher chance of inaccuracies and ability to not establish patterns to see the larger picture. 
@@ -168,15 +175,15 @@ A major limitation of using Twitter data for any research project is the inabili
 ## Data Coding
 This trial study employs a novel approach of conducting quantitative content analysis, combining the level of nuance and detail captured in qualitative content analysis and interviews [@wagner; @erikson] with more binary quantitative methods [@theocharis; @rheault]. By offering this quantitative, seven-point scale to measure the severity of harassment, we can begin to better understand the full extent of harassment faced by Canadian female politicians and implement solutions. 
 
-To code the Tweets, I designed a Google Form (available in [Second Appendix]) which allowed coders to enter key information about each Tweet and the type of account behind the Tweet. Coders code `severity of harassment` on the previously discussed seven-point scale based on the Tweet text provided in the dataset. `Type of account` was determined by coders by looking at a user's username, display name, and bio displayed in the dataset and then by looking at a user's profile and header pictures, frequency of replies and likes, as it stands of July 2023 on Twitter. Although there is a significant amount of time between when the Tweet was originally authored, collected, and coded for this project, it was determined that this was the best approach. 
+To code the Tweets, I designed a Google Form (available in [Second Appendix]) which allows coders to enter key information about each Tweet and the type of account behind the Tweet. Coders code `severity of harassment` on the previously discussed seven-point scale based on the Tweet text provided in the dataset. `Type of account` was determined by coders by looking at a user's username, display name, and bio displayed in the dataset and then by looking at a user's profile and header pictures, frequency of replies and likes, as it stands of July 2023 on Twitter. Although there is a significant amount of time between when the Tweet was originally authored, collected, and coded for this project, it was determined that this was the best approach for this trial study, but will be re-evaluated for the full-scale study.   
 
 ## Data Cleaning
-Data was collected via Twitter API using Python (see datasheet in [First Appendix] for more information) and cleaned, tested, modeled, and analyzed using the statistical programming software R [@r], using functions from `tidyverse` [@rTidyverse], `ggplot2` [@rGgplot2], `tayloRswift` [@taylor], `janitor` [@rJanitor], `KableExtra` [@rKableExtra], `knitr` [@rknitr], `here` [@rHere], `formattable` [@rFormattable], `arrow` [@arrow], `validate` [@validate], and `testthat` [@testthat]. 
+Data was collected via Twitter API using Python (see datasheet in [First Appendix] for more information) and cleaned, tested, modeled, and analyzed using the statistical programming software R [@r], using functions from `tidyverse` [@rTidyverse], `ggplot2` [@rGgplot2], `tayloRswift` [@taylor], `janitor` [@rJanitor], `KableExtra` [@rKableExtra], `knitr` [@rknitr], `here` [@rHere], `formattable` [@rFormattable], `arrow` [@arrow], `validate` [@validate], `testthat` [@testthat], `rstanarm` [@rstanarm], `marginaleffects` [@marginal], and `modelsummary` [@modelsummary].
 
 The data utilized in this trial study underwent two rounds of cleaning: the first was to clean and select the Tweets to manually code and the second was to clean the coded Tweets to prepare for analysis and visualization. 
 
 ### Raw Data 
-In preparation to code my Tweets for severity of harassment and type of account, I first had to eliminate extra information in the data sets and take a sample, given that there were 116,649 Tweets between the three politicians in the raw data sets. 
+In preparation to code my Tweets for severity of harassment and type of account, I first had to eliminate extra information in the data sets and take a sample, given that there were 116,649 Tweets between the three politicians in the raw datasets. 
 
 After retrieving the data sets from my archived files, I performed the first round of data cleaning based on the design of my trial study. I removed the columns which presented information not required for this study and using the `filter` function, I filtered all Tweets by the key word "climate", and then took a sample using the `slice_sample` function of 500 Tweets from both MP McKenna and MP May's data sets. Only 13 Tweets from MP Collins matched the criteria, so there was no need to take a sample. 
 
@@ -185,13 +192,17 @@ I renamed columns and capitalized the first letter of every word using Twitter D
 I then tested the raw data using the `testthat` [@testthat] package to ensure the data set was ready to be manually coded.
 
 ### Coded Data Cleaning
-After coding the 1,013 Tweets manually using my Google form (see [Second Appendix]), I then visually checked for missing data, such as Tweet URLs, severity of harassment, and type of account and went back and added in the few that I missed coding the first time. A number of Twitter accounts opted not have bios (listed as NA in the data sets), which is missing data that was anticipated within the data sets. After my data set passed this initial, informal test, I proceeded to clean it a second time. 
+After coding the 1,013 Tweets manually using my Google form (see [Second Appendix]), I then visually checked for missing data, such as Tweet URLs, severity of harassment, and type of account and went back and re-coded the few Tweets that contained missing information. A number of Twitter accounts opted not have bios (listed as NA in the data sets), which is missing data that was anticipated within the data sets. After my data set passed this initial, informal test, I proceeded to clean it a second time using R. 
 
 For my `severity of harassment` data, I updated value 1 to "Positive", 2 to "Neutral", 3 to "Questioning authority", 4 to "Name-calling/Gender insults", 5 to "Vicious language", 6 to "Credible threats", and 7 to "Hate speech" based on my Codebook. 
 
 For my `type of account` data, I changed value 1 to "Personal", 2 to "Professional", 3 to "Bots", 4 to "Spammers", 5 to "Anonymous", and 6 to "Suspended/deleted" based on my Codebook. 
 
 I tested the cleaned data using the `validate` [@validate] package, primarily validating variable types and ensuring all Tweets were coded (500 for both MP McKenna and MP May and 13 for MP Collins). 
+
+# Model
+
+## Model Justification 
 
 # Results
 ## Severity of Harassment
@@ -485,10 +496,10 @@ finalized_collins_data |>
   reverse = FALSE)
    
 ```
+## Model 
 
 # Discussion
-
-“Few studies have specifically considered the role of status—the visibility or public profile of a politician—as a condition for the occurrence of negativity toward women”(Rheault et al., 2019, p. 2)
+Overall, the data from this trial study reveals that over two-thirds of the Tweets contained some form of harassment (@tbl-overall_severity illustrates that 77% of Tweets include some form). The most frequently identified forms of harassment, according to @tbl-overall_severity, are **Questioning authority** (51.5%) and **Name-calling/Gender-insults** (24.1%). 
 
 ## Catherine McKenna
 MP McKenna chose not to seek election during the 2021 Federal Election and has since returned to public life. Although she cites wanting to help other countries around the world fight climate change as her main reason for leaving, the online and offline harassment she has and continues to face surely impacted her decision. Within the small sample of Tweets used in this trial study, MP McKenna's were found to be the most harassing, with 270 (54%) questioning her authority and 153 (30.6%) employing name-calling/gender insults. 13 Tweets (2.6%) were found to either contain vicious language, credible threats, or hate speech, which is a larger number then the 10 Tweets (2.0%) that were positive. 54 (10.8%) of the Tweets were determined to be neutral - a much smaller percent then MP May and MP Collins. 
@@ -498,6 +509,8 @@ Unlike MP McKenna, the Tweets sent to MP May were more neutral in tone and were 
 
 ## Laurel Collins 
 Of the 13 Tweets in MP Collins' sample, 11 (84.6%) were neutral in tone, discussing NDP platform commitments and events MP Collins attended on the campaign trail. The other 2 Tweets (15.4%) unsurprisingly questioned her authority, a likely harbinger of the severity of harassment that will be detected in the full-scale version of this study.  
+
+“Few studies have specifically considered the role of status—the visibility or public profile of a politician—as a condition for the occurrence of negativity toward women”(Rheault et al., 2019, p. 2)
 
 ## Political Identification & Type of Account
 As hypothesized, accounts belonging to right-wing, ideologically driven users will sent Tweets containing harassing content to the three female politicians. This data was gleaned by employing key word selection functions for user's bios. 114 accounts had information in their bios that emphasized their right-wing political views. 
@@ -597,16 +610,20 @@ combined_bio_data |>
 ## Deliberative Democracy
 Referencing previous discussions of the characteristics of what constitutes a healthy deliberative democracy, findings from this trial study will be compared and contrasted to evaluate the extent at which the discourse is healthy for Canadian democracy. 
 
-## Limitations
-The context in which these data sets were initially collected, focusing on mentions the three MPs received, means that my analysis and ability to draw conclusions is limited (further discussed in [First Appendix]). 
+The sample of MP May's Tweets analysed for this study most closed matched the characteristics of healthy discourse for democracy. 
 
-I chose not to remove mentions during the first cleaning stage where the three MPs mentioned themselves, because it meant there would be even fewer Tweets from the MP Collins data set to analyze. 
+The harassment of female politicians who communicate about climate change, one of the most crucial areas of policymaking, challenges the core values of Canada’s deliberative democracy by trying to minimize the diverse range of opinions and politicizes the subject matter, therefore risking the future of public discourse online and offline. 
+
+## Limitations
+The context in which these data sets were initially collected, focusing on mentions the three MPs received, means that my analysis and ability to draw conclusions is limited (further discussed in [First Appendix]). Due to the focus on mentions, I chose not to remove mentions during the first cleaning stage where the three MPs mentioned themselves, especially because it meant there would be even fewer Tweets from the MP Collins data set to analyze.
 
 ## Future Research
-Given the changes to Twitter's affordances and the increasingly polarized political climate in Canada following the Covid-19 pandemic, there are multiple aspects of this trial study that will differ in the full-scale version of this study. MP Collins has raised her profile, through her national work as the NDP's Environment Critic and local work as the MP for Victoria, so it is anticipated that there will be more Tweets of hers to analyze and the severity of harassment will fall higher on the seven-point scale. 
+Given the changes to Twitter's affordances and the increasingly polarized political climate in Canada following the Covid-19 pandemic, there are multiple aspects of this trial study that will differ in the full-scale version of this study. MP Collins has raised her profile, through her national work as the NDP's Environment Critic and local work as the MP for Victoria, so it is anticipated that there will be more Tweets of hers to analyse and the severity of harassment will fall higher on the seven-point scale.
+
+Some of my approaches, including how type of account is determined need to be refined ahead of the full scale version of this project. 
 
 # Conclusion
-In this trial study, I examined Tweets explicitly discussing climate change and mentioning former MP Catherine McKenna, MP Elizabeth May, and MP Laurel Collins to see the severity of harassment on a seven-point scale and type of accounts behind the harassment. My study reveals ... 
+In this trial study, I examined Tweets explicitly discussing climate change and mentioning former MP Catherine McKenna, MP Elizabeth May, and MP Laurel Collins to see the severity of harassment on a seven-point scale and type of accounts behind the harassment. My study reveals that over 75% 
 
 # First Appendix 
 
