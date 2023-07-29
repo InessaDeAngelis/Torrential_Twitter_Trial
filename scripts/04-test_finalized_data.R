@@ -35,7 +35,7 @@ finalized_collins_data <-
 # Check variable type #
 # Code referenced from: https://tellingstorieswithdata.com/09-clean_and_prepare.html#checking-and-testing #
 rules <- validator(
-  is.integer(ID),
+  is.numeric(ID),
   is.character(name_of_politician),
   is.character(tweet_text),
   is.character(username),
@@ -55,7 +55,7 @@ summary(out)
 #### Check the coded and cleaned May data set ####
 # Check variable type #
 rules <- validator(
-  is.integer(ID),
+  is.numeric(ID),
   is.character(name_of_politician),
   is.character(tweet_text),
   is.character(username),
@@ -75,7 +75,7 @@ summary(out)
 #### Check the coded and cleaned Collins data set ####
 # Check variable type #
 rules <- validator(
-  is.integer(ID),
+  is.numeric(ID),
   is.character(name_of_politician),
   is.character(tweet_text),
   is.character(username),
