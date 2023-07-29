@@ -13,15 +13,15 @@ library(testthat)
 
 #### Read in the preliminary cleaned data sets ####
 # Read in the cleaned McKenna data # 
-cleaned_mckenna_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/cleaned_mckenna_data.csv"))
+cleaned_mckenna_data <- read_csv(here::here("~/Desktop/Final Paper/Outputs/Data/cleaned_mckenna_data.csv"))
 show_col_types = FALSE
 
 # Read in the cleaned May data #
-cleaned_may_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/cleaned_may_data.csv"))
+cleaned_may_data <- read_csv(here::here("~/Desktop/Final Paper/Outputs/Data/cleaned_may_data.csv"))
 show_col_types = FALSE
 
 # Read in the cleaned Collins data #
-cleaned_collins_data <- read.csv(here::here("~/Desktop/Final Paper/Outputs/Data/cleaned_collins_data.csv"))
+cleaned_collins_data <- read_csv(here::here("~/Desktop/Final Paper/Outputs/Data/cleaned_collins_data.csv"))
 show_col_types = FALSE
 
 #### Check that the raw McKenna data set is ready to be coded ####
@@ -32,8 +32,8 @@ test_that("check class" , {
   expect_type(cleaned_mckenna_data$Username, "character")
   expect_type(cleaned_mckenna_data$Bio, "character")
   expect_type(cleaned_mckenna_data$Location, "character")
-  expect_type(cleaned_mckenna_data$Followers, "integer")
-  expect_type(cleaned_mckenna_data$Following, "integer")
+  expect_type(cleaned_mckenna_data$Followers, "double")
+  expect_type(cleaned_mckenna_data$Following, "double")
   expect_type(cleaned_mckenna_data$URL, "character")
 })
 
@@ -48,8 +48,8 @@ test_that("check class" , {
   expect_type(cleaned_may_data$Username, "character")
   expect_type(cleaned_may_data$Bio, "character")
   expect_type(cleaned_may_data$Location, "character")
-  expect_type(cleaned_may_data$Followers, "integer")
-  expect_type(cleaned_may_data$Following, "integer")
+  expect_type(cleaned_may_data$Followers, "double")
+  expect_type(cleaned_may_data$Following, "double")
   expect_type(cleaned_may_data$URL, "character")
 })
 
@@ -64,8 +64,8 @@ test_that("check class" , {
   expect_type(cleaned_collins_data$Username, "character")
   expect_type(cleaned_collins_data$Bio, "character")
   expect_type(cleaned_collins_data$Location, "character")
-  expect_type(cleaned_collins_data$Followers, "integer")
-  expect_type(cleaned_collins_data$Following, "integer")
+  expect_type(cleaned_collins_data$Followers, "double")
+  expect_type(cleaned_collins_data$Following, "double")
   expect_type(cleaned_collins_data$URL, "character")
 })
 

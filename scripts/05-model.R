@@ -83,39 +83,3 @@ harassment_likelihood_predictions |>
   theme_classic() +
   scale_color_brewer(palette = "Set1") +
   theme(legend.position = "bottom")
-
-
-######
-
-
-harassment_rstanarm <-
-  stan_glm(
-    ID ~ severity_of_harassment,
-    data = analysis_data,
-    family = poisson(link = "log"),
-    prior = normal(location = 0, scale = 2.5, autoscale = TRUE),
-    prior_intercept = normal(location = 0, scale = 2.5, autoscale = TRUE),
-    seed = 416
-  )
-
-# save model #
-saveRDS(
-  harassment_rstanarm,
-  file = "harassment_rstanarm.rds"
-)
-
-# Summary of model #
-modelsummary(
-  list(
-    "Harassment" = harassment_rstanarm
-  )
-)
-
-# Model interpretation #
-slopes(harassment_rstanarm) |>
-  summary() |>
-  select(-severity_of_harassment) |>
-  kable(
-    col.names = c("ID", "Severity of Harassment"),
-    digits = 2, booktabs = TRUE, linesep = ""
-  )
