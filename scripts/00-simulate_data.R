@@ -12,7 +12,7 @@ library(testthat)
 
 #### Data Expectations ####
 # Severity of harassment will vary on a 7-point scale from positive to hate speech 
-# Type of account will vary from Personal, Professional, Bots, Spammers, and Anonymous 
+# Type of account will vary from Personal, Professional, Bots, Spammers, Anonymous, and Suspended/Deleted 
 # The more severe forms of harassment will come from Personal and Suspended/Deleted accounts 
 # Harassing Tweets are more likely to be categorized as "Questioning authority", "Name-calling/gender insults", and/or "vicious language"
 # Personal accounts that send Tweets containing mid to high levels of harassment on the 7-point scale are likely to belong to people who support the Conservative Party or People's Party

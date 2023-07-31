@@ -233,7 +233,7 @@ combined_data |>
 
 ```
 
-@fig-severity_all illustrates that the `severity of harassment` detected across the Tweets mentioning all three female politicians has some commonalities, but also differences depending on the politician. Just over half of both MP McKenna and MP May's Tweets were categorized as **Questioning Authority**, while MP Collins only had 2 Tweets that questioned her authority. The next most frequent level of harassment detected for MP McKenna was **Name-calling/Gender insults** which accounted for 30% of all Tweets, while MP May's next most frequent type of harassment was **Neutral** at almost 30%. In contrast, the third most frequent level of harassment detected for MP McKenna was **Neutral**, with 10% of Tweets, while MP May's next most frequent level of harassment was **Name-calling/Gender insults**, accounting for almost 20% of Tweets. MP Collins' remaining 85% of Tweets were categorized as **Neutral**. 
+@fig-severity_all illustrates that the `severity of harassment` detected across the Tweets mentioning all three female politicians have some commonalities, but also differences depending on the politician. Just over half of both MP McKenna and MP May's Tweets were categorized as **Questioning Authority**, while MP Collins only had 2 Tweets that questioned her authority. The next most frequent level of harassment detected for MP McKenna was **Name-calling/Gender insults** which accounted for 30% of all Tweets, while MP May's next most frequent type of harassment was **Neutral** at almost 30%. In contrast, the third most frequent level of harassment detected for MP McKenna was **Neutral**, with 10% of Tweets, while MP May's next most frequent level of harassment was **Name-calling/Gender insults**, accounting for almost 20% of Tweets. MP Collins' remaining 85% of Tweets were categorized as **Neutral**. 
 
 For both MP McKenna and MP May, the remaining levels of harassment including **Positive**, **Vicious language**, **Credible threats**, and **Hate Speech** differed to some degree, as emphasized by @fig-severity_all. 2% of MP McKenna's Tweets were **Positive** while 3% of the Tweets sent to MP May had a **Positive** tone. 2% of MP McKenna's Tweets contained **Vicious language** while less than 1% of the Tweets sent to MP May contained **Vicious language**. **Credible threats** and **Hate Speech** accounted for less than 1% of the Tweets sent to MP McKenna, with MP May having no **Credible threats** detected among the Tweets sent to her and less than 1% containing **Hate Speech**. 
 
@@ -249,7 +249,7 @@ For both MP McKenna and MP May, the remaining levels of harassment including **P
 combined_data |>
   mutate(severity_of_harassment = fct_relevel(severity_of_harassment, "Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech")) |>
   ggplot(mapping = aes(x = severity_of_harassment, fill = name_of_politician)) +
-  geom_bar() +
+  geom_bar(position = "dodge2") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle=45, hjust = 1, size = 10)) + 
   labs(x = "Severity of Harassment", y = "Number of Tweets", fill = "Politician") +
@@ -263,14 +263,14 @@ combined_data |>
 ```
 
 ## Type of Account
-Of the accounts behind the Tweets sent to the three politicians, 422 (41.7%) of the identified as **Suspended/deleted**, 327 (32.3%) as **Personal**, and 150 (14.8%) as **Anonymous**. 102 (10.1%) were coded as **Professional**, 11 (1.1%) as **Spammers**, while 1 account (or 0.1%) was identified as a **Bot** (see @tbl-overall_account). 
+Of the accounts behind the Tweets sent to the three politicians, 422 (41.7%) were identified as **Suspended/deleted**, 327 (32.3%) as **Personal**, and 150 (14.8%) as **Anonymous**. 102 (10.1%) were coded as **Professional**, 11 (1.1%) as **Spammers**, while 1 account (or 0.1%) was identified as a **Bot** (see @tbl-overall_account). 
 
 ```{r}
 #| message: false
 #| echo: false
 #| warning: false
 #| label: tbl-overall_account
-#| tbl-cap: Breakdown of Types of Accounts detected in Tweets from all three MPs
+#| tbl-cap: Breakdown of Types of Accounts detected in Tweets from all three politicians
 
 combined_data |>
   group_by(type_of_account) |>
@@ -299,7 +299,7 @@ For the fourth most common `type of accounts` identified, just over 5% of Tweets
 combined_data |>
   mutate(type_of_account = fct_relevel(type_of_account, "Personal", "Professional", "Bots", "Spammers", "Anonymous", "Suspended/deleted")) |>
   ggplot(mapping = aes(x = type_of_account, fill = name_of_politician)) +
-  geom_bar() +
+  geom_bar(position = "dodge2") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle=45, hjust = 1, size = 10)) + 
   labs(x = "Type of Account", y = "Number of Tweets", fill = "Politician") +
@@ -313,7 +313,7 @@ combined_data |>
 ```
 
 ## Catherine McKenna
-Among the sample of 500 Tweets sent to MP McKenna, 270 (54%) were identified as **Questioning authority**, 153 (30.6%) as **Name-calling/Gender insults**, and 54 (10.8%) as **Neutral**. 10 Tweets (or 2.0%) were identified for both the **Positive** and **Vicious language** categories, while 2 Tweets (0.4%) contained **Credible threats** and 1 Tweet (0.2%) contained **Hate speech** (see @tbl-mckenna_severity). 
+Among the sample of 500 Tweets sent to MP McKenna, 270 (54%) were identified as **Questioning authority**, 153 (30.6%) as **Name-calling/Gender insults**, and 54 (10.8%) as **Neutral** for `severity of harassment`. 10 Tweets (or 2.0%) were identified for both the **Positive** and **Vicious language** categories, while 2 Tweets (0.4%) contained **Credible threats** and 1 Tweet (0.2%) contained **Hate speech** (see @tbl-mckenna_severity). 
 
 ```{r}
 #| message: false
@@ -386,7 +386,7 @@ finalized_mckenna_data |>
 ```
 
 ## Elizabeth May
-Among MP May's sample of 500 Tweets, 250 (50.0%) were identified as **Questioning authority**, 143 (28.6%) as **Neutral**, and 90 (18.0%) as **Name-calling/Gender insults**. 14 Tweets (2.8%) were identified as being **Positive**, while 2 Tweets (0.4%) contained **Vicious language** and 1 Tweet (0.2%) contained **Hate speech** (see @tbl-may_severity). No Tweets containing **Credible threats** were detected in this sample.
+Among MP May's sample of 500 Tweets, 250 (50.0%) were identified as **Questioning authority**, 143 (28.6%) as **Neutral**, and 90 (18.0%) as **Name-calling/Gender insults** for `severity of harassment`. 14 Tweets (2.8%) were identified as being **Positive**, while 2 Tweets (0.4%) contained **Vicious language** and 1 Tweet (0.2%) contained **Hate speech** (see @tbl-may_severity). No Tweets containing **Credible threats** were detected in this sample.
 
 ```{r}
 #| message: false
@@ -430,7 +430,7 @@ finalized_may_data |>
 
 ```
 
-The relationship between the `severity of harassment` faced by MP May and the `type of accounts` behind the Tweets can be observed in @fig-may_relationship.**Positive** Tweets were sent by either **Personal** users (1.4%) or **Professional** users (0.4%), while **Neutral** Tweets most frequently came from accounts categorized as **Personal** (10.9%), **Professional** (9.4%), and **Suspended/deleted** (7.4%). Tweets coded as **Questioning Authority** were most frequently sent by **Suspended/deleted** users (22.2%), followed by **Personal** users (20.2%) and **Anonymous** users (4.2%). Tweets **Questioning Authority** was the only instance in which **Bots** and **Spammers** were detected in MP May's sample. The Tweets containing **Name-calling/Gender insults** were most frequently sent by users identified as **Suspended/deleted** (8.8%), **Personal** (6.4%), or **Anonymous** (2.6%). Moreover, **Vicious language** identified Tweets were sent by **Suspended/deleted** users (0.2%) and **Anonymous** users (0.2%). There were no identified instances of **Credible threats** and the 1 instance of **Hate speech** was sent by a **Suspended/deleted** account. 
+The relationship between the `severity of harassment` faced by MP May and the `type of accounts` behind the Tweets can be observed in @fig-may_relationship. **Positive** Tweets were sent by either **Personal** users (1.4%) or **Professional** users (0.4%), while **Neutral** Tweets most frequently came from accounts categorized as **Personal** (10.9%), **Professional** (9.4%), and **Suspended/deleted** (7.4%). Tweets coded as **Questioning Authority** were most frequently sent by **Suspended/deleted** users (22.2%), followed by **Personal** users (20.2%) and **Anonymous** users (4.2%). Tweets **Questioning Authority** was the only instance in which **Bots** and **Spammers** were detected in MP May's sample. The Tweets containing **Name-calling/Gender insults** were most frequently sent by users identified as **Suspended/deleted** (8.8%), **Personal** (6.4%), or **Anonymous** (2.6%). Moreover, **Vicious language** identified Tweets were sent by **Suspended/deleted** users (0.2%) and **Anonymous** users (0.2%). There were no identified instances of **Credible threats** and the 1 instance of **Hate speech** was sent by a **Suspended/deleted** account. 
 
 ```{r}
 #| message: false
@@ -459,7 +459,7 @@ finalized_may_data |>
 ```
 
 ## Laurel Collins
-Among this small sample of 13 Tweets sent to MP Collins, 11 (84.6%) were identified as **Neutral** and 2 (15.4%) as **Questioning authority** (see @tbl-collins_severity). No Tweets containing **Positive**, **Name-calling/Gender insults**, **Vicious language**, **Credible threats**, or **Hate speech** were detected in this sample.
+Among this small sample of 13 Tweets sent to MP Collins, 11 (84.6%) were identified as **Neutral** and 2 (15.4%) as **Questioning authority** for `severity of harassment` (see @tbl-collins_severity). No Tweets containing **Positive**, **Name-calling/Gender insults**, **Vicious language**, **Credible threats**, or **Hate speech** were detected in this sample.
 
 ```{r}
 #| message: false
@@ -533,44 +533,65 @@ finalized_collins_data |>
 ## Model 
 
 # Discussion
-Overall, the data from this trial study reveals that over two-thirds of the Tweets contained some form of harassment (@tbl-overall_severity illustrates that 77% of Tweets include some form). The most frequently identified forms of harassment, according to @tbl-overall_severity, are **Questioning authority** (51.5%) and **Name-calling/Gender-insults** (24.1%). 
+Overall, the data from this trial study reveals some form of harassment is present in over two-thirds of the Tweets sent to MP McKenna, MP May, and MP Collins which explicitly discuss climate change (see @tbl-overall_severity). The `severity of harassment` and `type of accounts` behind the Tweets vary by female politician, with MP McKenna seeing the more severe forms of harassment and MP Collins seeing the least. The following sections will further discuss these identified trends and compared them to the characteristics of what constitutes a healthy deliberative democracy. 
 
-## Catherine McKenna
-MP McKenna chose not to seek election during the 2021 Federal Election and has since returned to public life. Although she cites wanting to help other countries around the world fight climate change as her main reason for leaving, the online and offline harassment she has and continues to face surely impacted her decision. Within the small sample of Tweets used in this trial study, MP McKenna's were found to be the most harassing, with 270 (54%) questioning her authority and 153 (30.6%) employing name-calling/gender insults. 13 Tweets (2.6%) were found to either contain vicious language, credible threats, or hate speech, which is a larger number then the 10 Tweets (2.0%) that were positive. 54 (10.8%) of the Tweets were determined to be neutral - a much smaller percent then MP May and MP Collins. 
+## Severity of Harassment
+As hypothesized, the `severity of harassment` detected in Tweets for this trial study varies on the seven-point scale, with at least one Tweet being detected for each level (see @tbl-overall_severity).
 
-## Elizabeth May
-Unlike MP McKenna, the Tweets sent to MP May were more neutral in tone and were interesting in debating policies surrounding climate change.  
+I also hypothesized that harassing Tweets were more likely to be categorized as **Questioning Authority**, **Name-calling/gender insults**, and/or **Vicious language**. My hypothesis was two-thirds correct, with 51.5% of Tweets coded as **Questioning Authority** and 24.0% coded as **Name-calling/gender insults**. However, only 1.2% of Tweets were categorized as **Vicious language**, with **Neutral** (at 20.5%) being the third most identified level in this trial study (further details available in @tbl-overall_severity). Although this hypothesis was not entirely validated through this trial study, I anticipate it being proven in the full-scale version of this study for reasons explained below. 
 
-## Laurel Collins 
-Of the 13 Tweets in MP Collins' sample, 11 (84.6%) were neutral in tone, discussing NDP platform commitments and events MP Collins attended on the campaign trail. The other 2 Tweets (15.4%) unsurprisingly questioned her authority, a likely harbinger of the severity of harassment that will be detected in the full-scale version of this study.  
+This discrepancy between **Vicious language** and **Neutral** can be explain by a few factors. Firstly, stronger content moderation processes were applied to content on Twitter prior to Elon Musk's purchase of the platform in 2022, leading to Tweets with more profanities being removed at a higher rate, which will likely change with Musk's promotion of "free speech" in 2023 [@Citron]. Secondly, I did not anticipate there being as much civil discourse about climate change and environmental policy as there was on/around the accounts of MP May and MP Collins. It is difficult to be certain whether this will be the case in the full-scale version of this study, with the more polarized nature of Canadian politics following the Covid-19 pandemic and MP Collins' raised profile which is often a cause of more severe forms of discourse and harassment [@rheault]. 
 
-“Few studies have specifically considered the role of status—the visibility or public profile of a politician—as a condition for the occurrence of negativity toward women”(Rheault et al., 2019, p. 2)
+## Type of Account
+As hypothesized, at least one account was identified for each of the six `types of accounts`. **Suspended/deleted** accounts constituted 41.7% of all accounts, followed by **Personal** (32.3%) and **Anonymous** (14.8%) (a full breakdown is available in @tbl-overall_account). The number of **Personal** accounts approximately aligns with number I anticipated finding in this trial study. However, I did not anticipate as many as 41.7% of Tweets would be authored by **Suspended/deleted** users, which could in part be due to the length of time which has passed since these Tweets were authored and collected (further discussed in [Limitations]). 
 
-## Political Identification & Type of Account
-As hypothesized, accounts belonging to right-wing, ideologically driven users will sent Tweets containing harassing content to the three female politicians. This data was gleaned by employing key word selection functions for user's bios. 114 accounts had information in their bios that emphasized their right-wing political views. 
+Moreover, I suspected that the more severe forms of harassment identified in this trial study would come from **Personal** and **Suspended/deleted accounts**. Given the low number of Tweets containing **Vicious language**, **Credible threats**, and **Hate speech**, this hypothesis will be applied to the results for **Questioning Authority** and **Name-calling/Gender insults**. **Personal** users accounted for 17.8% of the Tweets **Questioning Authority**, while **Suspended/deleted accounts** sent 22.1% of the Tweets. **Personal** accounts were responsible for sending 6.5% of the Tweets containing **Name-calling/Gender insults**, while **Suspended/deleted accounts** sent 12.3% (see @tbl-type_hypothesis). 
 
 ```{r}
 #| message: false
 #| echo: false
 #| warning: false
-#| label: fig-accounts_ideology 
-#| fig-cap: Relationship between Severity of Harassment, Type of Account, and Political Ideology 
+#| label: tbl-type_hypothesis
+#| tbl-cap: Breakdown of the Types of Accounts detected among MP Collins' Tweets
+
+combined_data |>
+  group_by(severity_of_harassment, type_of_account) |>
+  count() |>
+  ungroup() |>
+  mutate (pct = percent(n / sum(n), digit = 1)) |>
+  arrange(match(severity_of_harassment, c('Questioning Authority', 'Name-calling/Gender insults'))) |>
+  filter(severity_of_harassment == 'Questioning Authority' | severity_of_harassment == 'Name-calling/Gender insults') |>
+  filter(type_of_account == 'Personal' | type_of_account == 'Suspended/deleted') |>
+  kable(
+    col.names = c("Severity of Harassment", "Type of Account", "Number of Responses", "Percent"),
+    booktabs = TRUE,
+  )
+
+```
+
+## Severity of Harassment & Political Identification 
+As hypothesized, accounts belonging to right-wing, ideologically driven users will sent Tweets containing harassing content to the three female politicians. This data was gleaned by employing key word selection functions for users' bios. 114 accounts had information in their bios that emphasized their right-wing political views. 
+
+Unsurprisingly, @tbl-con_severity illustrates that 64 (56.1%) of the Tweets were **Questioning authority**, 45 (39.5%) were **Name-calling/Gender insults**, 4 (3.5%) were **Neutral**, and 1 (0.9%) contained **Vicious language**. No Tweets were coded as **Positive**, **Credible threats**, or **Hate speech** which emphasizes that users with right-wing views consistently felt motivated enough to engage with MP McKenna and MP May on Twitter, but not on either extreme of the seven-point scale. 
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| label: tbl-con_severity
+#| tbl-cap: Breakdown of the Type of Accounts detected among accounts that hold right-wing views and Severity of Harassment 
 
 combined_bio_data |>
-  ggplot(mapping = aes(x = name_of_politician, fill = type_of_account)) +
-  geom_bar() +
-  theme_minimal() +
-  scale_y_continuous(breaks = scales::pretty_breaks(n = 5)) +
-  theme(axis.text.x = element_text(angle=45, hjust = 1, size = 9)) + 
-  theme(axis.text.y = element_text(size = 6)) +
-  labs(x = "Politician", y = "Number of Tweets", fill = "Type of Account") +
-  theme(legend.position = "bottom") +
-  theme(legend.text = element_text(size = 6)) +
-  theme(legend.title = element_text(size = 9)) +
-  scale_fill_taylor(palette = "lover",
-  discrete = TRUE,
-  reverse = FALSE)
-   
+  group_by(severity_of_harassment) |>
+  count() |>
+  ungroup() |>
+  mutate (pct = percent(n / sum(n), digit = 1)) |>
+  arrange(match(severity_of_harassment, c('Positive', 'Neutral', 'Questioning Authority', 'Name-calling/Gender insults', 'Vicious language', 'Credible threats', 'Hate speech'))) |>
+  kable(
+    col.names = c("Severity of Harassment", "Number of Tweets", "Percentage"),
+    booktabs = TRUE,
+  )
+
 ```
 
 We can see in @tbl-con_accounts the breakdown of the different types of accounts that belong to people with right-wing views. 65 (57.0%) of the accounts are **Suspended/deleted**, while 32 (28.1%) are **Personal** and 13 (11.4%) are **Anonymous**. 2 (1.8%) of the accounts **Spammers** and similarly, 2 (1.8%) of the accounts are **Professional**. No **Bots** were identified. 
@@ -595,26 +616,39 @@ combined_bio_data |>
 
 ```
 
-Unsurprisingly, @tbl-con_severity illustrates that 64 (56.1%) of the Tweets were **Questioning authority**, 45 (39.5%) were **Name-calling/Gender insults**, 4 (3.5%) were **Neutral**, and 1 (0.9%) contained **Vicious language**. No Tweets were coded as **Positive**, **Credible threats**, or **Hate speech** which emphasizes that users with right-wing views consistently felt motivated enough to engage with MP McKenna and MP May on Twitter, but not on either extreme of the seven-point scale. 
 
 ```{r}
 #| message: false
 #| echo: false
 #| warning: false
-#| label: tbl-con_severity
-#| tbl-cap: Breakdown of the Type of Accounts detected among accounts that hold right-wing views and Severity of Harassment 
+#| label: fig-accounts_ideology 
+#| fig-cap: Relationship between Severity of Harassment, Type of Account, and Political Identification by politician
 
 combined_bio_data |>
-  group_by(severity_of_harassment) |>
-  count() |>
-  ungroup() |>
-  mutate (pct = percent(n / sum(n), digit = 1)) |>
-  arrange(match(severity_of_harassment, c('Positive', 'Neutral', 'Questioning Authority', 'Name-calling/Gender insults', 'Vicious language', 'Credible threats', 'Hate speech'))) |>
-  kable(
-    col.names = c("Severity of Harassment", "Number of Tweets", "Percentage"),
-    booktabs = TRUE,
+  mutate(severity_of_harassment = fct_relevel(severity_of_harassment, "Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech")) |>
+  mutate(type_of_account = fct_relevel(type_of_account, "Personal", "Professional", "Bots", "Spammers", "Anonymous", "Suspended/deleted")) |>
+  ggplot(mapping = aes(x = name_of_politician, fill = type_of_account)) +
+  geom_bar(position = 'dodge2') +
+  theme_minimal() +
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 3)) +
+  theme(axis.text.x = element_text(angle=45, hjust = 1, size = 6)) + 
+  theme(axis.text.y = element_text(size = 6)) +
+  labs(
+    x = "Politician",
+    y = "Severity of Harassment",
+    fill = "Type of Account"
+  ) +
+  theme(legend.position = "bottom") +
+  theme(legend.text = element_text(size = 6)) +
+  theme(legend.title = element_text(size = 9)) +
+  scale_fill_taylor(palette = "lover",
+  discrete = TRUE,
+  reverse = TRUE) +
+  facet_wrap(
+    vars(severity_of_harassment),
+    scales = "free",
   )
-
+   
 ```
 
 As shown in @fig-accounts_ideology_all, questioning authority and name-calling/gender insults were most frequently Tweeted by people with suspsended/deleted accounts, followed by personal accounts. 
@@ -628,6 +662,7 @@ As shown in @fig-accounts_ideology_all, questioning authority and name-calling/g
 
 combined_bio_data |>
   mutate(severity_of_harassment = fct_relevel(severity_of_harassment, "Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech")) |>
+  mutate(type_of_account = fct_relevel(type_of_account, "Personal", "Professional", "Bots", "Spammers", "Anonymous", "Suspended/deleted")) |>
   ggplot(mapping = aes(x = severity_of_harassment, fill = type_of_account)) +
   geom_bar() +
   theme_minimal() +
@@ -643,6 +678,17 @@ combined_bio_data |>
   reverse = TRUE)
 
 ```
+
+## Catherine McKenna
+MP McKenna chose not to seek re-election during the 2021 Federal Election and has since returned to public life. Although she cites wanting to help other countries around the world fight climate change as her main reason for leaving, the online and offline harassment she has and continues to face surely impacted her decision. Within the small sample of Tweets used in this trial study, MP McKenna's were found to be the most harassing, with 270 (54%) questioning her authority and 153 (30.6%) employing name-calling/gender insults (see @tbl-mckenna_severity). 13 Tweets (2.6%) were found to either contain vicious language, credible threats, or hate speech, which is a larger number then the 10 Tweets (2.0%) that were positive. 54 (10.8%) of the Tweets were determined to be neutral - a much smaller percent then MP May and MP Collins. 
+
+## Elizabeth May
+Unlike MP McKenna, the Tweets sent to MP May were more neutral in tone and were interesting in debating policies surrounding climate change.  
+
+## Laurel Collins 
+Of the 13 Tweets in MP Collins' sample, 11 (84.6%) were neutral in tone, discussing NDP platform commitments and events MP Collins attended on the campaign trail. The other 2 Tweets (15.4%) unsurprisingly questioned her authority, a likely harbinger of the severity of harassment that will be detected in the full-scale version of this study.  
+
+“Few studies have specifically considered the role of status—the visibility or public profile of a politician—as a condition for the occurrence of negativity toward women”(Rheault et al., 2019, p. 2)
 
 ## Deliberative Democracy
 Referencing previous discussions of the characteristics of what constitutes a healthy deliberative democracy, findings from this trial study will be compared and contrasted to evaluate the extent at which the discourse is healthy for Canadian democracy. 
