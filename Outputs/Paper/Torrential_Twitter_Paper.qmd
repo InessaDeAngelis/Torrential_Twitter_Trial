@@ -194,7 +194,7 @@ I renamed columns and capitalized the first letter of every word using Twitter D
 
 I then tested the raw data using the `testthat` [@testthat] package to ensure the data set was ready to be manually coded.
 
-### Coded Data Cleaning
+### Coded Data 
 After coding the 1,013 Tweets manually using my Google form (see [Appendix B]), I then visually checked for missing data, such as Tweet URLs, severity of harassment, and type of account and went back and re-coded the few Tweets that contained missing information. A number of Twitter accounts opted not have bios (listed as NA in the data sets), which is missing data that was anticipated within the data sets. After my data set passed this initial, informal test, I proceeded to clean it a second time using R. 
 
 For my `severity of harassment` data, I updated value 1 to "Positive", 2 to "Neutral", 3 to "Questioning authority", 4 to "Name-calling/Gender insults", 5 to "Vicious language", 6 to "Credible threats", and 7 to "Hate speech" based on my Codebook. 
@@ -209,73 +209,85 @@ I tested the cleaned data using the `validate` [@validate] package, primarily va
 
 # Results
 ## Severity of Harassment
-Among the 1,013 Tweets selected for content analysis, 522 (51.5%) were identified as **Questioning authority**, 243 (24.0%) as **Name-calling/Gender insults**, and 208 (20.5%) as **Neutral**. 24 (2.4%) were coded as **Positive**, 12 (1.2%) as **Vicious language**, while 2 Tweets (or 0.2%) were identified for both the **Credible threats** and **Hate speech** categories (see @tbl-overall_severity). 
+Among the 1,013 Tweets selected for content analysis from the three MPs, 522 (51.5%) Tweets were identified as **Questioning authority**, 243 (24.0%) as **Name-calling/Gender insults**, and 208 (20.5%) as **Neutral**. 24 (2.4%) Tweets were coded as **Positive**, 12 (1.2%) as **Vicious language**, while 2 Tweets (or 0.2%) were identified for both the **Credible threats** and **Hate speech** categories (see @tbl-overall_severity). 
 
 ```{r}
 #| message: false
 #| echo: false
 #| warning: false
 #| label: tbl-overall_severity
-#| tbl-cap: Breakdown of the Results for Severity of Harassment on the Seven-Point Scale
+#| tbl-cap: Breakdown of Severity of Harassment on the seven-point scale detected in Tweets to all three politicians
 
-# Come back and fix this!
-# Code to order the 7-point scale referenced from: https://stackoverflow.com/questions/23995285/custom-sorting-non-alphabetical
+# Code to arrange severity of harassment in order from 1-7 referenced from: https://www.statology.org/dplyr-arrange-custom-order/
 
 combined_data |>
   group_by(severity_of_harassment) |>
   count() |>
   ungroup() |>
   mutate (pct = percent(n / sum(n), digit = 1)) |>
+  arrange(match(severity_of_harassment, c('Positive', 'Neutral', 'Questioning Authority', 'Name-calling/Gender insults', 'Vicious language', 'Credible threats', 'Hate speech'))) |>
   kable(
-    col.names = c("Number of Responses", "Severity of Harassment", "Percent"),
+    col.names = c("Severity of Harassment", "Number of Responses", "Percent"),
     booktabs = TRUE,
   )
 
 ```
+
+@fig-severity_all illustrates that the `severity of harassment` detected across the Tweets mentioning all three female politicians has some commonalities, but also differences depending on the politician. Just over half of both MP McKenna and MP May's Tweets were categorized as **Questioning Authority**, while MP Collins only had 2 Tweets that questioned her authority. The next most frequent level of harassment detected for MP McKenna was **Name-calling/Gender insults** which accounted for 30% of all Tweets, while MP May's next most frequent type of harassment was **Neutral** at almost 30%. In contrast, the third most frequent level of harassment detected for MP McKenna was **Neutral**, with 10% of Tweets, while MP May's next most frequent level of harassment was **Name-calling/Gender insults**, accounting for almost 20% of Tweets. MP Collins' remaining 85% of Tweets were categorized as **Neutral**. 
+
+For both MP McKenna and MP May, the remaining levels of harassment including **Positive**, **Vicious language**, **Credible threats**, and **Hate Speech** differed to some degree, as emphasized by @fig-severity_all. 2% of MP McKenna's Tweets were **Positive** while 3% of the Tweets sent to MP May had a **Positive** tone. 2% of MP McKenna's Tweets contained **Vicious language** while less than 1% of the Tweets sent to MP May contained **Vicious language**. **Credible threats** and **Hate Speech** accounted for less than 1% of the Tweets sent to MP McKenna, with MP May having no **Credible threats** detected among the Tweets sent to her and less than 1% containing **Hate Speech**. 
 
 ```{r}
 #| message: false
 #| echo: false
 #| warning: false
 #| label: fig-severity_all
-#| fig-cap: Severity of Harassment of the Tweets Received by All Three Politicians
+#| fig-cap: Breakdown of Severity of Harassment on the seven-point scale detected in Tweets by politician
+
+# Code to order severity of harassment according to seven-point scale referenced from: https://r-graph-gallery.com/267-reorder-a-variable-in-ggplot2.html
 
 combined_data |>
-  ggplot(mapping = aes(x = name_of_politician, fill = severity_of_harassment)) +
+  mutate(severity_of_harassment = fct_relevel(severity_of_harassment, "Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech")) |>
+  ggplot(mapping = aes(x = severity_of_harassment, fill = name_of_politician)) +
   geom_bar() +
   theme_minimal() +
   theme(axis.text.x = element_text(angle=45, hjust = 1, size = 10)) + 
-  labs(x = "Politician", y = "Number of Tweets", fill = "Severity of Harassment") +
+  labs(x = "Severity of Harassment", y = "Number of Tweets", fill = "Politician") +
   theme(legend.position = "bottom") +
   theme(legend.text = element_text(size = 6)) +
   theme(legend.title = element_text(size = 9)) +
   scale_fill_taylor(palette = "lover",
   discrete = TRUE,
-  reverse = TRUE)
+  reverse = FALSE)
    
 ```
 
 ## Type of Account
-Among the 1,013 Tweets selected for content analysis, 422 (41.7%) were identified as **Suspended/deleted**, 327 (32.3%) as **Personal**, and 150 (14.8%) as **Anonymous**. 102 (10.1%) were coded as **Professional**, 11 (1.1%) as **Spammers**, while 1 account (or 0.1%) was identified as a **Bot** (see @tbl-overall_account). 
+Of the accounts behind the Tweets sent to the three politicians, 422 (41.7%) of the identified as **Suspended/deleted**, 327 (32.3%) as **Personal**, and 150 (14.8%) as **Anonymous**. 102 (10.1%) were coded as **Professional**, 11 (1.1%) as **Spammers**, while 1 account (or 0.1%) was identified as a **Bot** (see @tbl-overall_account). 
 
 ```{r}
 #| message: false
 #| echo: false
 #| warning: false
 #| label: tbl-overall_account
-#| tbl-cap: Breakdown of the Results for Type of Account
+#| tbl-cap: Breakdown of Types of Accounts detected in Tweets from all three MPs
 
 combined_data |>
   group_by(type_of_account) |>
   count() |>
   ungroup() |>
   mutate (pct = percent(n / sum(n), digit = 1)) |>
+  arrange(match(type_of_account, c('Personal', 'Professional', 'Bots', 'Spammers', 'Anonymous', 'Suspended/deleted'))) |>
   kable(
-    col.names = c("Number of Responses", "Type of Account", "Percent"),
+    col.names = c("Type of Account", "Number of Responses", "Percent"),
     booktabs = TRUE,
   )
 
 ```
+
+@fig-accounts_all illustrates that the `types of accounts` detected as being behind the Tweets sent to the three female politicians share some common features, but also differences depending on the politician. Just over 40% of Tweets sent to MP McKenna came from **Suspended/deleted** users while just under 40% of Tweets sent to MP May came from **Suspended/deleted** users. Approximately 25% of Tweets sent to MP McKenna came from a **Personal** account while nearly 40% of Tweets sent to MP May came from a **Personal** account. **Anonymous** accounts were the third most frequent type of account detected for MP McKenna, sending just over 20% of the Tweets in her sample. Conversely, the third most frequent type of account detected for MP May was **Professional**, responsible for sending just under 15% of the Tweets in her sample. The `types of accounts` responsible for sending Tweets to MP Collins were **Professional** users (70%), followed by **Personal** users (almost 25%), and then **Suspended/deleted** users (just under 5%). 
+
+For the fourth most common `type of accounts` identified, just over 5% of Tweets sent to MP McKenna came from **Professional** accounts while MP May received just under 10% of Tweets from **Anonymous** accounts (see @fig-accounts_all). The remaining 2% of Tweets received by MP McKenna came from **Spammers**, while **Spammers** and **Bots** combined were responsible for sending less than 1% of the remaining Tweets to MP May. Both MP McKenna and Collins had no **Bots** detected. 
 
 ```{r}
 #| message: false
@@ -285,35 +297,37 @@ combined_data |>
 #| fig-cap: Type of Accounts Behind the Tweets Received by All Three Politicians
 
 combined_data |>
-  ggplot(mapping = aes(x = name_of_politician, fill = type_of_account)) +
+  mutate(type_of_account = fct_relevel(type_of_account, "Personal", "Professional", "Bots", "Spammers", "Anonymous", "Suspended/deleted")) |>
+  ggplot(mapping = aes(x = type_of_account, fill = name_of_politician)) +
   geom_bar() +
   theme_minimal() +
   theme(axis.text.x = element_text(angle=45, hjust = 1, size = 10)) + 
-  labs(x = "Politician", y = "Number of Tweets", fill = "Type of Account") +
+  labs(x = "Type of Account", y = "Number of Tweets", fill = "Politician") +
   theme(legend.position = "bottom") +
   theme(legend.text = element_text(size = 6)) +
   theme(legend.title = element_text(size = 9)) +
   scale_fill_taylor(palette = "lover",
   discrete = TRUE,
-  reverse = TRUE)
+  reverse = FALSE)
    
 ```
 
 ## Catherine McKenna
-Among the sample of 500 Tweets, 270 (54%) were identified as **Questioning authority**, 153 (30.6%) as **Name-calling/Gender insults**, and 54 (10.8%) as **Neutral**. 10 Tweets (or 2.0%) were identified for both the **Positive** and **Vicious language** categories, while 2 Tweets (0.4%) contained **Credible threats** and 1 Tweet (0.2%) contained **Hate speech** (see @tbl-mckenna_severity). 
+Among the sample of 500 Tweets sent to MP McKenna, 270 (54%) were identified as **Questioning authority**, 153 (30.6%) as **Name-calling/Gender insults**, and 54 (10.8%) as **Neutral**. 10 Tweets (or 2.0%) were identified for both the **Positive** and **Vicious language** categories, while 2 Tweets (0.4%) contained **Credible threats** and 1 Tweet (0.2%) contained **Hate speech** (see @tbl-mckenna_severity). 
 
 ```{r}
 #| message: false
 #| echo: false
 #| warning: false
 #| label: tbl-mckenna_severity
-#| tbl-cap: Breakdown of the Severity of Harassment detected among MP McKenna's Tweets
+#| tbl-cap: Breakdown of the Severity of Harassment on the seven-point scale detected among MP McKenna's Tweets
 
 finalized_mckenna_data |>
   group_by(severity_of_harassment) |>
 count() |>
   ungroup() |>
   mutate(pct = percent(n / sum(n), digit = 1)) |>
+  arrange(match(severity_of_harassment, c('Positive', 'Neutral', 'Questioning Authority', 'Name-calling/Gender insults', 'Vicious language', 'Credible threats', 'Hate speech'))) |>
   kable(
     col.names = c("Severity of Harassment", "Number of Responses", "Percentage"),
     booktabs = TRUE,
@@ -328,19 +342,22 @@ For `Type of account`, 222 (44.4%) were detected as **Suspended/deleted**, 131 (
 #| echo: false
 #| warning: false
 #| label: tbl-mckenna_account
-#| tbl-cap: Breakdown of the Type of Accounts detected among MP McKenna's Tweets
+#| tbl-cap: Breakdown of the Types of Accounts detected among MP McKenna's Tweets
 
 finalized_mckenna_data |>
   group_by(type_of_account) |>
   count() |>
   ungroup() |>
   mutate (pct = percent(n / sum(n), digit = 1)) |>
+  arrange(match(type_of_account, c('Personal', 'Professional', 'Bots', 'Spammers', 'Anonymous', 'Suspended/deleted'))) |>
   kable(
     col.names = c("Type of Account", "Number of Responses", "Percentage"),
     booktabs = TRUE,
   )
 
 ```
+
+@fig-mckenna_relationship emphasizes the relationship between the `severity of harassment` faced by MP McKenna and the `type of accounts` behind the Tweets. The few **Positive** Tweets received by MP McKenna were most likely to be sent by **Personal** users (1%), **Professional** users (0.6%), or **Suspended/deleted** users (0.4%), while **Neutral** Tweets came from accounts categorized as **Professional** (3.8%), **Suspended/deleted** (3.6%), and **Personal** (2.4%). **Anonymous** users and **Spammers** did not send **Positive** Tweets to MP McKenna. Tweets coded as **Questioning Authority** were most frequently sent by **Suspended/deleted** users (22.6%), followed by **Personal** users (15.6%) and **Anonymous** users (13.4%). The Tweets containing **Name-calling/Gender insults** were most frequently sent by users identified as **Suspended/deleted** (16.2%), **Anonymous** (7.0%), or **Personal** (6.8%). **Vicious language** identified Tweets were sent by **Suspended/deleted** users (1.2%), **Anonymous** users (0.4%), and **Spammers** (0.2%). The identified instances of **Credible threats** and **Hate speech** were sent by **Suspended/deleted** accounts and **Bots** did not send any Tweets to MP McKenna. 
 
 ```{r}
 #| message: false
@@ -350,6 +367,8 @@ finalized_mckenna_data |>
 #| fig-cap: Relationship between Severity of Harassment and Types of Accounts detected among MP McKenna's Tweets
 
 finalized_mckenna_data |>
+  mutate(severity_of_harassment = fct_relevel(severity_of_harassment, "Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech")) |>
+  mutate(type_of_account = fct_relevel(type_of_account, "Personal", "Professional", "Bots", "Spammers", "Anonymous", "Suspended/deleted")) |>
   ggplot(mapping = aes(x = severity_of_harassment, fill = type_of_account)) +
   geom_bar() +
   theme_minimal() +
@@ -363,24 +382,25 @@ finalized_mckenna_data |>
   scale_fill_taylor(palette = "lover",
   discrete = TRUE,
   reverse = TRUE)
-   
+ 
 ```
 
 ## Elizabeth May
-Among the sample of 500 Tweets, 250 (50.0%) were identified as **Questioning authority**, 143 (28.6%) as **Neutral**, and 90 (18.0%) as **Name-calling/Gender insults**. 14 Tweets (2.8%) were identified as being **Positive**, while 2 Tweets (0.4%) contained **Vicious language** and 1 Tweet (0.2%) contained **Hate speech** (see @tbl-may_severity). No Tweets containing **Credible threats** were detected in this sample.
+Among MP May's sample of 500 Tweets, 250 (50.0%) were identified as **Questioning authority**, 143 (28.6%) as **Neutral**, and 90 (18.0%) as **Name-calling/Gender insults**. 14 Tweets (2.8%) were identified as being **Positive**, while 2 Tweets (0.4%) contained **Vicious language** and 1 Tweet (0.2%) contained **Hate speech** (see @tbl-may_severity). No Tweets containing **Credible threats** were detected in this sample.
 
 ```{r}
 #| message: false
 #| echo: false
 #| warning: false
 #| label: tbl-may_severity
-#| tbl-cap: Breakdown of the Severity of Harassment detected among MP May's Tweets
+#| tbl-cap: Breakdown of the Severity of Harassment on the seven-point scale detected among MP May's Tweets
 
 finalized_may_data |>
   group_by(severity_of_harassment) |>
   count() |>
   ungroup() |>
   mutate (pct = percent(n / sum(n), digit = 1)) |>
+  arrange(match(severity_of_harassment, c('Positive', 'Neutral', 'Questioning Authority', 'Name-calling/Gender insults', 'Vicious language', 'Credible threats', 'Hate speech'))) |>
   kable(
     col.names = c("Severity of Harassment", "Number of Responses", "Percentage"),
     booktabs = TRUE,
@@ -402,12 +422,15 @@ finalized_may_data |>
   count() |>
   ungroup() |>
   mutate (pct = percent(n / sum(n), digit = 1)) |>
+  arrange(match(type_of_account, c('Personal', 'Professional', 'Bots', 'Spammers', 'Anonymous', 'Suspended/deleted'))) |>
   kable(
     col.names = c("Type of Account", "Number of Responses", "Percentage"),
     booktabs = TRUE,
   )
 
 ```
+
+The relationship between the `severity of harassment` faced by MP May and the `type of accounts` behind the Tweets can be observed in @fig-may_relationship.**Positive** Tweets were sent by either **Personal** users (1.4%) or **Professional** users (0.4%), while **Neutral** Tweets most frequently came from accounts categorized as **Personal** (10.9%), **Professional** (9.4%), and **Suspended/deleted** (7.4%). Tweets coded as **Questioning Authority** were most frequently sent by **Suspended/deleted** users (22.2%), followed by **Personal** users (20.2%) and **Anonymous** users (4.2%). Tweets **Questioning Authority** was the only instance in which **Bots** and **Spammers** were detected in MP May's sample. The Tweets containing **Name-calling/Gender insults** were most frequently sent by users identified as **Suspended/deleted** (8.8%), **Personal** (6.4%), or **Anonymous** (2.6%). Moreover, **Vicious language** identified Tweets were sent by **Suspended/deleted** users (0.2%) and **Anonymous** users (0.2%). There were no identified instances of **Credible threats** and the 1 instance of **Hate speech** was sent by a **Suspended/deleted** account. 
 
 ```{r}
 #| message: false
@@ -417,6 +440,8 @@ finalized_may_data |>
 #| fig-cap: Relationship between Severity of Harassment and Types of Accounts detected among MP May's Tweets
 
 finalized_may_data |>
+  mutate(severity_of_harassment = fct_relevel(severity_of_harassment, "Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech")) |>
+  mutate(type_of_account = fct_relevel(type_of_account, "Personal", "Professional", "Bots", "Spammers", "Anonymous", "Suspended/deleted")) |>
   ggplot(mapping = aes(x = severity_of_harassment, fill = type_of_account)) +
   geom_bar() +
   theme_minimal() +
@@ -430,24 +455,25 @@ finalized_may_data |>
   scale_fill_taylor(palette = "lover",
   discrete = TRUE,
   reverse = TRUE)
-   
+
 ```
 
 ## Laurel Collins
-Among this small sample of 13 Tweets, 11 (84.6%) were identified as **Neutral** and 2 (15.4%) as **Questioning authority** (see @tbl-collins_severity). No Tweets containing **Positive**, **Name-calling/Gender insults**, **Vicious language**, **Credible threats**, or **Hate speech** were detected in this sample.
+Among this small sample of 13 Tweets sent to MP Collins, 11 (84.6%) were identified as **Neutral** and 2 (15.4%) as **Questioning authority** (see @tbl-collins_severity). No Tweets containing **Positive**, **Name-calling/Gender insults**, **Vicious language**, **Credible threats**, or **Hate speech** were detected in this sample.
 
 ```{r}
 #| message: false
 #| echo: false
 #| warning: false
 #| label: tbl-collins_severity
-#| tbl-cap: Breakdown of the Severity of Harassment detected among MP Collins' Tweets
+#| tbl-cap: Breakdown of the Severity of Harassment on the seven-point scale detected among MP Collins' Tweets
 
 finalized_collins_data |>
   group_by(severity_of_harassment) |>
   count() |>
   ungroup() |>
   mutate (pct = percent(n / sum(n), digit = 1)) |>
+  arrange(match(severity_of_harassment, c('Positive', 'Neutral', 'Questioning Authority', 'Name-calling/Gender insults', 'Vicious language', 'Credible threats', 'Hate speech'))) |>
   kable(
     col.names = c("Severity of Harassment", "Number of Responses", "Percentage"),
     booktabs = TRUE,
@@ -462,19 +488,22 @@ For `Type of account`, 9 (69.2%) were detected as **Professional**, 3 (23.1%) as
 #| echo: false
 #| warning: false
 #| label: tbl-collins_account
-#| tbl-cap: Breakdown of the Type of Accounts detected among MP Collins' Tweets
+#| tbl-cap: Breakdown of the Types of Accounts detected among MP Collins' Tweets
 
 finalized_collins_data |>
   group_by(type_of_account) |>
   count() |>
   ungroup() |>
   mutate (pct = percent(n / sum(n), digit = 1)) |>
+  arrange(match(type_of_account, c('Personal', 'Professional', 'Bots', 'Spammers', 'Anonymous', 'Suspended/deleted'))) |>
   kable(
     col.names = c("Type of Account", "Number of Responses", "Percentage"),
     booktabs = TRUE,
   )
 
 ```
+
+The relationship between `severity of harassment` and `types of accounts` present in MP Collins' sample of Tweets is available in @fig-collins_relationship. **Neutral** Tweets were sent by **Professional** users (61.5%), **Personal** users (15.4%), or **Suspended/deleted** users (7.7%). Tweets **Questioning Authority** were identified as being sent by either **Personal** users (7.7%) or **Professional** users (7.7%). No **Positive**, **Name-calling/Gender insults**, **Vicious language**, **Credible threats**, or **Hate speech** Tweets were detected in this sample and neither were **Bots**, **Spammers**, or **Anonymous** accounts. 
 
 ```{r}
 #| message: false
@@ -484,6 +513,8 @@ finalized_collins_data |>
 #| fig-cap: Relationship between Severity of Harassment and Types of Accounts detected among MP Collin's Tweets
 
 finalized_collins_data |>
+  mutate(severity_of_harassment = fct_relevel(severity_of_harassment, "Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech")) |>
+  mutate(type_of_account = fct_relevel(type_of_account, "Personal", "Professional", "Bots", "Spammers", "Anonymous", "Suspended/deleted")) |>
   ggplot(mapping = aes(x = severity_of_harassment, fill = type_of_account)) +
   geom_bar() +
   theme_minimal() +
@@ -497,7 +528,7 @@ finalized_collins_data |>
   scale_fill_taylor(palette = "lover",
   discrete = TRUE,
   reverse = FALSE)
-   
+  
 ```
 ## Model 
 
@@ -556,6 +587,7 @@ combined_bio_data |>
   count() |>
   ungroup() |>
   mutate (pct = percent(n / sum(n), digit = 1)) |>
+  arrange(match(type_of_account, c('Personal', 'Professional', 'Bots', 'Spammers', 'Anonymous', 'Suspended/deleted'))) |>
   kable(
     col.names = c("Type of Account", "Number of Accounts", "Percentage"),
     booktabs = TRUE,
@@ -577,6 +609,7 @@ combined_bio_data |>
   count() |>
   ungroup() |>
   mutate (pct = percent(n / sum(n), digit = 1)) |>
+  arrange(match(severity_of_harassment, c('Positive', 'Neutral', 'Questioning Authority', 'Name-calling/Gender insults', 'Vicious language', 'Credible threats', 'Hate speech'))) |>
   kable(
     col.names = c("Severity of Harassment", "Number of Tweets", "Percentage"),
     booktabs = TRUE,
@@ -594,6 +627,7 @@ As shown in @fig-accounts_ideology_all, questioning authority and name-calling/g
 #| fig-cap: Relationship between Severity of Harassment, Type of Account, and Political Ideology 
 
 combined_bio_data |>
+  mutate(severity_of_harassment = fct_relevel(severity_of_harassment, "Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech")) |>
   ggplot(mapping = aes(x = severity_of_harassment, fill = type_of_account)) +
   geom_bar() +
   theme_minimal() +
