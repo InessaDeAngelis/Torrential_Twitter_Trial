@@ -46,7 +46,7 @@ analysis_data <- rbind(finalized_mckenna_data, finalized_may_data, finalized_col
 analysis_data
 
 #### Modeling ####
-# Make a analysis dataset with a binary for whether suspended or not
+# Make an analysis dataset with a binary for whether suspended or not
 analysis_data_binary <- 
   analysis_data %>% 
   select(severity_of_harassment, type_of_account, name_of_politician) %>% 
@@ -73,13 +73,17 @@ harassment_likelihood_predictions <-
 
 harassment_likelihood_predictions |>
   mutate(was_suspended = factor(suspended_binary)) |>
+  mutate(severity_of_harassment = fct_relevel(severity_of_harassment, "Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech")) |>
   ggplot(aes(x = severity_of_harassment, y = estimate, color = was_suspended)) +
   geom_jitter(width = 0.2, height = 0.1, alpha = 0.3) +
   labs(
-    x = "Number of cars that were seen",
-    y = "Estimated probability it is a weekday",
-    color = "Actually weekday"
+    x = "Severity of Harassment",
+    y = "Estimated probability that an account was suspended",
+    color = "Was Suspended"
   ) +
   theme_classic() +
+  theme(axis.text.x = element_text(angle=45, hjust = 1, size = 10)) + 
   scale_color_brewer(palette = "Set1") +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  theme(legend.text = element_text(size = 6)) +
+  theme(legend.title = element_text(size = 9)) 
