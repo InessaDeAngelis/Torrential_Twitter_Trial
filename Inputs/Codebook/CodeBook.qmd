@@ -92,7 +92,7 @@ c. Tweets that are likely to fall under this category may call MP McKenna a "cli
 |-----------------------------------------------------------------------------------------------------------------|
 |@ cathmckenna Hey Blonde Bimbo Barbie why do you look like you always just scraped outta bed |  
 
-: Sample of a Tweet containing **Name-calling and gender-based insults** sent to former MP Catherine McKenna. {#tbl-nc_gender_insult-example}
+: Sample of a Tweet containing **Name-calling/Gender insults** sent to former MP Catherine McKenna. {#tbl-nc_gender_insult-example}
 
 5.	**Vicious language** 
 a. The use of offensive and derogatory language, often grounded in stereotypes regarding weight and physical appearance, used to refer to female politicians, their gender, policies, and assumed qualifications [@silencingwomen; @digitalsuffragists]. @tbl-viciouslang-example provides an example. 
