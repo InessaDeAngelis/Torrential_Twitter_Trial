@@ -552,7 +552,7 @@ Moreover, I suspected that the more severe forms of harassment identified in thi
 #| echo: false
 #| warning: false
 #| label: tbl-type_hypothesis
-#| tbl-cap: Breakdown of the Types of Accounts detected among MP Collins' Tweets
+#| tbl-cap: Breakdown of Types of Accounts and Severity of Harassment 
 
 combined_data |>
   group_by(severity_of_harassment, type_of_account) |>
@@ -569,17 +569,17 @@ combined_data |>
 
 ```
 
-## Severity of Harassment & Political Identification 
-As hypothesized, accounts belonging to right-wing, ideologically driven users will sent Tweets containing harassing content to the three female politicians. This data was gleaned by employing key word selection functions for users' bios. 114 accounts had information in their bios that emphasized their right-wing political views. 
+## Severity of Harassment, Type of Account & Political Views
+As hypothesized, accounts belonging to right-wing, ideologically driven users sent Tweets containing harassing content to the three female politicians. In order to evaluate this hypothesis, I combined the datasets of MP McKenna and MP May and used the `filter` function to select key words such as "Conservative," "PPC", "MAGA", and "#TrudeauMustGo" from users' bios. 114 accounts had information in their bios that emphasized their right-wing political views, keeping in mind the discussion from the [Data Limitations] section. 
 
-Unsurprisingly, @tbl-con_severity illustrates that 64 (56.1%) of the Tweets were **Questioning authority**, 45 (39.5%) were **Name-calling/Gender insults**, 4 (3.5%) were **Neutral**, and 1 (0.9%) contained **Vicious language**. No Tweets were coded as **Positive**, **Credible threats**, or **Hate speech** which emphasizes that users with right-wing views consistently felt motivated enough to engage with MP McKenna and MP May on Twitter, but not on either extreme of the seven-point scale. 
+Unsurprisingly, @tbl-con_severity illustrates that 64 (56.1%) of the Tweets were identified **Questioning authority**, 45 (39.5%) were **Name-calling/Gender insults**, 4 (3.5%) were **Neutral**, and 1 (0.9%) contained **Vicious language**. No Tweets were coded as **Positive**, **Credible threats**, or **Hate speech** which emphasizes that users with right-wing views consistently felt motivated enough to engage with MP McKenna and MP May on Twitter, but not on either extreme of the seven-point scale, confirming my hypothesis. 
 
 ```{r}
 #| message: false
 #| echo: false
 #| warning: false
 #| label: tbl-con_severity
-#| tbl-cap: Breakdown of the Type of Accounts detected among accounts that hold right-wing views and Severity of Harassment 
+#| tbl-cap: Breakdown of the Severity of Harassment detected among Tweets sent from users with right-wing views 
 
 combined_bio_data |>
   group_by(severity_of_harassment) |>
@@ -594,14 +594,14 @@ combined_bio_data |>
 
 ```
 
-We can see in @tbl-con_accounts the breakdown of the different types of accounts that belong to people with right-wing views. 65 (57.0%) of the accounts are **Suspended/deleted**, while 32 (28.1%) are **Personal** and 13 (11.4%) are **Anonymous**. 2 (1.8%) of the accounts **Spammers** and similarly, 2 (1.8%) of the accounts are **Professional**. No **Bots** were identified. 
+Furthermore, we can see in @tbl-con_accounts the breakdown of the different types of accounts that belong to people with right-wing views. 65 (57.0%) of the accounts are **Suspended/deleted**, while 32 (28.1%) are **Personal** and 13 (11.4%) are **Anonymous**. 2 (1.8%) of the accounts **Spammers** and similarly, 2 (1.8%) of the accounts are **Professional**. No **Bots** were identified. The high number of **Suspended/deleted** accounts identified somewhat contradicts this specific hypothesis, but generally aligns with other findings from this trial study, especially with **Personal** users being the second most frequently identified type of account for people with right-wing views. 
 
 ```{r}
 #| message: false
 #| echo: false
 #| warning: false
 #| label: tbl-con_accounts
-#| tbl-cap: Breakdown of the Type of Accounts detected among accounts that hold right-wing views
+#| tbl-cap: Breakdown of the Type of Accounts detected among users that hold right-wing views
 
 combined_bio_data |>
   group_by(type_of_account) |>
@@ -616,13 +616,14 @@ combined_bio_data |>
 
 ```
 
+@fig-relationships emphasizes the relationship between `Severity of Harassment` and `Type of Account` for users with  right-wing, ideologically driven views, broken down by politician. MP McKenna received Tweets more frequently than MP May that were from users with right-wing views that were categorized as **Questioning Authority** (32.5% versus 23.7%) and **Name-calling/Gender insults** (23.7% versus 15.8%). MP McKenna also received 1 Tweet (0.9%) containing **Vicious language**, unlike MP May who received none. In contrast to previous results, MP McKenna received more Tweets than MP May (2.6% vs 0.9%) that were **Neutral** when specifically analysing the political views of users. Overall, this analysis reveals that MP McKenna always receives Tweets with higher levels of harassment from users with right-wing views. 
 
 ```{r}
 #| message: false
 #| echo: false
 #| warning: false
-#| label: fig-accounts_ideology 
-#| fig-cap: Relationship between Severity of Harassment, Type of Account, and Political Identification by politician
+#| label: fig-relationships
+#| fig-cap: Relationship between Severity of Harassment, Type of Account, and Political Views by politician
 
 combined_bio_data |>
   mutate(severity_of_harassment = fct_relevel(severity_of_harassment, "Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech")) |>
@@ -635,7 +636,7 @@ combined_bio_data |>
   theme(axis.text.y = element_text(size = 6)) +
   labs(
     x = "Politician",
-    y = "Severity of Harassment",
+    y = "Number of Tweets",
     fill = "Type of Account"
   ) +
   theme(legend.position = "bottom") +
@@ -648,34 +649,6 @@ combined_bio_data |>
     vars(severity_of_harassment),
     scales = "free",
   )
-   
-```
-
-As shown in @fig-accounts_ideology_all, questioning authority and name-calling/gender insults were most frequently Tweeted by people with suspsended/deleted accounts, followed by personal accounts. 
-
-```{r}
-#| message: false
-#| echo: false
-#| warning: false
-#| label: fig-accounts_ideology_all 
-#| fig-cap: Relationship between Severity of Harassment, Type of Account, and Political Ideology 
-
-combined_bio_data |>
-  mutate(severity_of_harassment = fct_relevel(severity_of_harassment, "Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech")) |>
-  mutate(type_of_account = fct_relevel(type_of_account, "Personal", "Professional", "Bots", "Spammers", "Anonymous", "Suspended/deleted")) |>
-  ggplot(mapping = aes(x = severity_of_harassment, fill = type_of_account)) +
-  geom_bar() +
-  theme_minimal() +
-  scale_y_continuous(breaks = scales::pretty_breaks(n = 5)) +
-  theme(axis.text.x = element_text(angle=45, hjust = 1, size = 9)) + 
-  theme(axis.text.y = element_text(size = 6)) +
-  labs(x = "Severity of Harassment", y = "Number of Tweets", fill = "Type of Account") +
-  theme(legend.position = "bottom") +
-  theme(legend.text = element_text(size = 6)) +
-  theme(legend.title = element_text(size = 9)) +
-  scale_fill_taylor(palette = "lover",
-  discrete = TRUE,
-  reverse = TRUE)
 
 ```
 
@@ -686,9 +659,7 @@ MP McKenna chose not to seek re-election during the 2021 Federal Election and ha
 Unlike MP McKenna, the Tweets sent to MP May were more neutral in tone and were interesting in debating policies surrounding climate change.  
 
 ## Laurel Collins 
-Of the 13 Tweets in MP Collins' sample, 11 (84.6%) were neutral in tone, discussing NDP platform commitments and events MP Collins attended on the campaign trail. The other 2 Tweets (15.4%) unsurprisingly questioned her authority, a likely harbinger of the severity of harassment that will be detected in the full-scale version of this study.  
-
-“Few studies have specifically considered the role of status—the visibility or public profile of a politician—as a condition for the occurrence of negativity toward women”(Rheault et al., 2019, p. 2)
+Of the 13 Tweets in MP Collins' sample, 11 (84.6%) were neutral in tone, discussing NDP platform commitments and events MP Collins attended on the campaign trail. The other 2 Tweets (15.4%) unsurprisingly questioned her authority, a likely harbinger of the severity of harassment that will be detected in the full-scale version of this study (see @tbl-collins_severity). Previous research has found that the higher the profile of female politicians in Canada, the more likely they are to face more severe forms of harassment, which I anticipate will apply to MP Collins [@rheault].  
 
 ## Deliberative Democracy
 Referencing previous discussions of the characteristics of what constitutes a healthy deliberative democracy, findings from this trial study will be compared and contrasted to evaluate the extent at which the discourse is healthy for Canadian democracy. 
@@ -701,12 +672,12 @@ The harassment of female politicians who communicate about climate change, one o
 The context in which these data sets were initially collected, focusing on mentions the three MPs received, means that my analysis and ability to draw conclusions is limited (further discussed in [Appendix A]). Due to the focus on mentions, I chose not to remove mentions during the first cleaning stage where the three MPs mentioned themselves, especially because it meant there would be even fewer Tweets from the MP Collins data set to analyze.
 
 ## Future Research
-Given the changes to Twitter's affordances and the increasingly polarized political climate in Canada following the Covid-19 pandemic, there are multiple aspects of this trial study that will differ in the full-scale version of this study. MP Collins has raised her profile, through her national work as the NDP's Environment Critic and local work as the MP for Victoria, so it is anticipated that there will be more Tweets of hers to analyse and the severity of harassment will fall higher on the seven-point scale.
+Given the changes to Twitter's affordances and the increasingly polarized political climate in Canada following the Covid-19 pandemic, there are multiple aspects of this trial study that will differ in the full-scale version of this study. Since MP McKenna has left public life, Deputy Prime Minister and Minister of Finance Hon. Chrystia Freeland has been selected to replace her as the Liberal politician in full-scale version of this study. MP May briefly handed over leadership of the Green Party of Canada between 2020 and 2022 to Annamie Paul, but has since returned as the Party's Co-Leader with Jonathan Pedneault, meaning her profie and status is largely unchanged between the two versions of this study. Lastly, MP Collins has raised her profile, through her national work as the NDP's Environment Critic and local work as the MP for Victoria, so it is anticipated that there will be more Tweets of hers to analyse and the severity of harassment will fall higher on the seven-point scale.
 
-Some of my approaches, including how type of account is determined need to be refined ahead of the full scale version of this project. 
+Some of my approaches, including how `type of account` is determined while coding needs to be refined ahead of the full scale version of this project. My definition of `type of account` in both the introduction of this paper and in my Codebook references the "dynamic" affordances of Twitter, such as the "... interactions and communications between the users" [@singh, p. 383]. These dynamics are generally lost and difficult to evaluate in a static dataset, especially when most users have been reduced to a single interaction on the platform. Consequently, I need to determine whether I will solely evaluate users based on their single line in the dataset (discounting the ability to look at how frequently they reply to Tweets for example) or look their profiles up on Twitter as I actively code, potentially risking having more **Suspended/deleted** accounts represented. The final approach employed will be determined once the dataset for the full-scale study has been collected. 
 
 # Conclusion
-In this trial study, I examined Tweets explicitly discussing climate change and mentioning former MP Catherine McKenna, MP Elizabeth May, and MP Laurel Collins to see the severity of harassment on a seven-point scale and type of accounts behind the harassment. My study reveals that over 75% 
+In this trial study, I examined Tweets explicitly discussing climate change and mentioning former MP Catherine McKenna, MP Elizabeth May, and MP Laurel Collins to see the severity of harassment on a seven-point scale and type of accounts behind the harassment. My study reveals that over 75% of Tweets sent to the three MPs contained some level of harassment, with MP McKenna consistently receiving Tweets with more severe forms of harassment and MP Collins receiving the least number. 
 
 # Appendix A
 
