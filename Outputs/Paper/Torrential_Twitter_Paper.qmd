@@ -25,6 +25,8 @@ library(kableExtra)
 library(here)
 library(ggplot2)
 library(formattable)
+library(gtsummary)
+library(marginaleffects)
 library(tayloRswift)
 
 # Read in the cleaned McKenna data # 
@@ -142,7 +144,7 @@ combined_bio_data
 # Introduction
 Women in politics face considerable online and offline harassment, such as former Minister of the Environment and Climate Change Catherine McKenna and current Deputy Prime Minister Hon. Chrystia Freeland [@southern]. Known as “gendertrolling,” this harassment is part of a global trend of violence against women [@mantilla2013; @wagner]. Gender-based harassment on Twitter is well documented in academic literature and inexplicably pro-environmental behaviors are often viewed as “feminine” [@Citron; @mediatingmisogyny; @Anshelm]. Female politicians who adopt strong policy stances are more likely to face online misogyny and harassment because it is not consistent with existing gender stereotypes and notions of power, and poses a threat to male climate deniers [@courtemanche; @rheault; @degeus]
 
-To gain a deeper understanding of the intersection of climate denialism and online gendered-harassment faced by Canadian female politicians, I measure the severity of harassment former Liberal Party MP Catherine McKenna, Green Party MP Elizabeth May, and New Democratic Party MP Laurel Collins receive when Tweeting about climate change on a seven-point scale, using Tweets sent leading up to and during the 2019 Federal election. I then analysed the types of accounts behind the Tweets sent to MP McKenna, MP May, and MP Collins. 
+To gain a deeper understanding of the intersection of climate change denialism and online gendered-harassment faced by Canadian female politicians, I measure the severity of harassment former Liberal Party MP Catherine McKenna, Green Party MP Elizabeth May, and New Democratic Party MP Laurel Collins receive when Tweeting about climate change on a seven-point scale, using Tweets sent leading up to and during the 2019 Federal election. I then analyse the types of accounts behind the Tweets sent to MP McKenna, MP May, and MP Collins. 
 
 Harassment or gendertrolling is defined as sexist or misogynistic remarks that target a person based on their gender or sexuality and have varying levels of severity [@wagner]. Severity of harassment includes:
 
@@ -175,7 +177,7 @@ Type of account is defined as the dynamics of relationships between followers, f
 
   6. Suspended/Deleted
 
-My analysis emphasizes that nearly 80% of the Tweets in my sample contained some level harassment, ranging from questioning authority to hate speech, while the remaining Tweets had either positive or neutral sentiments. Questioning the authority of female politicians or name-calling/offering up gender-based insults were the most common forms of harassment identified, accounting for 75% of all Tweets and aligning with expectations. Harassing Tweets were most likely to be sent from Suspended/deleted or personal Twitter accounts. My [Discussion] section further explore these key findings and others of note. 
+My analysis emphasizes that nearly 80% of the Tweets in my sample contained some level harassment, ranging from questioning authority to hate speech, while the remaining Tweets had either positive or neutral sentiments. Questioning the authority of female politicians or name-calling/offering up gender-based insults were the most common forms of harassment identified, accounting for 75% of all Tweets and harassing Tweets were most likely to be sent from Suspended/deleted or personal Twitter accounts. Statistically speaking, there was little difference between the severity of harassment faced by MP McKenna and MP May, although there were distinguishable qualitative differences. My [Discussion] section further explore these key findings and others of note. 
 
 In the remainder of this paper, I commence with the [Data] section which outlines the nature of the data used for this trial study, limitations, coding, cleaning, and modelling procedures. The [Model] section outlines and justifies the model used in this paper. In the [Results] section, I present trends found during the analysis process and results from my model. Then, in the [Discussion] section, I provide further insights and outline areas where my thesis will differ from this trial study. Finally, in the [Conclusion], I summarize the main findings. 
 
@@ -224,19 +226,6 @@ For my `type of account` data, I changed value 1 to "Personal", 2 to "Profession
 
 I tested the cleaned data using the `validate` [@validate] package, primarily validating variable types and ensuring all Tweets were coded (500 for both MP McKenna and MP May and 13 for MP Collins). 
 
-# Model
-This trial study aims to evaluate the `severity of harassment` and the `types of accounts` behind the Tweets sent to Canadian female politicians and we are especially interested in seeing the impact of **Suspended/deleted** accounts on the overall severity of harassment of Tweets. The model assumes that: 
-
-$$
-\mbox{Pr}(y_i=1) = \mbox{logit}^{-1}\left(\beta_0+\beta_1 x_i\right)
-$$ {#eq-was_suspended}
-
-where $y_i$ is the estimated probability whether an account was suspended and $x_i$ is the severity of harassment.
-
-## Model Justification 
-The goal of this model is to evaluate whether there is a difference in Tweeting behaviour of **Suspended/deleted** accounts versus all other `types of accounts` identified in this trial study. Logistic regression was chosen because the outcome variable, **Suspended/deleted** has a binary outcome - whether accounts are **Suspended/deleted** (1) or any of the other five types of accounts (0). This binary outcome can then be compared to the seven levels on the severity of harassment scale. 
-
-The model was fit using `rstanarm` [@rstanarm].
 
 # Results
 ## Severity of Harassment
@@ -561,7 +550,64 @@ finalized_collins_data |>
   reverse = FALSE)
   
 ```
-## Model 
+
+
+# Model
+
+This trial study aims to evaluate the `severity of harassment` and the `types of accounts` behind the Tweets sent to Canadian female politicians and we are especially interested in seeing the impact of **Suspended/deleted** accounts on the overall severity of harassment of Tweets. The model considers whether an account was suspended or not, as a function of the severity of harassment, and which politician is targeted: 
+
+$$
+\mbox{Pr}(y_i=1) = \mbox{logit}^{-1}\left(\beta_0+\beta_1 x_i\right)
+$$ {#eq-was_suspended}
+
+where $y_i$ is the estimated probability whether an account was suspended, $x_i$ is the severity of harassment, and $z_i$ is which politician was targeted.
+
+Our estimates (@fig-modelresults) show...
+
+```{r}
+#| echo: false
+#| eval: true
+#| label: fig-modelresults
+#| fig-cap: Examining whether an account was suspended or not, based on the severity of harassment, and which politician was being targeted
+#| message: false
+#| warning: false
+
+suspension_and_harassment <- readRDS(here::here("Outputs/model/suspension_and_harassment.rds"))
+
+tbl_regression(
+  suspension_and_harassment) %>% 
+  as_gt()
+```
+
+The model is struggling when the severity of harassment is "hate speech". We expect that this is because in our dataset there are only two instances of this.
+
+
+One interesting aspect is that there does not seem to be any particular difference between severity of harassment coded as neutral and positive. It may be that future work considers expanding these two categories.
+
+```{r}
+#| echo: false
+#| eval: true
+#| label: fig-modelresultsmarginal
+#| fig-cap: Examining whether an account was suspended or not, based on the severity of harassment, and which politician was being targeted
+
+slopes(suspension_and_harassment, newdata = "median") |>
+  select(contrast, estimate, std.error) |>
+  kable(
+    col.names = c("Contrast", "Estimate", "Standard error"),
+    digits = 2, booktabs = TRUE
+  )
+```
+
+We expected a difference between Tweets directed at McKenna and May, however @fig-modelresultsmarginal shows that we were unable to find a quantitative difference. We will discuss later qualitative differences.
+
+
+
+The goal of this model is to evaluate whether there is a difference in Tweeting behaviour of **Suspended/deleted** accounts versus all other `types of accounts` identified in this trial study. Logistic regression was chosen because the outcome variable, **Suspended/deleted** has a binary outcome - whether accounts are **Suspended/deleted** (1) or any of the other five types of accounts (0). This binary outcome can then be compared to the seven levels on the severity of harassment scale.
+
+I initially considered each type of account as a separate category, not creating a binary to evaluate one specific type of account in comparison to all the other types. Consequently, I thought about building the model using Poisson regression but that was due to my incorrect understanding of count data.  
+
+
+
 
 # Discussion
 Overall, the data from this trial study reveals some form of harassment is present in over two-thirds of the Tweets sent to MP McKenna, MP May, and MP Collins which explicitly discuss climate change (see @tbl-overall_severity). The `severity of harassment` and `type of accounts` behind the Tweets vary by female politician, with MP McKenna seeing the more severe forms of harassment and MP Collins seeing the least. The following sections will further discuss these identified trends and compared them to the characteristics of what constitutes a healthy deliberative democracy. 
@@ -761,11 +807,11 @@ This datasheet provides background on who originally collected the raw Twitter d
 ## Motivation
 1. *For what purpose was the dataset created? Was there a specific task in mind? Was there a specific gap that needed to be filled? Please provide a description.*
 
-    - This dataset was created for a group project under the theme “who follows and mentions who during elections” for        CMN 4160 - Digital Social Research taught by Professor Elizabeth Dubois at the University of Ottawa. 
+    - This dataset was created for a group project under the theme “who follows and mentions who during elections” for CMN 4160 - Digital Social Research taught by Professor Elizabeth Dubois at the University of Ottawa. 
 
     - Inessa De Angelis was the group member who led research project design and pitched the idea of selecting former MP Catherine McKenna, MP Elizabeth May, and MP Laurel Collins because of their engagement in climate change policy advocacy. 
 
-    - Because of her previous work with Catherine McKenna during the 2019 Federal Election Campaign, Inessa noticed the connection between climate change denial, misogyny, and online harassment. After reviewing relevant literature from both Canada and other countries, Inessa noticed a large gap and wanted to help fill the gap through this project and her continued research at the Faculty of Information at the University of Toronto. 
+    - Because of her previous work with Catherine McKenna during the 2019 Federal Election campaign, Inessa noticed the connection between climate change denialism, misogyny, and online harassment. After reviewing relevant literature from both Canada and other countries, Inessa noticed a large gap and wanted to help fill the gap through this project and her continued research at the Faculty of Information at the University of Toronto. 
 
     - The dataset specifically collected mentions of the three female politicians, not simply replies, which differs from how Inessa will approach the full-scale version of this project. Instead of quantitative content analysis, the group performed social network analysis using Gephi on the datasets. 
 
@@ -823,7 +869,7 @@ This datasheet provides background on who originally collected the raw Twitter d
 
 9. *Are there any errors, sources of noise, or redundancies in the dataset?*
  
-     -  It has been over four years since these Tweets were initally sent and over two years since these Tweets were         collected for the dataset, so there is potential inaccuracies in reporting which accounts are still on the platform and which have been suspended/deleted.
+     -  It has been over four years since these Tweets were initally sent and over two years since these Tweets were collected for the dataset, so there is potential inaccuracies in reporting which accounts are still on the platform and which have been suspended/deleted.
      - Some users do not have bios or locations indicated (listed as NA), which may impact how coders categorized "type of account".
     
 10. *Is the dataset self-contained, or does it link to or otherwise rely on external resources?*
@@ -858,7 +904,7 @@ This datasheet provides background on who originally collected the raw Twitter d
 
 1. *What mechanisms or procedures were used to collect the data (for example, hardware apparatuses or sensors, manual human curation, software programs, software APIs)? How were these mechanisms or procedures validated?*
 
-    -  Trevor collected these Tweets using a custom Python script to access Twitter’s API. The Tweets were also run         through Perspective API’s sentiment detection software to check for toxicity and assign a score, although Inessa removed these scores during the initial cleaning process for this paper. 
+    -  Trevor collected these Tweets using a custom Python script to access Twitter’s API. The Tweets were also run through Perspective API’s sentiment detection software to check for toxicity and assign a score, although Inessa removed these scores during the initial cleaning process for this paper. 
     
 2. *What mechanisms or procedures were used to collect the data (for example, hardware apparatuses or sensors, manual human curation, software programs, software APIs)? How were these mechanisms or procedures validated?*
 
@@ -874,7 +920,7 @@ This datasheet provides background on who originally collected the raw Twitter d
 
     - Trevor Deley (compensation unknown).
     
-    - Professor Elizabeth Dubois (Associate Professor salary from the University of Ottawa, but not directly for this       project).
+    - Professor Elizabeth Dubois (Associate Professor salary from the University of Ottawa, but not directly for this project).
     
     - Inessa De Angelis (no compensation, paid tuition to the University of Ottawa to take CMN 4160).
 
@@ -916,9 +962,9 @@ This datasheet provides background on who originally collected the raw Twitter d
 
 1. *Was any preprocessing/cleaning/labeling of the data done?*
 
-    - It is unknown whether Trevor conducted any cleaning of the raw datasets with Python, beyond obtaining toxicity        scores via Perspective API. 
+    - It is unknown whether Trevor conducted any cleaning of the raw datasets with Python, beyond obtaining toxicity scores via Perspective API. 
     
-    - For this trial study, Inessa used R to clean and simplify column names, remove additional variables, and filter       out Tweets which did not contain the word `climate`.
+    - For this trial study, Inessa used R to clean and simplify column names, remove additional variables, and filter out Tweets which did not contain the word `climate`.
     
 2. *Was the "raw" data saved in addition to the preprocessed/cleaned/labeled data (for example, to support unanticipated future uses)?*
 
@@ -926,7 +972,7 @@ This datasheet provides background on who originally collected the raw Twitter d
     
 3. *Is the software that was used to preprocess/clean/label the data available? If so, please provide a link or other access point.*
 
-    - Trevor used Python and Perspective API by Jigsaw. Perspective API is currently free to use but requires                registration.
+    - Trevor used Python and Perspective API by Jigsaw. Perspective API is currently free to use but requires registration.
     
     - Inessa uses R. 
 
@@ -940,7 +986,7 @@ This datasheet provides background on who originally collected the raw Twitter d
 
     - Yes. This dataset was used for the aforementioned CMN 4160 class project. 
     
-    - We used Gephi to conduct social network analysis to see which communities formed around the Tweets and Twitter        accounts of former MP Catherine McKenna, MP Elizabeth May, and MP Laurel Collins. We found that McKenna had 26        communities, May had 131 communities, and Collins had 18. We also found that harssment was sent by users with         personal accounts and was most likely to show up in the same community as the three female politicans. These          findings were written up in a professional-style guide, aimed at women running for office. This project report        was used by Professor Dubois as an example for future students in her class, but not publicly distributed beyond      the class’ Brightspace page. 
+    - We used Gephi to conduct social network analysis to see which communities formed around the Tweets and Twitter accounts of former MP Catherine McKenna, MP Elizabeth May, and MP Laurel Collins. We found that McKenna had 26 communities, May had 131 communities, and Collins had 18. We also found that harssment was sent by users with personal accounts and was most likely to show up in the same community as the three female politicans. These findings were written up in a professional-style guide, aimed at women running for office. This project report was used by Professor Dubois as an example for future students in her class, but not publicly distributed beyond the class’ Brightspace page. 
 
 2. *Is there a repository that links to any or all papers or systems that use the dataset?*
   
@@ -1070,7 +1116,5 @@ Please contact inessa.deangelis@mail.utoronto.ca if you have questions or requir
     - 5
     
     - 6
-    
-# Appendix C
 
 # References

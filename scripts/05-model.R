@@ -57,13 +57,15 @@ analysis_data_binary <-
                                     0))
 
 
-# Code referenced from: https://tellingstorieswithdata.com/13-ijaglm.html#poisson-regression 
+# Code referenced from: https://tellingstorieswithdata.com/13-ijaglm.html#logistic-regression 
 suspension_and_harassment <-
   glm(
-    suspended_binary ~ severity_of_harassment,
+    suspended_binary ~ severity_of_harassment + name_of_politician,
     data = analysis_data_binary,
     family = "binomial"
   )
+
+saveRDS(suspension_and_harassment, "Outputs/model/suspension_and_harassment.rds")
 
 summary(suspension_and_harassment)
 
@@ -71,11 +73,13 @@ harassment_likelihood_predictions <-
   predictions(suspension_and_harassment) |>
   as_tibble()
 
+### Graph
+
 harassment_likelihood_predictions |>
   mutate(was_suspended = factor(suspended_binary)) |>
   mutate(severity_of_harassment = fct_relevel(severity_of_harassment, "Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech")) |>
   ggplot(aes(x = severity_of_harassment, y = estimate, color = was_suspended)) +
-  geom_jitter(width = 0.2, height = 0.1, alpha = 0.3) +
+  geom_jitter(width = 0.2, height = 0.0, alpha = 0.3) +
   labs(
     x = "Severity of Harassment",
     y = "Estimated probability that an account was suspended",
@@ -87,3 +91,40 @@ harassment_likelihood_predictions |>
   theme(legend.position = "bottom") +
   theme(legend.text = element_text(size = 6)) +
   theme(legend.title = element_text(size = 9)) 
+
+
+### Table
+just_the_estimates <-
+  harassment_likelihood_predictions %>%
+  select(estimate, severity_of_harassment, name_of_politician) %>%
+  unique()
+
+harassment_likelihood_predictions |>
+  mutate(was_suspended = factor(suspended_binary)) |>
+  mutate(
+    severity_of_harassment = fct_relevel(
+      severity_of_harassment,
+      "Positive",
+      "Neutral",
+      "Questioning Authority",
+      "Name-calling/Gender insults",
+      "Vicious language",
+      "Credible threats",
+      "Hate speech"
+    )
+  ) %>%
+  count(severity_of_harassment, was_suspended) %>%
+  pivot_wider(names_from = was_suspended,
+              values_from = n) %>%
+  mutate(`0` = if_else(is.na(`0`), 0, `0`)) %>%
+  mutate(proportion_suspended = `1` / (`0` + `1`)) %>%
+  rename("Number not suspended" = `0`,
+         "Number suspended" = `1`) %>%
+  left_join(just_the_estimates, by = join_by(severity_of_harassment))
+  
+
+  
+
+slopes(suspension_and_harassment, newdata = "median")
+
+
