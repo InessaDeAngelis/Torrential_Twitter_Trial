@@ -9,7 +9,7 @@ The repo is structured as the following:
 
 -   `Inputs` contains some of the literature consulted and the files used to generate the Codebook, as well as the PDF of the Codebook to code the Tweets.
     
--   `Outputs/Paper` contains the files used to generate the paper, including the Quarto document, bibliography file, and the PDF of the paper.
+-   `Outputs` contains the files used to generate the paper, including the Quarto document, bibliography file, model, and the PDF of the paper.
 
 -   `Scripts` contains the R scripts used to simulate, clean, validate, and model the data.
 
