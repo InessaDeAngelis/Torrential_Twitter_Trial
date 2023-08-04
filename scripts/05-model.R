@@ -48,10 +48,10 @@ analysis_data
 #### Modeling ####
 # Make an analysis dataset with a binary for whether suspended or not
 analysis_data_binary <- 
-  analysis_data %>% 
-  select(severity_of_harassment, type_of_account, name_of_politician) %>% 
-  filter(name_of_politician != "Laurel Collins") %>% 
-  filter(type_of_account != c("Bots", "Spammers")) %>% 
+  analysis_data |>
+  select(severity_of_harassment, type_of_account, name_of_politician) |>
+  filter(name_of_politician != "Laurel Collins") |>
+  filter(type_of_account != c("Bots", "Spammers")) |> 
   mutate(suspended_binary = if_else(type_of_account == "Suspended/deleted",
                                     1,
                                     0))
@@ -95,8 +95,8 @@ harassment_likelihood_predictions |>
 
 ### Table
 just_the_estimates <-
-  harassment_likelihood_predictions %>%
-  select(estimate, severity_of_harassment, name_of_politician) %>%
+  harassment_likelihood_predictions |>
+  select(estimate, severity_of_harassment, name_of_politician) |>
   unique()
 
 harassment_likelihood_predictions |>
@@ -113,13 +113,13 @@ harassment_likelihood_predictions |>
       "Hate speech"
     )
   ) %>%
-  count(severity_of_harassment, was_suspended) %>%
+  count(severity_of_harassment, was_suspended) |>
   pivot_wider(names_from = was_suspended,
-              values_from = n) %>%
-  mutate(`0` = if_else(is.na(`0`), 0, `0`)) %>%
-  mutate(proportion_suspended = `1` / (`0` + `1`)) %>%
+              values_from = n) |>
+  mutate(`0` = if_else(is.na(`0`), 0, `0`)) |>
+  mutate(proportion_suspended = `1` / (`0` + `1`)) |>
   rename("Number not suspended" = `0`,
-         "Number suspended" = `1`) %>%
+         "Number suspended" = `1`) |>
   left_join(just_the_estimates, by = join_by(severity_of_harassment))
   
 

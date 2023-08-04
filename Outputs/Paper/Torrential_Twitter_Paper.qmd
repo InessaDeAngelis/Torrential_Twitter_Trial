@@ -4,7 +4,7 @@ author: "Inessa De Angelis"
 thanks: "Code and other information available at: https://github.com/InessaDeAngelis/Torrential_Twitter_Trial "
 date: "today"
 date-format: "long"
-abstract: "Women in politics face considerable online and offline harassment for their participation, especially when adopting strong policy stances on issues such as climate change. Known as gendertrolling, this specific form of harassment, in part, is due to male climate deniers feeling threatened by the perceived power and qualifications of female politicians. This paper analyzes Tweets which specifically discuss climate change from former MP Catherine McKenna, MP Elizabeth May, and MP Laurel Collins to investigate the severity of harassment on a seven-point scale and type of accounts behind the Tweets. This trial study reveals that nearly 80% of all Tweets contained some level of harassment, most frequently either questioning the authority of the MPs or calling them names or gender-based insults and came from accounts that were either suspended/deleted or personal users."
+abstract: "Women in politics face considerable online and offline harassment for their participation, especially when adopting strong policy stances on issues such as climate change. Known as gendertrolling, this specific form of harassment is often due to male climate deniers feeling threatened by the perceived power and qualifications of female politicians. This paper analyses Tweets which specifically discuss climate change from former MP Catherine McKenna, MP Elizabeth May, and MP Laurel Collins to investigate the severity of harassment on a seven-point scale and type of accounts behind the Tweets. This trial study reveals that nearly 80% of all Tweets contained some level of harassment, most frequently either questioning the authority of the MPs or calling them names or gender-based insults and came from accounts that were either suspended/deleted or personal users."
 format: pdf
 toc: true
 number-sections: true
@@ -48,11 +48,11 @@ finalized_collins_data <-
 show_col_types = FALSE
 )
 
-# Create one combined data set with all three politicians #
+# Create one combined dataset with all three politicians #
 combined_data <- rbind(finalized_mckenna_data, finalized_may_data, finalized_collins_data)
 combined_data
 
-# Create climate barbie data set # 
+# Create climate barbie dataset # 
 climate_barbie_data <-
   finalized_mckenna_data |>
   select(ID,
@@ -74,7 +74,7 @@ climate_barbie_data2 <-
 combined_barbie_data <- rbind(climate_barbie_data, climate_barbie_data2)
 combined_barbie_data
 
-# Create data set filtering bio data #
+# Create dataset filtering bio data #
 bio_data_MAGA <-
 combined_data |>
   select(ID,
@@ -135,12 +135,13 @@ combined_data |>
   ) |>
   filter(grepl('ppc', bio)) 
 
-# Merge together all bio data sets #
+# Merge together all bio datasets #
 combined_bio_data <- rbind(bio_data_CPC, bio_data_MAGA, bio_data_PPC, bio_data_trudeau, bio_data_CPC2, bio_data_ppc2)
 combined_bio_data
   
 ```
 
+\newpage
 # Introduction
 Women in politics face considerable online and offline harassment, such as former Minister of the Environment and Climate Change Catherine McKenna and current Deputy Prime Minister Hon. Chrystia Freeland [@southern]. Known as “gendertrolling,” this harassment is part of a global trend of violence against women [@mantilla2013; @wagner]. Gender-based harassment on Twitter is well documented in academic literature and inexplicably pro-environmental behaviors are often viewed as “feminine” [@Citron; @mediatingmisogyny; @Anshelm]. Female politicians who adopt strong policy stances are more likely to face online misogyny and harassment because it is not consistent with existing gender stereotypes and notions of power, and poses a threat to male climate deniers [@courtemanche; @rheault; @degeus]
 
@@ -179,53 +180,52 @@ Type of account is defined as the dynamics of relationships between followers, f
 
 My analysis emphasizes that nearly 80% of the Tweets in my sample contained some level harassment, ranging from questioning authority to hate speech, while the remaining Tweets had either positive or neutral sentiments. Questioning the authority of female politicians or name-calling/offering up gender-based insults were the most common forms of harassment identified, accounting for 75% of all Tweets and harassing Tweets were most likely to be sent from Suspended/deleted or personal Twitter accounts. Statistically speaking, there was little difference between the severity of harassment faced by MP McKenna and MP May, although there were distinguishable qualitative differences. My [Discussion] section further explore these key findings and others of note. 
 
-In the remainder of this paper, I commence with the [Data] section which outlines the nature of the data used for this trial study, limitations, coding, cleaning, and modelling procedures. The [Model] section outlines and justifies the model used in this paper. In the [Results] section, I present trends found during the analysis process and results from my model. Then, in the [Discussion] section, I provide further insights and outline areas where my thesis will differ from this trial study. Finally, in the [Conclusion], I summarize the main findings. 
+In the remainder of this paper, I commence with the [Data] section which outlines the nature of the data used for this trial study, limitations, coding, and cleaning procedures. In the [Results] section, I present trends found during the analysis process, followed by more insights in the [Model] section. Then, in the [Discussion] section, I provide further insights and outline areas where my thesis will differ from this trial study. Finally, in the [Conclusion], I summarize the main findings. 
 
 ## Theoretical Framework
 This study will be conducted under the theory of deliberative democracy which emphasizes having open, respectful, and diverse discourse for a healthy democracy [@pmc2019; @trifiro]. Democratic legitimacy is established by allowing the public to collectively participate in deliberation about consequential decisions, while recognizing there are multiple viewpoints on every issue, including climate change [@mckaytenove; @masullochen]. 
 
-Results from the analyzed Tweets from the three female politicians will be compared to the aforementioned definition to see if the level of discourse about climate change on Twitter matches the characteristics of what is considered healthy discourse under the theory of deliberative democracy. 
+Results from the analysed Tweets will be compared to the aforementioned definition to see if the level of discourse about climate change on Twitter matches the characteristics of what is considered healthy discourse under the theory of deliberative democracy. 
 
 # Data 
 The data used in this paper was collected via Twitter's API in early 2021 for a separate research project I undertook during my undergraduate degree and has since been stored on my personal Mac. A more detailed discussion of the dataset composition and the collection process can be found in the [Appendix A]. 
 
 ## Data Limitations
-Twitter, the platform's affordances, and the types of accounts and content circulate is ever-changing. Consequently, Tweets authored in 2019, collected in 2021, and analyzed for this trial study in 2023 are faced with changing contexts and affordances which must be accounted for. There are potential inaccuracies in reporting which accounts are still on the platform and which have been suspended/deleted, especially following successive waves of Covid-19 mis- and dis-information on the platform. Although this was anticipated, some users do not have bios or locations indicated (listed as NA), which may impact how `type of account` is coded. The sheer volume of Tweets collected in 2021 also means that only a small sample is being used for this trial study, which means there is a higher chance of inaccuracies and ability to not establish patterns to see the larger picture. 
+Twitter, the platform's affordances, and the types of accounts and content circulate is ever-changing. Consequently, Tweets authored in 2019, collected in 2021, and analysed for this trial study in 2023 are faced with changing contexts and affordances which must be accounted for. There are potential inaccuracies in reporting which accounts are still on the platform and which have been suspended/deleted, especially following successive waves of Covid-19 mis- and dis-information on the platform. Although this was anticipated, some users do not have bios or locations indicated (listed as NA), which may impact how `type of account` is coded. The sheer volume of Tweets collected in 2021 also means that only a small sample is being used for this trial study, impacting the ability to broadly generalize results. 
 
-During the 2019 Federal election campaign, MP Collins was a City Councillor in Victoria, BC, never having been elected to the House of Commons or faced the scrutiny of traditional and social media on a national level. This means that she received far fewer Tweets during the same period as MP McKenna and MP May and that the results from her study are far less generalizable, but are still important to include given her increased profile in 2023 and anticipated prominence in the full-scale version of this study. 
+During the 2019 Federal election campaign, MP Collins was a City Councillor in Victoria, BC, never having been elected to the House of Commons or faced the scrutiny of traditional and social media on a national level. This means that she received far fewer Tweets during the same period as MP McKenna and MP May and that the results from her portion of the study are less generalizable, but are still important to include given her increased profile in 2023 and anticipated prominence in the full-scale version of this study. 
 
 A major limitation of using Twitter data for any research project, including this one, is the inability to determine a representative sample of voting-age Canadians and draw generalizable results about public opinion on any given issue [@bermingham]. Selection bias exists because Twitter tends to only represent the views of people who are “... more partisan, polarized, and uncivil” and motivated to be active users [@mcgregor, p. 237]. We are also limited by the information users choose to publicly display on their profiles, such as their location, so it is not always possible to confirm if an individual is Canadian or other identifying demographic information [@holmberg]. 
 
-Moreover, Twitter data is collected as a snapshot in time, often reducing users to a single interaction on the platform and leading to potential measurement bias. Consequently, with context collapse which happens when an individual user’s Tweets are taken out of the context and imagined audience in which they were intended for, it can be easy to misrepresent their true political beliefs, views on climate change, and perspectives on the qualifications of women in politics [@contextcollapse]. Some users may also show up more than once in the data set if they are prolific Twitter users, leading to overrepresentation of their views and type of account. With these identified limitations in mind, generalizations from this trial study can only be reflective of the users in the dataset and not the wider Canadian public. 
+Moreover, Twitter data is collected as a snapshot in time, often reducing users to a single interaction on the platform, meaning we cannot see their full range of political expressions and frequency of certain behaviours, leading to potential measurement bias. Consequently, with context collapse which happens when an individual user’s Tweets are taken out of the context and imagined audience in which they were intended for, users' true political beliefs, views on climate change, and perspectives on the qualifications of women in politics may be misrepresented [@contextcollapse]. Some users may also show up more than once in the dataset if they are prolific Twitter users, leading to overrepresentation of their views and type of account. With these identified limitations in mind, results should be considered in the context of this study and generalizations can only be reflective of the users in the dataset and not the wider Canadian public. 
 
 ## Data Coding
-This trial study employs a novel approach of conducting quantitative content analysis, combining the level of nuance and detail captured in qualitative content analysis and interviews [@wagner; @erikson] with more binary quantitative methods [@theocharis; @rheault]. By offering this quantitative, seven-point scale to measure the severity of harassment, we can begin to better understand the full extent of harassment faced by Canadian female politicians and implement solutions. 
+This trial study employs a novel approach of conducting quantitative content analysis, combining the level of nuance and detail captured in qualitative content analysis and interviews [@wagner; @erikson] with more binary quantitative methods [@theocharis; @rheault]. By offering this quantitative, seven-point scale to measure the severity of harassment, we can begin to better understand the full extent of harassment faced by Canadian female politicians and work toward implementing solutions. 
 
-To code the Tweets, I designed a Google Form (available in [Appendix B]) which allows coders to enter key information about each Tweet and the type of account behind the Tweet. Coders code `severity of harassment` on the previously discussed seven-point scale based on the Tweet text provided in the dataset. `Type of account` was determined by coders by looking at a user's username, display name, and bio displayed in the dataset and then by looking at a user's profile and header pictures, frequency of replies and likes, as it stands of July 2023 on Twitter. Although there is a significant amount of time between when the Tweet was originally authored, collected, and coded for this project, it was determined that this was the best approach for this trial study, but will be re-evaluated for the full-scale study.   
+To code the Tweets, I developed a Codebook to standardization the coding process and designed a Google Form (available in [Appendix B]) which allows coders to enter key information about each Tweet to determine the severity of harassment and type of account. Coders code `severity of harassment` on the previously discussed seven-point scale based on the Tweet text provided in the dataset. `Type of account` was determined by coders by looking at a user's username, display name, and bio displayed in the static dataset and then by logging into Twitter to look at the "dynamics" including the user's profile and header pictures and frequency of replies and likes, as it stands of July 2023 on Twitter [@singh]. Although a significant amount of time has passed between when the Tweet was originally authored, collected, and coded for this project, it was determined that this was the best approach for this trial study, but will be re-evaluated for the full-scale study.   
 
 ## Data Cleaning
-Data was collected via Twitter API using Python (see datasheet in [Appendix A] for more information) and cleaned, tested, modeled, and analyzed using the statistical programming software R [@r], using functions from `tidyverse` [@rTidyverse], `ggplot2` [@rGgplot2], `tayloRswift` [@taylor], `janitor` [@rJanitor], `KableExtra` [@rKableExtra], `knitr` [@rknitr], `here` [@rHere], `formattable` [@rFormattable], `arrow` [@arrow], `validate` [@validate], `testthat` [@testthat], `rstanarm` [@rstanarm], `marginaleffects` [@marginal], and `modelsummary` [@modelsummary].
+Data was collected via Twitter API using Python (see datasheet in [Appendix A] for more information) and cleaned, tested, modeled, and analysed using the statistical programming software R [@r], using functions from `tidyverse` [@rTidyverse], `ggplot2` [@rGgplot2], `tayloRswift` [@taylor], `janitor` [@rJanitor], `KableExtra` [@rKableExtra], `knitr` [@rknitr], `here` [@rHere], `formattable` [@rFormattable], `arrow` [@arrow], `validate` [@validate], `testthat` [@testthat], `rstanarm` [@rstanarm], `gtsummary` [@gtsummary], `marginaleffects` [@marginal], and `modelsummary` [@modelsummary].
 
 The data utilized in this trial study underwent two rounds of cleaning: the first was to clean and select the Tweets to manually code and the second was to clean the coded Tweets to prepare for analysis and visualization. 
 
 ### Raw Data 
-In preparation to code my Tweets for severity of harassment and type of account, I first had to eliminate extra information in the data sets and take a sample, given that there were 116,649 Tweets between the three politicians in the raw datasets. 
+In preparation to code my Tweets for severity of harassment and type of account, I first had to eliminate extra information in the datasets and take a sample, given that there were 116,649 Tweets between the three politicians in the raw datasets. 
 
-After retrieving the data sets from my archived files, I performed the first round of data cleaning based on the design of my trial study. I removed the columns which presented information not required for this study and using the `filter` function, I filtered all Tweets by the key word "climate", and then took a sample using the `slice_sample` function of 500 Tweets from both MP McKenna and MP May's data sets. Only 13 Tweets from MP Collins matched the criteria, so there was no need to take a sample. 
+After retrieving the datasets from my archived files, I performed the first round of data cleaning based on the design of my trial study. I removed the columns which presented information not required for this study and using the `filter` function, I filtered all Tweets by the key word "climate", and then took a sample using the `slice_sample` function of 500 Tweets from both MP McKenna and MP May's datasets. Only 13 Tweets from MP Collins matched the criteria, so there was no need to take a sample. 
 
 I renamed columns and capitalized the first letter of every word using Twitter Developer's guidelines and my Codebook [@Twittermedia]. I renamed `text` to `Text`, `user_name` to `Name`, `user_sname` to `Username`, `user_description` to `Bio`, `user_location` to `Location`, `followers` to `Followers`, `friends` to `Following`, and `tweet_URL` to `URL`. 
 
-I then tested the raw data using the `testthat` [@testthat] package to ensure the data set was ready to be manually coded.
+I then tested the raw data using the `testthat` [@testthat] package to ensure the dataset was ready to be manually coded.
 
 ### Coded Data 
-After coding the 1,013 Tweets manually using my Google form (see [Appendix B]), I then visually checked for missing data, such as Tweet URLs, severity of harassment, and type of account and went back and re-coded the few Tweets that contained missing information. A number of Twitter accounts opted not have bios (listed as NA in the data sets), which is missing data that was anticipated within the data sets. After my data set passed this initial, informal test, I proceeded to clean it a second time using R. 
+After coding the 1,013 Tweets manually using my Google form (see [Appendix B]), I then visually checked for missing data, such as Tweet URLs, name of politicians, and severity of harassment that I forgot to add the first time, and went back and re-coded the few Tweets that contained missing information. I also conducted random spot checks to ensure that all Tweets were consistently coded based on the definitions and examples in my Codebook, since there is only one coder for this study. A number of Twitter accounts opted not have bios (listed as NA in the datasets), which is missing data that was anticipated within the datasets. After my dataset passed this initial test, I proceeded to clean it a second time using R. 
 
 For my `severity of harassment` data, I updated value 1 to "Positive", 2 to "Neutral", 3 to "Questioning authority", 4 to "Name-calling/Gender insults", 5 to "Vicious language", 6 to "Credible threats", and 7 to "Hate speech" based on my Codebook. 
 
 For my `type of account` data, I changed value 1 to "Personal", 2 to "Professional", 3 to "Bots", 4 to "Spammers", 5 to "Anonymous", and 6 to "Suspended/deleted" based on my Codebook. 
 
 I tested the cleaned data using the `validate` [@validate] package, primarily validating variable types and ensuring all Tweets were coded (500 for both MP McKenna and MP May and 13 for MP Collins). 
-
 
 # Results
 ## Severity of Harassment
@@ -262,7 +262,7 @@ For both MP McKenna and MP May, the remaining levels of harassment including **P
 #| echo: false
 #| warning: false
 #| label: fig-severity_all
-#| fig-cap: Breakdown of Severity of Harassment on the seven-point scale detected in Tweets by politician
+#| fig-cap: Breakdown of Severity of Harassment on the seven-point scale detected in Tweets and organized by politician
 
 # Code to order severity of harassment according to seven-point scale referenced from: https://r-graph-gallery.com/267-reorder-a-variable-in-ggplot2.html
 
@@ -314,7 +314,7 @@ For the fourth most common `type of accounts` identified, just over 5% of Tweets
 #| echo: false
 #| warning: false
 #| label: fig-accounts_all
-#| fig-cap: Type of Accounts Behind the Tweets Received by All Three Politicians
+#| fig-cap: Type of Accounts behind the Tweets received by all three politicians
 
 combined_data |>
   mutate(type_of_account = fct_relevel(type_of_account, "Personal", "Professional", "Bots", "Spammers", "Anonymous", "Suspended/deleted")) |>
@@ -333,7 +333,7 @@ combined_data |>
 ```
 
 ## Catherine McKenna
-Among the sample of 500 Tweets sent to MP McKenna, 270 (54%) were identified as **Questioning authority**, 153 (30.6%) as **Name-calling/Gender insults**, and 54 (10.8%) as **Neutral** for `severity of harassment`. 10 Tweets (or 2.0%) were identified for both the **Positive** and **Vicious language** categories, while 2 Tweets (0.4%) contained **Credible threats** and 1 Tweet (0.2%) contained **Hate speech** (see @tbl-mckenna_severity). 
+Among the sample of 500 Tweets sent to MP McKenna, 270 (54%) were identified as **Questioning authority**, 153 (30.6%) as **Name-calling/Gender insults**, and 54 (10.8%) as **Neutral** for `severity of harassment`. 10 Tweets (2.0%) were identified for both the **Positive** and **Vicious language** categories, while 2 Tweets (0.4%) contained **Credible threats** and 1 Tweet (0.2%) contained **Hate speech** (see @tbl-mckenna_severity). 
 
 ```{r}
 #| message: false
@@ -355,7 +355,7 @@ count() |>
 
 ```
 
-For `Type of account`, 222 (44.4%) were detected as **Suspended/deleted**, 131 (26.2%) identified as **Personal**, 109 (21.8%) as **Anonymous**, 28 (5.6%) as **Professional**, 10 (2.0%) as **Spammers**, with no **bots** being detected (see @tbl-mckenna_account). 
+For `Type of account`, 222 (44.4%) were identified as **Suspended/deleted**, 131 (26.2%) as **Personal**, 109 (21.8%) as **Anonymous**, 28 (5.6%) as **Professional**, 10 (2.0%) as **Spammers**, with no **bots** being detected (see @tbl-mckenna_account). 
 
 ```{r}
 #| message: false
@@ -377,7 +377,7 @@ finalized_mckenna_data |>
 
 ```
 
-@fig-mckenna_relationship emphasizes the relationship between the `severity of harassment` faced by MP McKenna and the `type of accounts` behind the Tweets. The few **Positive** Tweets received by MP McKenna were most likely to be sent by **Personal** users (1%), **Professional** users (0.6%), or **Suspended/deleted** users (0.4%), while **Neutral** Tweets came from accounts categorized as **Professional** (3.8%), **Suspended/deleted** (3.6%), and **Personal** (2.4%). **Anonymous** users and **Spammers** did not send **Positive** Tweets to MP McKenna. Tweets coded as **Questioning Authority** were most frequently sent by **Suspended/deleted** users (22.6%), followed by **Personal** users (15.6%) and **Anonymous** users (13.4%). The Tweets containing **Name-calling/Gender insults** were most frequently sent by users identified as **Suspended/deleted** (16.2%), **Anonymous** (7.0%), or **Personal** (6.8%). **Vicious language** identified Tweets were sent by **Suspended/deleted** users (1.2%), **Anonymous** users (0.4%), and **Spammers** (0.2%). The identified instances of **Credible threats** and **Hate speech** were sent by **Suspended/deleted** accounts and **Bots** did not send any Tweets to MP McKenna. 
+@fig-mckenna_relationship emphasizes the relationship between the `severity of harassment` faced by MP McKenna and the `type of accounts` behind the Tweets. The few **Positive** Tweets received by MP McKenna were most likely to be sent by **Personal** users (1%), **Professional** users (0.6%), or **Suspended/deleted** users (0.4%), while **Neutral** Tweets came from accounts categorized as **Professional** (3.8%), **Suspended/deleted** (3.6%), and **Personal** (2.4%). **Anonymous** users and **Spammers** did not send **Positive** Tweets to MP McKenna. Tweets coded as **Questioning Authority** were most frequently sent by **Suspended/deleted** users (22.6%), followed by **Personal** users (15.6%), and **Anonymous** users (13.4%). The Tweets containing **Name-calling/Gender insults** were most frequently sent by users identified as **Suspended/deleted** (16.2%), **Anonymous** (7.0%), or **Personal** (6.8%). **Vicious language** identified Tweets were sent by **Suspended/deleted** users (1.2%), **Anonymous** users (0.4%), and **Spammers** (0.2%). The identified instances of **Credible threats** and **Hate speech** were sent by **Suspended/deleted** accounts and **Bots** did not send any Tweets to MP McKenna. 
 
 ```{r}
 #| message: false
@@ -406,7 +406,7 @@ finalized_mckenna_data |>
 ```
 
 ## Elizabeth May
-Among MP May's sample of 500 Tweets, 250 (50.0%) were identified as **Questioning authority**, 143 (28.6%) as **Neutral**, and 90 (18.0%) as **Name-calling/Gender insults** for `severity of harassment`. 14 Tweets (2.8%) were identified as being **Positive**, while 2 Tweets (0.4%) contained **Vicious language** and 1 Tweet (0.2%) contained **Hate speech** (see @tbl-may_severity). No Tweets containing **Credible threats** were detected in this sample.
+Among MP May's sample of 500 Tweets, 250 (50.0%) were identified as **Questioning authority**, 143 (28.6%) as **Neutral**, and 90 (18.0%) as **Name-calling/Gender insults** for `severity of harassment`. 14 Tweets (2.8%) were identified as being **Positive**, while 2 Tweets (0.4%) contained **Vicious language**, and 1 Tweet (0.2%) contained **Hate speech** (see @tbl-may_severity). No Tweets containing **Credible threats** were detected in this sample.
 
 ```{r}
 #| message: false
@@ -428,7 +428,7 @@ finalized_may_data |>
 
 ```
 
-For `Type of account`, 199 (39.8%) were detected as **Suspended/deleted**, 193 (38.6%) identified as **Personal**, 65 (13.0%) as **Professional**, and 41 (8.2%) as **Anonymous**. 1 (0.2%) of each **Bots** and **Spammers** were detected (see @tbl-may_account). 
+For `Type of account`, 199 (39.8%) were detected as **Suspended/deleted**, 193 (38.6%) identified as **Personal**, 65 (13.0%) as **Professional**, and 41 (8.2%) as **Anonymous**. 1 (0.2%) of both **Bots** and **Spammers** were detected (see @tbl-may_account). 
 
 ```{r}
 #| message: false
@@ -450,7 +450,7 @@ finalized_may_data |>
 
 ```
 
-The relationship between the `severity of harassment` faced by MP May and the `type of accounts` behind the Tweets can be observed in @fig-may_relationship. **Positive** Tweets were sent by either **Personal** users (1.4%) or **Professional** users (0.4%), while **Neutral** Tweets most frequently came from accounts categorized as **Personal** (10.9%), **Professional** (9.4%), and **Suspended/deleted** (7.4%). Tweets coded as **Questioning Authority** were most frequently sent by **Suspended/deleted** users (22.2%), followed by **Personal** users (20.2%) and **Anonymous** users (4.2%). Tweets **Questioning Authority** was the only instance in which **Bots** and **Spammers** were detected in MP May's sample. The Tweets containing **Name-calling/Gender insults** were most frequently sent by users identified as **Suspended/deleted** (8.8%), **Personal** (6.4%), or **Anonymous** (2.6%). Moreover, **Vicious language** identified Tweets were sent by **Suspended/deleted** users (0.2%) and **Anonymous** users (0.2%). There were no identified instances of **Credible threats** and the 1 instance of **Hate speech** was sent by a **Suspended/deleted** account. 
+The relationship between the `severity of harassment` faced by MP May and the `type of accounts` behind the Tweets can be observed in @fig-may_relationship. **Positive** Tweets were sent by either **Personal** users (1.4%) or **Professional** users (0.4%), while **Neutral** Tweets most frequently came from accounts categorized as **Personal** (10.9%), **Professional** (9.4%), and **Suspended/deleted** (7.4%). Tweets coded as **Questioning Authority** were most frequently sent by **Suspended/deleted** users (22.2%), followed by **Personal** users (20.2%), and **Anonymous** users (4.2%). The only instance in which **Bots** and **Spammers** were detected in MP May's sample were when sending Tweets **Questioning Authority**. The Tweets containing **Name-calling/Gender insults** were most frequently sent by users identified as **Suspended/deleted** (8.8%), **Personal** (6.4%), or **Anonymous** (2.6%). Moreover, **Vicious language** identified Tweets were sent by **Suspended/deleted** users (0.2%) and **Anonymous** users (0.2%). There were no identified instances of **Credible threats** and the 1 instance of **Hate speech** was sent by a **Suspended/deleted** account. 
 
 ```{r}
 #| message: false
@@ -551,9 +551,7 @@ finalized_collins_data |>
   
 ```
 
-
 # Model
-
 This trial study aims to evaluate the `severity of harassment` and the `types of accounts` behind the Tweets sent to Canadian female politicians and we are especially interested in seeing the impact of **Suspended/deleted** accounts on the overall severity of harassment of Tweets. The model considers whether an account was suspended or not, as a function of the severity of harassment, and which politician is targeted: 
 
 $$
@@ -563,6 +561,7 @@ $$ {#eq-was_suspended}
 where $y_i$ is the estimated probability whether an account was suspended, $x_i$ is the severity of harassment, and $z_i$ is which politician was targeted.
 
 Our estimates (@fig-modelresults) show...
+\newpage
 
 ```{r}
 #| echo: false
@@ -575,12 +574,11 @@ Our estimates (@fig-modelresults) show...
 suspension_and_harassment <- readRDS(here::here("Outputs/model/suspension_and_harassment.rds"))
 
 tbl_regression(
-  suspension_and_harassment) %>% 
+  suspension_and_harassment) |> 
   as_gt()
 ```
-
-The model is struggling when the severity of harassment is "hate speech". We expect that this is because in our dataset there are only two instances of this.
-
+The model is struggling when the severity of harassment is **Hate speech**. We expect that this is the case because in our dataset there are only two identified instances of **Hate speech**.
+\newpage
 
 One interesting aspect is that there does not seem to be any particular difference between severity of harassment coded as neutral and positive. It may be that future work considers expanding these two categories.
 
@@ -598,29 +596,24 @@ slopes(suspension_and_harassment, newdata = "median") |>
   )
 ```
 
-We expected a difference between Tweets directed at McKenna and May, however @fig-modelresultsmarginal shows that we were unable to find a quantitative difference. We will discuss later qualitative differences.
-
-
+We expected a difference between Tweets directed at MP McKenna and MP May, however @fig-modelresultsmarginal shows that we were unable to find a quantitative difference. Qualitative differences between MP McKenna and May will be explored in the [Discussion] section.
 
 The goal of this model is to evaluate whether there is a difference in Tweeting behaviour of **Suspended/deleted** accounts versus all other `types of accounts` identified in this trial study. Logistic regression was chosen because the outcome variable, **Suspended/deleted** has a binary outcome - whether accounts are **Suspended/deleted** (1) or any of the other five types of accounts (0). This binary outcome can then be compared to the seven levels on the severity of harassment scale.
 
 I initially considered each type of account as a separate category, not creating a binary to evaluate one specific type of account in comparison to all the other types. Consequently, I thought about building the model using Poisson regression but that was due to my incorrect understanding of count data.  
 
-
-
-
 # Discussion
-Overall, the data from this trial study reveals some form of harassment is present in over two-thirds of the Tweets sent to MP McKenna, MP May, and MP Collins which explicitly discuss climate change (see @tbl-overall_severity). The `severity of harassment` and `type of accounts` behind the Tweets vary by female politician, with MP McKenna seeing the more severe forms of harassment and MP Collins seeing the least. The following sections will further discuss these identified trends and compared them to the characteristics of what constitutes a healthy deliberative democracy. 
+Overall, the data from this trial study reveals some form of harassment is present in over two-thirds of the Tweets sent to MP McKenna, MP May, and MP Collins which explicitly discuss climate change (see @tbl-overall_severity). The `severity of harassment` and `type of accounts` behind the Tweets varies by female politician, with some of the main differences in the severity of harassment detected between MP McKenna and MP May being qualitative in nature. The following sections will further discuss these identified trends and compared them to the characteristics of what constitutes a healthy deliberative democracy. 
 
 ## Severity of Harassment
 As hypothesized, the `severity of harassment` detected in Tweets for this trial study varies on the seven-point scale, with at least one Tweet being detected for each level (see @tbl-overall_severity).
 
 I also hypothesized that harassing Tweets were more likely to be categorized as **Questioning Authority**, **Name-calling/gender insults**, and/or **Vicious language**. My hypothesis was two-thirds correct, with 51.5% of Tweets coded as **Questioning Authority** and 24.0% coded as **Name-calling/gender insults**. However, only 1.2% of Tweets were categorized as **Vicious language**, with **Neutral** (at 20.5%) being the third most identified level in this trial study (further details available in @tbl-overall_severity). Although this hypothesis was not entirely validated through this trial study, I anticipate it being proven in the full-scale version of this study for reasons explained below. 
 
-This discrepancy between **Vicious language** and **Neutral** can be explain by a few factors. Firstly, stronger content moderation processes were applied to content on Twitter prior to Elon Musk's purchase of the platform in 2022, leading to Tweets with more profanities being removed at a higher rate, which will likely change with Musk's promotion of "free speech" in 2023 [@Citron]. Secondly, I did not anticipate there being as much civil discourse about climate change and environmental policy as there was on/around the accounts of MP May and MP Collins. It is difficult to be certain whether this will be the case in the full-scale version of this study, with the more polarized nature of Canadian politics following the Covid-19 pandemic and MP Collins' raised profile which is often a cause of more severe forms of discourse and harassment [@rheault]. 
+The discrepancy between the number of Tweets identified as containing **Vicious language** and **Neutral** sentiments can be explain by a few factors. Firstly, stronger content moderation processes were applied to content on Twitter prior to Elon Musk's purchase of the platform in 2022, leading to Tweets with more profanities being removed at a higher rate, which will likely change with Musk's promotion of "free speech" in 2023 [@Citron]. Secondly, I did not anticipate there being as much civil discourse about climate change and environmental policy as there was on/around the accounts of MP May and MP Collins. It is difficult to be certain whether this will be the case in the full-scale version of this study, with the more polarized nature of Canadian politics following the Covid-19 pandemic and MP Collins' raised profile which is often a cause of more uncivil forms of discourse and harassment [@rheault]. 
 
 ## Type of Account
-As hypothesized, at least one account was identified for each of the six `types of accounts`. **Suspended/deleted** accounts constituted 41.7% of all accounts, followed by **Personal** (32.3%) and **Anonymous** (14.8%) (a full breakdown is available in @tbl-overall_account). The number of **Personal** accounts approximately aligns with number I anticipated finding in this trial study. However, I did not anticipate as many as 41.7% of Tweets would be authored by **Suspended/deleted** users, which could in part be due to the length of time which has passed since these Tweets were authored and collected (further discussed in [Limitations]). 
+As hypothesized, at least one account was identified for each of the six `types of accounts`. **Suspended/deleted** accounts constituted 41.7% of all accounts, followed by **Personal** (32.3%), and **Anonymous** (14.8%) (a full breakdown is available in @tbl-overall_account). The number of **Personal** accounts approximately aligns with number I anticipated finding in this trial study. However, I did not anticipate as many as 41.7% of Tweets would be authored by **Suspended/deleted** users, which could in part be due to the length of time which has passed since these Tweets were authored and collected (further discussed in [Limitations]). 
 
 Moreover, I suspected that the more severe forms of harassment identified in this trial study would come from **Personal** and **Suspended/deleted accounts**. Given the low number of Tweets containing **Vicious language**, **Credible threats**, and **Hate speech**, this hypothesis will be applied to the results for **Questioning Authority** and **Name-calling/Gender insults**. **Personal** users accounted for 17.8% of the Tweets **Questioning Authority**, while **Suspended/deleted accounts** sent 22.1% of the Tweets. **Personal** accounts were responsible for sending 6.5% of the Tweets containing **Name-calling/Gender insults**, while **Suspended/deleted accounts** sent 12.3% (see @tbl-type_hypothesis). 
 
@@ -671,7 +664,7 @@ combined_bio_data |>
 
 ```
 
-Furthermore, we can see in @tbl-con_accounts the breakdown of the different types of accounts that belong to people with right-wing views. 65 (57.0%) of the accounts are **Suspended/deleted**, while 32 (28.1%) are **Personal** and 13 (11.4%) are **Anonymous**. 2 (1.8%) of the accounts **Spammers** and similarly, 2 (1.8%) of the accounts are **Professional**. No **Bots** were identified. The high number of **Suspended/deleted** accounts identified somewhat contradicts this specific hypothesis, but generally aligns with other findings from this trial study, especially with **Personal** users being the second most frequently identified type of account for people with right-wing views. 
+Furthermore, we can see in @tbl-con_accounts the breakdown of the different types of accounts that belong to people with right-wing views. 65 (57.0%) of the accounts are **Suspended/deleted**, while 32 (28.1%) are **Personal**, and 13 (11.4%) are **Anonymous**. 2 (1.8%) of the accounts belong to **Spammers** and similarly, 2 (1.8%) of the accounts are **Professional**. No **Bots** were identified. The high number of **Suspended/deleted** accounts identified somewhat contradicts this specific hypothesis, but generally aligns with other findings from this trial study, especially with **Personal** users being the second most frequently identified type of account for people with right-wing views. 
 
 ```{r}
 #| message: false
@@ -730,7 +723,7 @@ combined_bio_data |>
 ```
 
 ## Catherine McKenna
-MP McKenna chose not to seek re-election during the 2021 Federal Election and has since returned to private life. Although she cites wanting to help other countries around the world fight climate change as her main reason for leaving, the online and offline harassment she has and continues to face surely impacted her decision. Within the small sample of Tweets used in this trial study, MP McKenna's were found to be the most harassing, with 270 (54%) **questioning her authority** and 153 (30.6%) employing **Name-calling/gender insults** (see @tbl-mckenna_severity). 13 Tweets (2.6%) were found to either contain **Vicious language**, **Credible threats**, or **Hate speech**, which is a larger number then the 10 Tweets (2.0%) that were **Positive**. 54 (10.8%) of the Tweets were determined to be **Neutral** - a much smaller percent then MP May and MP Collins. @fig-relationships highlights how MP McKenna always receives Tweets with higher levels of harassment from users with right-wing views. 
+MP McKenna chose not to seek re-election during the 2021 Federal Election and has since returned to private life. Although she cites wanting to help other countries around the world fight climate change as her main reason for leaving, the online and offline harassment she has and continues to face surely impacted her decision. Within the small sample of Tweets used in this trial study, MP McKenna's were found to be the most harassing, with 270 (54%) **questioning her authority** and 153 (30.6%) employing **Name-calling/gender insults** (see @tbl-mckenna_severity). 13 Tweets (2.6%) were found to either contain **Vicious language**, **Credible threats**, or **Hate speech**, which is a larger number then the 10 Tweets (2.0%) that were **Positive**. 54 (10.8%) of the Tweets were determined to be **Neutral** - a much smaller percent than MP May and MP Collins. @fig-relationships highlights how MP McKenna receives Tweets with higher levels of harassment from users with right-wing views. 
 
 A name which MP McKenna has and continues to be called is *Climate Barbie* (see @tbl-barbie-example), so I used the `filter` function to select all Tweets which contained the name to further examine the `severity of harassment` and `type of account`. @fig-barbie illustrates that of the 51 Tweets that explicitly use the name *Climate Barbie*, 90.2% were categorized as **Name-calling/Gender insults**, 5.9% as **Vicious language**, and 2.0% for both **Questioning Authority** and **Credible threats**. For the `types of accounts` behind the *Climate Barbie* Tweets, 41.2% are **Suspended/deleted** users, 35.3% are **Anonymous**, 21.6% are **Personal**, and 2.0% are **Spammers** (see @fig-barbie). These results reveal that the name *Climate Barbie* is often used in derogatory contexts (hence the frequent selection of the **Name-calling/Gender insults** category), but can also be used in more severe ways - represented by the **Vicious language** and **Credible threats** categories. Moreover, the high number of **Anonymous** accounts who employ the name *Climate Barbie* is noteworthy. Given their limited digital footprints, **Anonymous** users likely feel emboldened to use offensive language and derogatory comments and not worry about repercussions. 
 
@@ -739,7 +732,7 @@ A name which MP McKenna has and continues to be called is *Climate Barbie* (see 
 #| echo: false
 #| warning: false
 #| label: fig-barbie
-#| fig-cap: Severity of Harassment and Type of Account identified in Tweets which call MP McKenna "Climate Barbie"
+#| fig-cap: Severity of Harassment and Type of Account identified in Tweets which call MP McKenna *Climate Barbie*
 
 combined_barbie_data |>
   mutate(severity_of_harassment = fct_relevel(severity_of_harassment, "Positive", "Neutral", "Questioning Authority", "Name-calling/Gender insults", "Vicious language", "Credible threats", "Hate speech")) |>
@@ -773,29 +766,29 @@ Unlike MP McKenna, the Tweets sent to MP May were more neutral in tone and were 
 |-----------------------------------------------------------------------------------------------------------------|
 |@ ElizabethMay Ms May you should be ashamed of your self. More and more science is disputing these dramatic climate emergencies. You are scaring our children and hurting our economy. The climate is changing we cannot stop it but should develop the technolgy and finacial ability to live with it.|  
 
-: Sample of a Tweet **Questioning Authority** sent to MP May. {#tbl-may-example}
+: Sample of a Tweet **Questioning Authority** sent to MP May from a **Personal** account. {#tbl-may-example}
 
 ## Laurel Collins 
 Of the 13 Tweets in MP Collins' sample, 11 (84.6%) were **Neutral** in tone, discussing NDP platform commitments and events MP Collins attended on the campaign trail. The other 2 Tweets (15.4%) unsurprisingly **questioned her authority**, a likely harbinger of the severity of harassment that will be detected in the full-scale version of this study (see @tbl-collins_severity). Previous research has found that the higher the profile of female politicians in Canada, the more likely they are to face more severe forms of harassment, which I anticipate will apply to MP Collins [@rheault].  
 
 ## Deliberative Democracy
-Referencing previous discussions of the characteristics of what constitutes a healthy deliberative democracy, findings from this trial study will be compared and contrasted to evaluate the extent at which the discourse is healthy for Canadian democracy. Scholars previously noted that democratic legitimacy exists when the public collectively participates in deliberation about consequential issues (in this case, climate change), while recognizing there are multiple perspectives [@mckaytenove; @masullochen]. Through Twitter, the wider Canadian public had the opportunity to add their perspectives to consequential discussions about climate change. Although Twitter is not entirely representative of wider public opinion, it is simply one tool Canadian MPs can employ when trying to glean an understanding of public opinion [@mcgregor]. Many of the Tweets studied, especially sent to MP May, provided multiple viewpoints on the causes and consequences of climate change, satisfying that aspect of democratic legitimacy (example: @tbl-may-example). 
+Referencing previous discussions of the characteristics of what constitutes a healthy deliberative democracy, findings from this trial study will be compared and contrasted to evaluate the extent at which the discourse is healthy for Canadian democracy. Scholars previously noted that democratic legitimacy exists when the public collectively participates in deliberation about consequential topics, while recognizing there are multiple perspectives to every issue, such as climate change [@mckaytenove; @masullochen]. Through Twitter, the wider Canadian public has the opportunity to add their perspectives to consequential discussions about climate change. Although Twitter is not entirely representative of wider public opinion, it is simply one tool Canadian MPs can employ when trying to glean a general understanding of public opinion [@mcgregor]. Many of the Tweets studied, especially sent to MP May, provided multiple viewpoints on the causes and consequences of climate change, satisfying that aspect of democratic legitimacy (example: @tbl-may-example). 
 
-McKay and Tenove emphasize in their article that maintaining anonymity, especially in the digital public sphere, is a new characteristic of democratic discourse [@mckaytenove]. Only 14.8% of accounts in this trial study were identified as **Anonymous**, but it is likely that users with other types of accounts feel that they can participate in debate in anonymous and pseudonymous ways because of the affordances of Twitter and lack of Canadian legislation governing harmful speech in online spaces (see @tbl-overall_account). 
+In their article, @mckaytenove emphasize that maintaining anonymity, especially in the digital public sphere, is a new characteristic of democratic discourse. Only 14.8% of accounts in this trial study were identified as **Anonymous**, but it is likely that users with other types of accounts feel that they can participate in debate in anonymous and pseudonymous ways because of the affordances of Twitter and lack of Canadian legislation governing harmful speech in online spaces (see @tbl-overall_account). Moreover, **Anonymous** users were the second most frequently identified typed of account that used the phrase *Climate Barbie* to refer to MP McKenna - a derogatory term which undermines healthy democratic discourse and is trend worth looking out for in the full-scale version of this study (see @fig-barbie).
 
 While the level of debate remained healthy enough for democracy in this trial study, it is anticipated that the Tweets in the full-scale version of this study will be more uncivil, challenging the core values of Canada’s deliberative democracy and risking the future of public discourse online and offline about climate change. 
 
 ## Limitations
-The context in which these data sets were initially collected, focusing on mentions the three MPs received, means that my analysis and ability to draw conclusions is especially limited (further discussed in [Appendix A]). I tried to use these previously collected data sets in this trial study in a nearly identical way to how I will conduct the full-scale version of this study with intentionally created data sets, despite the fact that the old data set focused on mentions of the MPs and I intended to focus on replies to Tweets authored by the MPs.  
+The context in which these datasets were initially collected, focusing on mentions the three MPs received, means that my analysis and ability to draw conclusions is especially limited (further discussed in [Appendix A]). I tried to use these previously collected datasets in this trial study in a nearly identical way to how I will conduct the full-scale version of this study with intentionally created datasets, despite the fact that the old dataset focused on mentions of the MPs and I intended to focus on replies to Tweets authored by the MPs.  
 
-MP Collins' lower national profile in 2019 meant that she received far fewer Tweets during the same period as MP McKenna and MP May and that it is challenging to identity patterns and generalize the results from her data. However, I still felt that it was important to include given her increased profile in 2023 and anticipated prominence in the full-scale version of this study. Any of the patterns identified using data from MP McKenna in this trial study will not be usable to directly inform the full-scale version of this study (further discussed [Future Research]), but more broadly can suggest how to handle data from female Ministers with higher profiles who work on climate change policy issues. 
+MP Collins' lower national profile in 2019 meant that she received far fewer Tweets during the same period as MP McKenna and MP May and that it is challenging to identity patterns and generalize the results from her data. However, I still felt that it was important to include given her increased profile in 2023 and anticipated prominence in the full-scale version of this study. Any of the patterns identified using data from MP McKenna in this trial study will not be usable to directly inform the full-scale version of this study (further discussed [Future Research]), but more broadly can suggest how to handle data from female Ministers with higher profiles who work on climate change policy issues.
 
 Lastly, Twitter's ever-changing affordances and focuses as a platform (such as promoting "free speech") directly and indirectly impact the severity of harassment deemed acceptable to keep on the platform and the types of accounts worthy of remaining active users. It is impossible to know on a granular level how every change to Twitter affordances impacts each harassing Tweet and account on the platform, but can generally inform hypotheses and patterns established when analysing the data.   
 
 ## Future Research
 Given the changes to Twitter's affordances and the increasingly polarized political climate in Canada following the Covid-19 pandemic, there are multiple aspects of this trial study that will differ in the full-scale version of this study. Since MP McKenna has left public life, Deputy Prime Minister and Minister of Finance Hon. Chrystia Freeland has been selected to replace her as the Liberal politician in full-scale version of this study. MP May briefly handed over leadership of the Green Party of Canada between 2020 and 2022 to Annamie Paul, but has since returned as the Party's Co-Leader with Jonathan Pedneault, meaning her profile and status is largely unchanged between the two versions of this study. Lastly, MP Collins has raised her profile, through her national work as the NDP's Environment Critic and local work as the MP for Victoria, so it is anticipated that there will be more Tweets of hers to analyse and the severity of harassment will fall higher on the seven-point scale.
 
-Some of my approaches, including how `type of account` is determined while coding needs to be refined ahead of the full scale version of this project. My definition of `type of account` in both the introduction of this paper and in my Codebook references the "dynamic" affordances of Twitter, such as the "... interactions and communications between the users" [@singh, p. 383]. These dynamics are generally lost and difficult to evaluate in a static data set, especially when most users have been reduced to a single interaction on the platform. Consequently, I need to determine whether I will solely evaluate users based on their single line in the data set (discounting the ability to look at how frequently they reply to Tweets for example) or look their profiles up on Twitter as I actively code, potentially risking having more **Suspended/deleted** accounts represented. The final approach employed will be determined once the data set for the full-scale study has been collected. 
+Some of my approaches, including how `type of account` is determined while coding needs to be refined ahead of the full scale version of this project. My definition of `type of account` in both the introduction of this paper and in my Codebook references the "dynamic" affordances of Twitter, such as the "... interactions and communications between the users" [@singh, p. 383]. These dynamics are generally lost and difficult to evaluate in a static dataset, especially when most users have been reduced to a single interaction on the platform. Consequently, I need to determine whether I will solely evaluate users based on their single line in the dataset (discounting the ability to look at how frequently they reply to Tweets for example) or look their profiles up on Twitter as I actively code, potentially risking having more **Suspended/deleted** accounts represented. The final approach employed will be determined once the dataset for the full-scale study has been collected. 
 
 # Conclusion
 In this trial study, I examined Tweets explicitly discussing climate change and mentioning former MP Catherine McKenna, MP Elizabeth May, and MP Laurel Collins to see the severity of harassment on a seven-point scale and type of accounts behind the Tweets. My study reveals that nearly 80% of Tweets sent to the three MPs contained some level of harassment, with MP McKenna consistently receiving Tweets with more severe forms of harassment and MP Collins receiving the least number. **Suspended/deleted** and **Personal** accounts were most frequently identified as engaging with the female politicians on Twitter and being responsible for sending the more serve forms of harassment identified. The Tweets analysed for this study matched the criteria of what constitutes a healthy deliberative democracy, with users with multiple, diverse viewpoints weighing in on the issue of climate change. In the full-scale version of this study, it is anticipated that Tweets will consistently contain more severe forms of harassment (such as **Vicious language** and **Credible threats**), while still being sent by **Personal** and **Suspended/deleted** accounts. It is crucial to ensure we continue studying and discussing the intersection of climate change denialism and misogyny, because if we cannot mediate the risks of gendertrolling at the highest echelons of power, then female politicians may self-censor and risk everyone’s ability to engage in respectful discourse surrounding climate change.  
@@ -827,9 +820,9 @@ This datasheet provides background on who originally collected the raw Twitter d
 
 4. *Any additional comments?*
 
-    - While Inessa has previously worked with former MP Catherine McKenna during the 2019 Federal Election campaign, it is important to note that she did not have access to MP McKenna's social media accounts nor produce social media content, including the Tweets in the data set. 
+    - While Inessa has previously worked with former MP Catherine McKenna during the 2019 Federal Election campaign, it is important to note that she did not have access to MP McKenna's social media accounts nor produce social media content, including the Tweets in the dataset. 
     
-    - Since the creation of this dataset in 2021 and the inital version of this project was completed, MP McKenna has left public life and pursued other projects. This has no impact on the composition of this data set, but is important context. 
+    - Since the creation of this dataset in 2021 and the inital version of this project was completed, MP McKenna has left public life and pursued other projects. This has no impact on the composition of this dataset, but is important context. 
 
 ## Composition
 
@@ -843,7 +836,7 @@ This datasheet provides background on who originally collected the raw Twitter d
 
 3. *Does the dataset contain all possible instances or is it a sample (not necessarily random) of instances from a larger set? If the dataset is a sample, then what is the larger set? Is the sample representative of the larger set (for example, geographic coverage)? If so, please describe how this representativeness was validated/verified. If it is not representative of the larger set, please describe why not*  
 
-    - No, the raw data set does not contain all the mentions of MPs McKenna, May, and Collins on Twitter leading up to and during the 2019 Federal election campaign but it is also not a sample. Tweets in the data set range from early August to late October, with the election campaign running from September 11 - October 21, 2019. The missing instances is due to accounts being suspended or deleted from the platform and accounts being set to "private" before data collection happened in early 2021. 
+    - No, the raw dataset does not contain all the mentions of MPs McKenna, May, and Collins on Twitter leading up to and during the 2019 Federal election campaign but it is also not a sample. Tweets in the dataset range from early August to late October, with the election campaign running from September 11 - October 21, 2019. The missing instances is due to accounts being suspended or deleted from the platform and accounts being set to "private" before data collection happened in early 2021. 
     
     - Given the affordances of Twitter, the sample of Tweets is representative of the nature of discourse about climate policy on Twitter before/during the election campaign because there is diversity in the age, gender, politicial affiliation, and geographic coverage (verified through user bios, locations, and other personal information attatched to their public profiles). 
     
@@ -857,7 +850,7 @@ This datasheet provides background on who originally collected the raw Twitter d
 
 6. *Is any information missing from individual instances? If so, please provide a description, explaining why this information is missing (for example, because it was unavailable).*
 
-    - Yes. Many individuals opted not to list a location on their profile or write a bio, which makes it unavailable and listed as NA in the raw data set. Not sharing a location or writing a bio could be due to individuals wanting to protect their privacy or not reveal any personal information about themselves. 
+    - Yes. Many individuals opted not to list a location on their profile or write a bio, which makes it unavailable and listed as NA in the raw dataset. Not sharing a location or writing a bio could be due to individuals wanting to protect their privacy or not reveal any personal information about themselves. 
 
 7. *Are relationships between individual instances made explicit? If so, please describe how these relationships are made explicit.*
 
@@ -886,7 +879,7 @@ This datasheet provides background on who originally collected the raw Twitter d
 
 13. *Does the dataset identify any sub-populations (for example, by age, gender)? If so, please describe how these subpopulations are identified and provide a description of their respective distributions within the dataset*
   
-    - No, the data set does not have any columns that directly identify any sub-populations, but information regarding gender, location, politicial ideology and party affiliation can be gleaned from the "location" and "bio" columns. 
+    - No, the dataset does not have any columns that directly identify any sub-populations, but information regarding gender, location, politicial ideology and party affiliation can be gleaned from the "location" and "bio" columns. 
     
 14. *Is it possible to identify individuals (that is, one or more natural persons), either directly or indirectly (that is, in combination with other data) from the dataset?*
 
@@ -894,7 +887,7 @@ This datasheet provides background on who originally collected the raw Twitter d
 
 15. *Does the dataset contain data that might be considered sensitive in any way (for example, data that reveals race or ethnic origins, sexual orientations, religious beliefs, political opinions or union memberships, or locations; financial or health data; biometric or genetic data; forms of government identification, such as social security numbers; criminal history)? If so, please provide a description.*
 
-    - Yes, the data set contains sensitive information, such as political party affiliation, ideology, and location, however this is public information as users list it in their bio or on the House of Common's website in the instance of the three female politicians.
+    - Yes, the dataset contains sensitive information, such as political party affiliation, ideology, and location, however this is public information as users list it in their bio or on the House of Common's website in the instance of the three female politicians.
 
 16. *Any other comments?*
 
@@ -914,7 +907,7 @@ This datasheet provides background on who originally collected the raw Twitter d
 
 3. *If the dataset is a sample from a larger set, what was the sampling strategy (for example, deterministic, probabilistic with specific sampling probabilities)?*
 
-    - The data set is not a sample, it contains all the Tweets that were publicly available when Trevor collected the data.
+    - The dataset is not a sample, it contains all the Tweets that were publicly available when Trevor collected the data.
     
 4. *Who was involved in the data collection process (for example, students, crowdworkers, contractors) and how were they compensated (for example, how much were crowdworkers paid)?*
 
@@ -928,7 +921,7 @@ This datasheet provides background on who originally collected the raw Twitter d
 
       - Tweets were collected once, in late January/early February 2021 (a specific day/time is unknown). 
       
-      - The Tweets included in the data set were created between the start of August and the end of October of 2019. 
+      - The Tweets included in the dataset were created between the start of August and the end of October of 2019. 
 
 6. *Were any ethical review processes conducted (for example, by an institutional review board)?*
 
@@ -968,7 +961,7 @@ This datasheet provides background on who originally collected the raw Twitter d
     
 2. *Was the "raw" data saved in addition to the preprocessed/cleaned/labeled data (for example, to support unanticipated future uses)?*
 
-    - Yes. Inessa has the original raw data sets saved in her personal Google Drive and on the desktop of her personal       Mac. 
+    - Yes. Inessa has the original raw datasets saved in her personal Google Drive and on the desktop of her personal       Mac. 
     
 3. *Is the software that was used to preprocess/clean/label the data available? If so, please provide a link or other access point.*
 
@@ -994,7 +987,7 @@ This datasheet provides background on who originally collected the raw Twitter d
 
 3. *What (other) tasks could the dataset be used for?*
   
-    - Beyond this trial study, this data set could be used to see the amount of discourse about other policy issues that mattered before/during the 2019 Federal election, such as the economy and housing.
+    - Beyond this trial study, this dataset could be used to see the amount of discourse about other policy issues that mattered before/during the 2019 Federal election, such as the economy and housing.
 
 4. *Is there anything about the composition of the dataset or the way it was collected and preprocessed/cleaned/labeled that might impact future uses? For example, is there anything that a dataset consumer might need to know to avoid uses that could result in unfair treatment of individuals or groups (for example, stereotyping, quality of service issues) or other risks or harms (for example, legal risks, financial harms)? If so, please provide a description. Is there anything a dataset consumer could do to mitigate these risks or harms?*
 
@@ -1002,7 +995,7 @@ This datasheet provides background on who originally collected the raw Twitter d
 
 5. *Are there tasks for which the data set should not be used? If so, please provide a description.*
 
-    - This data set (and any Twitter data generally) should not be used to measure public opinion, as it is not representative of the general Canadian public. 
+    - This dataset (and any Twitter data generally) should not be used to measure public opinion, as it is not representative of the general Canadian public. 
 
 6. *Any other comments?*
 
@@ -1016,7 +1009,7 @@ This datasheet provides background on who originally collected the raw Twitter d
 
 2. *How will the dataset be distributed (for example, tarball on website, API, GitHub)? Does the dataset have a digital object identifier (DOI)?*
 
-    - No, this data set will not be distributed and does not have a DOI. 
+    - No, this dataset will not be distributed and does not have a DOI. 
 
 3. *When will the dataset be distributed?*
     
@@ -1042,7 +1035,7 @@ This datasheet provides background on who originally collected the raw Twitter d
 
 1. *Who will be supporting/hosting/maintaining the dataset? How can the owner/curator/manager of the dataset be contacted?*
 
-    - There is no regular maintaince of this data set, but Inessa De Angelis is responsible. 
+    - There is no regular maintaince of this dataset, but Inessa De Angelis is responsible. 
     
     - She can be reached via email at inessa.deangelis@mail.utoronto.ca. 
     
