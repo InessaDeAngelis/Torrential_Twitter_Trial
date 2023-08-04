@@ -112,7 +112,7 @@ harassment_likelihood_predictions |>
       "Credible threats",
       "Hate speech"
     )
-  ) %>%
+  ) |>
   count(severity_of_harassment, was_suspended) |>
   pivot_wider(names_from = was_suspended,
               values_from = n) |>
@@ -122,9 +122,4 @@ harassment_likelihood_predictions |>
          "Number suspended" = `1`) |>
   left_join(just_the_estimates, by = join_by(severity_of_harassment))
   
-
-  
-
 slopes(suspension_and_harassment, newdata = "median")
-
-
